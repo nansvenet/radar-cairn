@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Radar de compatibilité · Cairn Partners</title>
+<meta name="description" content="Cairn Partners — radar de compatibilité entre une entreprise, ses équipes et ses candidats.">
+<meta name="theme-color" content="#14233B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 38'%3E%3Cellipse cx='17' cy='31' rx='15' ry='6' fill='%2314233B'/%3E%3Cellipse cx='17' cy='19.5' rx='11' ry='5' fill='%2355627A'/%3E%3Cellipse cx='17' cy='9.5' rx='7' ry='4' fill='%232F7FB8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout : une colonne étroite pensée pour le téléphone ; le radar et les jauges à repères (direction / équipe / candidat) portent l'analyse. */
+:root {
+  --bg: #F5F2EC;        /* lin */
+  --surface: #FFFFFF;
+  --ink: #14233B;       /* marine */
+  --muted: #55627A;     /* ardoise */
+  --sky: #2F7FB8;       /* bleu ciel, assombri pour le contraste */
+  --sky-soft: #DCEBF6;
+  --line: #DAD4C8;
+  --dir: #14233B;
+  --team: #2F7FB8;
+  --cand: #8A3F7A;
+  --ok: #2B7355; --ok-bg: #DDEFE6;
+  --warn: #8F5E12; --warn-bg: #F6E9CC;
+  --crit: #A63A31; --crit-bg: #F7DEDB;
+  --on-ink: #F5F2EC;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1826; --surface: #172336; --ink: #E8EDF5; --muted: #9AA7BD;
+    --sky: #7DBDE8; --sky-soft: #1E3550; --line: #2B3B55;
+    --dir: #EDE6D6; --team: #7DBDE8; --cand: #DB94CC;
+    --ok: #6CC79B; --ok-bg: #173A2C; --warn: #E3B05A; --warn-bg: #3D2F12;
+    --crit: #EE8A80; --crit-bg: #47201C; --on-ink: #0F1826;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1826; --surface: #172336; --ink: #E8EDF5; --muted: #9AA7BD;
+  --sky: #7DBDE8; --sky-soft: #1E3550; --line: #2B3B55;
+  --dir: #EDE6D6; --team: #7DBDE8; --cand: #DB94CC;
+  --ok: #6CC79B; --ok-bg: #173A2C; --warn: #E3B05A; --warn-bg: #3D2F12;
+  --crit: #EE8A80; --crit-bg: #47201C; --on-ink: #0F1826;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+header.brand { display: flex; align-items: center; gap: 12px; }
+header.brand svg { flex: none; }
+.brand-name { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
+.brand-sub { color: var(--muted); font-size: 13px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 28px; font-weight: 700; }
+h2 { font-size: 20px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; }
+p { margin: 0; }
+.lead { color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.stack-lg { display: flex; flex-direction: column; gap: 20px; }
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.row > .grow { flex: 1 1 180px; min-width: 0; }
+.small { font-size: 13px; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+button, .btn {
+  font: inherit; font-weight: 600; font-size: 15px; cursor: pointer;
+  border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink);
+  padding: 11px 16px; min-height: 44px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+}
+button.ghost, .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+button.danger { background: transparent; color: var(--crit); border-color: var(--crit); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button:focus-visible, .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--sky); outline-offset: 2px;
+}
+a { color: var(--sky); }
+input[type="text"], textarea {
+  font: inherit; width: 100%; padding: 11px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+textarea { min-height: 88px; resize: vertical; }
+textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; word-break: break-all; }
+.msg { font-size: 14px; padding: 10px 12px; border-radius: 8px; }
+.msg.err { background: var(--crit-bg); color: var(--crit); }
+.msg.good { background: var(--ok-bg); color: var(--ok); }
+
+.mission-list { display: flex; flex-direction: column; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.mission-item {
+  width: 100%; text-align: left; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 500;
+}
+.mission-item .name { min-width: 0; overflow-wrap: anywhere; font-family: var(--display); font-weight: 600; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; padding: 2px 7px; border-radius: 999px; background: var(--sky-soft); color: var(--ink); font-weight: 600; }
+.counts { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+.pill { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--ok); }
+.pill.warn { background: var(--warn-bg); color: var(--warn); }
+.pill.crit { background: var(--crit-bg); color: var(--crit); }
+
+.axis { display: flex; flex-direction: column; gap: 8px; padding-block: 14px; border-top: 1px solid var(--line); }
+.axis:first-child { border-top: 0; padding-top: 0; }
+.axis-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.track { position: relative; height: 22px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--line); }
+.mark { position: absolute; top: 4px; width: 14px; height: 14px; margin-left: -7px; }
+.mark.d { background: var(--dir); transform: rotate(45deg); border-radius: 2px; }
+.mark.e { background: var(--team); border-radius: 50%; }
+.mark.c { background: var(--cand); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.poles { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+.poles span { flex: 1 1 0; min-width: 0; }
+.poles span:last-child { text-align: right; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.sw { width: 11px; height: 11px; display: inline-block; }
+.sw.d { background: var(--dir); transform: rotate(45deg); border-radius: 2px; }
+.sw.e { background: var(--team); border-radius: 50%; }
+.sw.c { background: var(--cand); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.radar { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; }
+.radar text { font-family: var(--body); font-size: 12px; fill: var(--ink); }
+.radar .tick { font-size: 10px; fill: var(--muted); }
+.dig { padding-block: 12px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.dig:first-child { border-top: 0; padding-top: 0; }
+.dig q, .verb q { quotes: "« " " »"; }
+.dig q { font-weight: 600; }
+.pistes { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.verb { font-size: 14px; overflow-wrap: anywhere; }
+.verb b { font-weight: 600; }
+
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress > i { display: block; height: 100%; background: var(--sky); }
+.q { display: flex; flex-direction: column; gap: 10px; padding-block: 18px; border-top: 1px solid var(--line); }
+.q:first-of-type { border-top: 0; padding-top: 4px; }
+.q-stem { font-weight: 600; font-size: 17px; }
+.q-poles { display: flex; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--muted); }
+.q-poles span { flex: 1 1 0; min-width: 0; }
+.q-poles span:last-child { text-align: right; }
+.scale { display: flex; justify-content: space-between; gap: 6px; }
+.scale button {
+  flex: 1 1 0; min-width: 0; padding: 0; height: 46px; border-radius: 8px;
+  background: var(--surface); color: var(--muted); border: 1px solid var(--line); font-weight: 600;
+}
+.scale button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.role-choice { display: flex; flex-direction: column; gap: 10px; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.consent input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--ink); }
+.consent input:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) { .progress > i { transition: width .25s ease; } }
+.site-foot { color: var(--muted); font-size: 12px; text-align: center; }
+body { margin: 0; }
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand">
+    <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+      <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
+      <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
+      <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
+    </svg>
+    <div>
+      <div class="brand-name">Cairn Partners</div>
+      <div class="brand-sub">Radar de compatibilité</div>
+    </div>
+  </header>
+  <main id="app" class="stack-lg"></main>
+  <footer class="site-foot">© Cairn Partners · Vos réponses restent confidentielles.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Référentiel (version 4 du questionnaire) ----------
+     Vague 1 direction / équipe : 7 thèmes de style x 4 questions + 4 questions de climat = 32.
+     Vague 1 candidat : 7 thèmes x 4 questions + 7 questions d'importance = 35.
+     Vague 2 : sur chaque thème en écart, 4 questions-hypothèses + 2 situations vécues + 1 commentaire libre.
+     Chaque question : [énoncé, pôle gauche de l'axe, pôle droit de l'axe, affiché inversé].
+     Les réponses sont toujours stockées dans le sens de l'axe (1 = pôle gauche, 5 = pôle droit). */
+  var AXES = [
+    { nom: "Prise de décision", court: "Décision", g: "Centralisée", d: "Déléguée", th: "Sur la prise de décision", desc: "qui décide, et quelle marge ont les équipes", q: [
+      ["Les décisions qui touchent le quotidien de l'équipe sont prises", "par la direction", "par l'équipe concernée", false],
+      ["Face à un imprévu, le plus souvent, un collaborateur", "fait valider avant d'agir", "agit, puis informe", true],
+      ["La façon de réaliser une tâche est", "décrite par des procédures communes", "laissée au choix de chacun", false],
+      ["Pour engager une dépense courante (matériel, prestataire), il faut", "l'accord d'un responsable", "simplement respecter son budget", true]
+    ], p: [
+      ["La dernière décision importante pour l'équipe a été prise", "par la direction seule", "avec l'équipe, ou par elle"],
+      ["La dernière initiative prise sans demander a été", "recadrée", "laissée faire, voire saluée"]
+    ]},
+    { nom: "Relation à la hiérarchie", court: "Hiérarchie", g: "Formelle", d: "Proche", th: "Sur la relation à la hiérarchie", desc: "vouvoiement, accès au dirigeant, respect des circuits", q: [
+      ["Entre les collaborateurs et la direction, on se", "vouvoie", "tutoie", false],
+      ["Pour aborder un sujet avec le dirigeant, un collaborateur", "passe par son responsable direct", "va le voir directement", true],
+      ["Les échanges avec la direction ont lieu surtout", "lors de réunions prévues", "à tout moment, de façon informelle", false],
+      ["Les titres et les niveaux hiérarchiques", "comptent et se voient au quotidien", "s'effacent au quotidien", true]
+    ], p: [
+      ["La dernière fois qu'un collaborateur a voulu parler au dirigeant, il", "a demandé un rendez-vous", "est allé le voir directement"],
+      ["Le dernier arrivé a rencontré le dirigeant", "lors d'un rendez-vous prévu", "dès ses premiers jours, sans formalité"]
+    ]},
+    { nom: "Organisation du travail", court: "Organisation", g: "Planifiée", d: "Réactive", th: "Sur l'organisation du travail", desc: "priorités, urgences, délais", q: [
+      ["Les priorités", "restent les mêmes plusieurs mois", "changent plusieurs fois par trimestre", false],
+      ["La charge de travail, d'une semaine à l'autre, est", "régulière", "très variable, avec des pics", true],
+      ["Les projets sont lancés", "après une préparation complète", "vite, puis ajustés en route", false],
+      ["Une journée type est", "planifiée à l'avance", "rythmée par les sollicitations du moment", true]
+    ], p: [
+      ["Le mois dernier, les urgences ont été", "rares", "presque quotidiennes"],
+      ["Quand une nouvelle priorité arrive, les autres", "sont décalées", "s'y ajoutent"]
+    ]},
+    { nom: "Franc-parler", court: "Franc-parler", g: "Avec tact", d: "Sans détour", th: "Sur la façon de se dire les choses", desc: "façon de dire les critiques et les désaccords", q: [
+      ["Quand un travail ne convient pas, la remarque est formulée", "avec ménagement", "directement", false],
+      ["Les désaccords se règlent plutôt", "en tête-à-tête", "ouvertement, en réunion", true],
+      ["Avec son responsable, un désaccord s'exprime", "en y mettant les formes", "franchement", false],
+      ["Les messages écrits (mails, messageries) sont", "soignés et nuancés", "courts et directs", true]
+    ], p: [
+      ["La dernière fois qu'un collaborateur a contredit son responsable, c'était", "en privé", "devant les autres"],
+      ["Les mauvaises nouvelles remontent à la direction", "après avoir été préparées", "immédiatement, telles quelles"]
+    ]},
+    { nom: "Travail en équipe", court: "Équipe", g: "Chacun son périmètre", d: "Tout à plusieurs", th: "Sur le travail en équipe", desc: "travail seul ou partagé, réussites individuelles ou collectives", q: [
+      ["Le travail se fait surtout", "chacun sur son dossier", "à plusieurs, en binôme ou en groupe", false],
+      ["Les réussites mises en avant sont plutôt", "individuelles", "collectives", true],
+      ["Pour résoudre un problème, on commence par", "chercher seul", "solliciter les collègues", false],
+      ["Les objectifs (et les primes, s'il y en a) sont", "individuels", "collectifs", true]
+    ], p: [
+      ["Quand quelqu'un est débordé, les collègues", "restent sur leurs dossiers", "reprennent une partie de sa charge"],
+      ["La dernière réussite a été attribuée", "à une ou deux personnes", "à toute l'équipe"]
+    ]},
+    { nom: "Rapport au changement", court: "Changement", g: "On consolide", d: "On expérimente", th: "Sur le rapport au changement", desc: "nouveautés, nouveaux outils, droit d'essayer", q: [
+      ["Avant de lancer une nouveauté, on", "vérifie tout en amont", "teste à petite échelle, puis on ajuste", false],
+      ["Après une erreur, l'accent est mis sur", "les contrôles pour qu'elle ne se reproduise pas", "ce qu'on en retient pour la suite", true],
+      ["Les façons de faire", "évoluent rarement", "sont souvent revues", false],
+      ["Les nouveaux outils sont adoptés", "une fois éprouvés ailleurs", "parmi les premiers", true]
+    ], p: [
+      ["La dernière erreur importante a surtout donné lieu à", "de nouveaux contrôles", "un retour d'expérience partagé"],
+      ["La dernière proposition de changement a été", "étudiée longuement", "essayée rapidement"]
+    ]},
+    { nom: "Disponibilité", court: "Disponibilité", g: "Horaires cadrés", d: "Horaires élastiques", th: "Sur les horaires et la disponibilité", desc: "horaires, joignabilité le soir, télétravail", q: [
+      ["Les horaires de travail sont", "fixes", "variables selon l'activité", false],
+      ["En dehors des horaires, être joignable est", "exceptionnel", "fréquent", true],
+      ["Le lieu de travail (bureau ou télétravail) est", "fixé par l'entreprise", "laissé au choix de chacun", false],
+      ["La séparation entre temps de travail et temps personnel est", "nette", "souple", true]
+    ], p: [
+      ["Le mois dernier, des échanges de travail ont eu lieu le soir ou le week-end", "jamais", "plusieurs fois"],
+      ["Partir à l'heure un jour chargé est perçu comme", "normal", "inhabituel"]
+    ]}
+  ];
+  /* Socle : pas un style, une base commune. Ici, plus c'est haut, mieux c'est. */
+  var SOCLE = [
+    ["Chacun est traité avec respect, quel que soit son poste.", "Rarement vrai", "Presque toujours vrai", false],
+    ["On peut signaler une erreur ou un problème sans craindre de représailles.", "Rarement vrai", "Presque toujours vrai", false],
+    ["Personne ne cherche à se mettre en valeur aux dépens des autres.", "Rarement vrai", "Presque toujours vrai", false],
+    ["Les règles s'appliquent à tous, responsables compris.", "Rarement vrai", "Presque toujours vrai", false]
+  ];
+  var SOCLE_NOMS = ["Respect", "Droit à l'erreur", "Solidarité entre collègues", "Équité des règles"];
+
+  var PER = 4, PER2 = 6, NSTYLE = AXES.length * PER, NS = SOCLE.length, NI = AXES.length;
+  var N_DE = NSTYLE + NS, N_C = NSTYLE + NI;
+  var MIN_TEAM = 3, SEUIL_V2 = 0.5, MAXCOM = 160, VERSION = 4;
+
+  function importanceQ(ai) {
+    var ax = AXES[ai];
+    return ["« " + ax.nom + " » (" + ax.desc + ") : un environnement à l'opposé de vos réponses serait", "facile à vivre", "rédhibitoire", false];
+  }
+  function questionsV2(ai) {
+    var ax = AXES[ai];
+    return [
+      [ax.th + ", ce qui est annoncé et ce qui se pratique", "coïncident", "diffèrent nettement", false],
+      ["Sur ce sujet, d'une équipe ou d'un manager à l'autre, les pratiques sont", "les mêmes partout", "très différentes", false],
+      ["Depuis un an, sur ce sujet, les choses", "n'ont pas bougé", "ont beaucoup changé", false],
+      ["Sur ce sujet, les attentes de la direction sont", "clairement expliquées", "peu ou mal expliquées", false],
+      [ax.p[0][0], ax.p[0][1], ax.p[0][2], false],
+      [ax.p[1][0], ax.p[1][1], ax.p[1][2], false]
+    ];
+  }
+
+  /* ---------- Outils ---------- */
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function fr(n) { return n.toFixed(1).replace(".", ","); }
+  function pl(n, mot) { return n + " " + mot + (n > 1 ? "s" : ""); }
+  function mean(a) { var s = 0; for (var i = 0; i < a.length; i++) s += a[i]; return a.length ? s / a.length : 0; }
+  function sd(a) {
+    if (a.length < 2) return 0;
+    var m = mean(a), s = 0;
+    for (var i = 0; i < a.length; i++) s += (a[i] - m) * (a[i] - m);
+    return Math.sqrt(s / a.length);
+  }
+  function slugify(s) {
+    return String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 30).replace(/-+$/, "");
+  }
+  function axesValides(x) {
+    if (typeof x !== "string" || !/^[0-6]{1,7}$/.test(x)) return false;
+    for (var i = 1; i < x.length; i++) if (x[i] <= x[i - 1]) return false;
+    return true;
+  }
+  function reLong(n) { return new RegExp("^[1-5]{" + n + "}$"); }
+  function longueurV1(role) { return role === "c" ? N_C : N_DE; }
+  function b64e(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function b64d(s) {
+    s = s.replace(/-/g, "+").replace(/_/g, "/");
+    while (s.length % 4) s += "=";
+    return decodeURIComponent(escape(atob(s)));
+  }
+  function encodeReponse(r) { return "CAIRN-" + b64e(JSON.stringify(r)); }
+  /* Renvoie une réponse validée, {ancien:true} pour un code d'une version précédente, ou null. */
+  function decodeReponse(txt) {
+    var m = String(txt).replace(/\s+/g, "").match(/CAIRN-([A-Za-z0-9_-]+)/);
+    if (!m) return null;
+    try {
+      var o = JSON.parse(b64d(m[1]));
+      if (!o || typeof o !== "object") return null;
+      if (typeof o.m !== "string" || !/^[a-z0-9-]{1,40}$/.test(o.m)) return null;
+      if (o.r !== "d" && o.r !== "e" && o.r !== "c") return null;
+      if (typeof o.a !== "string" || typeof o.i !== "string" || !/^[a-z0-9]{6,16}$/.test(o.i)) return null;
+      if (o.v !== VERSION) return /^[1-5]+$/.test(o.a) ? { ancien: true } : null;
+      var t = typeof o.t === "string" && /^\d{4}-\d{2}-\d{2}$/.test(o.t) ? o.t : "";
+      var res = { m: o.m, r: o.r, a: o.a, i: o.i, t: t };
+      if (o.w === 2) {
+        if (o.r === "c" || !axesValides(o.x) || !reLong(o.x.length * PER2).test(o.a)) return null;
+        res.w = 2; res.x = o.x; res.k = [];
+        for (var j = 0; j < o.x.length; j++) {
+          var c = Array.isArray(o.k) && typeof o.k[j] === "string" ? o.k[j] : "";
+          res.k.push(c.replace(/\s+/g, " ").trim().slice(0, MAXCOM));
+        }
+        return res;
+      }
+      if (!reLong(longueurV1(o.r)).test(o.a)) return null;
+      if (o.r === "c") res.n = (typeof o.n === "string" && o.n.trim()) ? o.n.trim().slice(0, 40) : "Candidat";
+      return res;
+    } catch (e) { return null; }
+  }
+  function statut(g) {
+    if (g < 0.5) return ["ok", "Aligné"];
+    if (g < 1) return ["warn", "À clarifier"];
+    return ["crit", "Écart marqué"];
+  }
+  function statutSocle(em, dm) {
+    if (em < 3) return ["crit", "Signal d'alerte"];
+    if (Math.abs(dm - em) >= 1) return ["warn", "Vu différemment"];
+    return ["ok", "Solide"];
+  }
+  /* Candidat : l'écart compte d'autant plus que le thème est important pour lui. */
+  function statutC(gap, imp) {
+    if (gap < 0.75) return ["ok", "Compatible"];
+    if (gap >= 1.5 && imp >= 3) return ["crit", "Friction probable"];
+    return ["warn", "À discuter"];
+  }
+  function penche(v, g, d) {
+    if (v < 2.5) return "« " + g + " »";
+    if (v > 3.5) return "« " + d + " »";
+    return "entre les deux";
+  }
+  function pct(v) { return ((v - 1) / 4 * 100).toFixed(1); }
+  function avecPoints(stem) { return /[.?!]$/.test(stem) ? stem : stem + "…"; }
+
+  /* ---------- Analyse ---------- */
+  function analyser(reponses, v2axes) {
+    var D = [], E = [], C = [], D2 = [], E2 = [];
+    (reponses || []).forEach(function (r) {
+      if (!r || typeof r.a !== "string" || r.v !== VERSION) return;
+      if (r.w === 2) {
+        if (!v2axes || r.x !== v2axes || !reLong(v2axes.length * PER2).test(r.a)) return;
+        var o = { v: r.a.split("").map(Number), k: Array.isArray(r.k) ? r.k : [] };
+        if (r.r === "d") D2.push(o); else if (r.r === "e") E2.push(o);
+        return;
+      }
+      if (!reLong(longueurV1(r.r)).test(r.a)) return;
+      var v = r.a.split("").map(Number);
+      if (r.r === "d") D.push(v);
+      else if (r.r === "e") E.push(v);
+      else if (r.r === "c") C.push({ i: String(r.i || ""), n: typeof r.n === "string" && r.n ? r.n : "Candidat", t: r.t || "", v: v });
+    });
+    var out = { nd: D.length, ne: E.length, cands: C, pret: D.length >= 1 && E.length >= MIN_TEAM, axes: [], items: [], socle: [], v2: null };
+    if (!out.pret) return out;
+    function col(set, k) { return set.map(function (v) { return v[k]; }); }
+    AXES.forEach(function (ax, ai) {
+      var dq = [], eq = [], perTeam = E.map(function () { return 0; });
+      for (var j = 0; j < PER; j++) {
+        var k = ai * PER + j, dm = mean(col(D, k)), em = mean(col(E, k));
+        dq.push(dm); eq.push(em);
+        E.forEach(function (v, n) { perTeam[n] += v[k] / PER; });
+        out.items.push({ ai: ai, stem: ax.q[j][0], g: ax.q[j][1], d: ax.q[j][2], dm: dm, em: em, gap: Math.abs(dm - em) });
+      }
+      var dA = mean(dq), eA = mean(eq);
+      out.axes.push({ nom: ax.nom, court: ax.court, g: ax.g, d: ax.d, dm: dA, em: eA, gap: Math.abs(dA - eA), partage: sd(perTeam) >= 1 });
+    });
+    SOCLE.forEach(function (q, j) {
+      var k = NSTYLE + j, es = col(E, k);
+      out.socle.push({ nom: SOCLE_NOMS[j], stem: q[0], dm: mean(col(D, k)), em: mean(es),
+                       bas: es.filter(function (x) { return x <= 2; }).length });
+    });
+    if (v2axes) {
+      var w = { nd: D2.length, ne: E2.length, pret: D2.length >= 1 && E2.length >= MIN_TEAM, axes: [] };
+      if (w.pret) v2axes.split("").forEach(function (ch, pos) {
+        var ai = +ch, qs = questionsV2(ai), lignes = [];
+        for (var j = 0; j < PER2; j++) {
+          var k = pos * PER2 + j;
+          lignes.push({ stem: qs[j][0], g: qs[j][1], d: qs[j][2],
+            dm: mean(D2.map(function (o) { return o.v[k]; })), em: mean(E2.map(function (o) { return o.v[k]; })) });
+        }
+        var verb = [];
+        D2.forEach(function (o) { if (typeof o.k[pos] === "string" && o.k[pos]) verb.push({ r: "d", t: o.k[pos].slice(0, MAXCOM) }); });
+        E2.forEach(function (o) { if (typeof o.k[pos] === "string" && o.k[pos]) verb.push({ r: "e", t: o.k[pos].slice(0, MAXCOM) }); });
+        w.axes.push({ ai: ai, nom: AXES[ai].nom, diag: lignes.slice(0, 4), conc: lignes.slice(4), verb: verb });
+      });
+      out.v2 = w;
+    }
+    return out;
+  }
+  function axesEnEcart(an) {
+    var s = "";
+    an.axes.forEach(function (a, i) { if (a.gap >= SEUIL_V2) s += i; });
+    return s;
+  }
+  function nomsAxes(x) { return x.split("").map(function (c) { return AXES[+c].nom; }).join(", "); }
+  function pistes(ax) {
+    var out = [], h1 = ax.diag[0], h2 = ax.diag[1], h3 = ax.diag[2], h4 = ax.diag[3];
+    function chiffres(l) { return " (équipe " + fr(l.em) + " · direction " + fr(l.dm) + ")"; }
+    function haut(l) { return Math.max(l.em, l.dm) >= 3.5; }
+    if (h1.em >= 3.5) out.push("L'équipe voit un décalage entre ce qui est annoncé et ce qui se pratique" +
+      (h1.dm < 2.5 ? ", la direction non" : "") + chiffres(h1) + ".");
+    else if (h1.dm >= 3.5) out.push("La direction reconnaît elle-même un décalage entre l'annoncé et le pratiqué" + chiffres(h1) + ".");
+    if (haut(h2)) out.push("Les pratiques varient selon les équipes ou les managers : l'écart vient peut-être de certains périmètres seulement" + chiffres(h2) + ".");
+    if (haut(h3)) out.push("Le sujet a bougé depuis un an : direction et équipe ne décrivent peut-être pas la même période" + chiffres(h3) + ".");
+    if (h4.em >= 3.5) out.push("L'équipe juge les attentes de la direction mal expliquées : l'écart peut venir d'un défaut d'explication plus que d'une différence de pratique" + chiffres(h4) + ".");
+    if (!out.length) out.push("Aucune des quatre pistes testées ne ressort (décalage entre annoncé et pratiqué, différences entre équipes, changement récent, attentes mal expliquées). L'écart tient sans doute à une différence de point de vue, à explorer en entretien.");
+    return out;
+  }
+  function analyserCandidat(an, c) {
+    return {
+      axes: an.axes.map(function (a, ai) {
+        var cm = mean(c.v.slice(ai * PER, ai * PER + PER)), imp = c.v[NSTYLE + ai];
+        var gE = Math.abs(cm - a.em), gD = Math.abs(cm - a.dm);
+        return { nom: a.nom, court: a.court, g: a.g, d: a.d, dm: a.dm, em: a.em, cm: cm, gap: gE, imp: imp,
+                 st: statutC(gE, imp), discours: a.gap >= 1 && gD + 0.5 <= gE };
+      }),
+      items: an.items.map(function (it, k) {
+        return { ai: it.ai, stem: it.stem, g: it.g, d: it.d, em: it.em, cm: c.v[k], gap: Math.abs(c.v[k] - it.em) };
+      })
+    };
+  }
+
+  /* ---------- État ---------- */
+  var S = {
+    route: { vue: "cabinet" },
+    db: null, peutGerer: false, charge: "attente", // attente | ok | lent | absent
+    missions: [], courant: null, candidat: null, msg: null, confirmeSuppr: false, confirmeSupprCand: false,
+    rep: null // { slug, role, w, x:[], a:[], k:[], etape, code, nom, accord }
+  };
+  var app = document.getElementById("app");
+
+  function lireHash() {
+    var h = (location.hash || "").slice(1), m;
+    m = h.match(/^([de])2-([0-6]{1,7})-([a-z0-9-]{1,40})$/);
+    if (m && axesValides(m[2])) return { vue: "repondre", role: m[1], slug: m[3], w: 2, x: m[2] };
+    m = h.match(/^([dec])-([a-z0-9-]{1,40})$/);
+    if (m) return { vue: "repondre", role: m[1], slug: m[2], w: 1, x: "" };
+    if (h === "cabinet" || h === "missions") return { vue: "cabinet" };
+    return { vue: "repondre", role: null, slug: null, w: 1, x: "" };
+  }
+  /* Pages du questionnaire : { titre, lead, q: [...], com, n (questions par page) } */
+  function pagesRep(r) {
+    if (r.w === 2) return r.x.map(function (ai) { return { titre: AXES[ai].nom, q: questionsV2(ai), com: true }; });
+    var pages = AXES.map(function (ax) {
+      return { titre: ax.nom, q: ax.q, com: false, lead: r.role === "c" ? "Dans le poste où j'ai été le plus efficace et le plus à l'aise…" : "" };
+    });
+    if (r.role === "c") pages.push({ titre: "Ce qui compte pour vous", q: AXES.map(function (a, i) { return importanceQ(i); }), com: false,
+      lead: "Pour chaque thème, dites à quel point un environnement très différent de ce que vous avez décrit vous gênerait." });
+    else pages.push({ titre: "Climat de travail", q: SOCLE, com: false,
+      lead: "Ces quatre affirmations ne décrivent pas un style : dites simplement à quel point elles sont vraies aujourd'hui." });
+    return pages;
+  }
+  function debutPage(pages, p) { var n = 0; for (var i = 0; i < p; i++) n += pages[i].q.length; return n; }
+  function cleBrouillon(r) { return "cairn-radar5-" + r.slug + "-" + r.role + (r.w === 2 ? "-v2-" + r.x.join("") : ""); }
+  function ecrireBrouillon() {
+    var r = S.rep; if (!r || !r.slug || !r.role) return;
+    try { localStorage.setItem(cleBrouillon(r), r.a.join("")); } catch (e) {}
+  }
+  function demarrerReponse(route) {
+    var r = { slug: route.slug, role: route.role, w: route.w || 1,
+              x: (route.x || "").split("").map(Number), a: [], k: [], etape: -1, code: null, nom: "", accord: false };
+    var n = r.role ? (r.w === 2 ? r.x.length * PER2 : longueurV1(r.role)) : 0;
+    if (r.slug && r.role) {
+      try {
+        var s = localStorage.getItem(cleBrouillon(r));
+        if (s && new RegExp("^[0-5]{" + n + "}$").test(s)) r.a = s.split("").map(Number);
+      } catch (e) {}
+    }
+    while (r.a.length < n) r.a.push(0);
+    r.x.forEach(function () { r.k.push(""); });
+    S.rep = r;
+  }
+  function router() {
+    S.route = lireHash();
+    if (S.route.vue === "cabinet") S.peutGerer = true;
+    S.msg = null; S.confirmeSuppr = false; S.candidat = null; S.confirmeSupprCand = false;
+    if (S.route.vue === "repondre") demarrerReponse(S.route);
+    rendre();
+    window.scrollTo(0, 0);
+  }
+  function blocMsg() {
+    return S.msg ? '<p class="msg ' + (S.msg.ok ? "good" : "err") + '" role="status">' + esc(S.msg.t) + '</p>' : "";
+  }
+  function piste(l, marques) {
+    var h = '<div class="track" role="img" aria-label="' + esc(marques.map(function (m) { return m[1] + " " + fr(m[2]) + " sur 5"; }).join(", ")) + '">';
+    marques.forEach(function (m) { h += '<i class="mark ' + m[0] + '" style="left:' + pct(m[2]) + '%"></i>'; });
+    return h + '</div><div class="poles"><span>' + esc(l.g) + '</span><span>' + esc(l.d) + '</span></div>';
+  }
+
+  var CFG = window.CAIRN_CONFIG || {};
+  function urlDe(hash) { return location.origin + location.pathname + "#" + hash; }
+  function blocLien(titre, hash) {
+    return '<div class="stack" style="gap:6px"><span class="label">' + esc(titre) + '</span>' +
+      '<div class="row"><input type="text" readonly class="grow lien" value="' + esc(urlDe(hash)) + '" aria-label="Lien ' + esc(titre) + '">' +
+      '<button type="button" class="ghost" data-copie="' + esc(urlDe(hash)) + '">Copier</button>' +
+      '<a class="btn ghost" href="#' + esc(hash) + '">Ouvrir</a></div></div>';
+  }
+  function copierTexte(txt, btn) {
+    function ok() { var l = btn.textContent; btn.textContent = "Copié"; setTimeout(function () { btn.textContent = l; }, 1500); }
+    try { navigator.clipboard.writeText(txt).then(ok, function () {}); } catch (e) {}
+  }
+
+  /* ---------- Rendu : espace cabinet ---------- */
+  function vueCabinet() {
+    if (S.charge === "absent") return vueEntreeRepondant(
+      "L'espace cabinet a besoin du stockage du navigateur, bloqué ici (navigation privée ?). Vous pouvez tout de même répondre à un questionnaire.");
+    if (S.courant) {
+      var m = S.missions.filter(function (x) { return x.id === S.courant; })[0];
+      if (m) {
+        var an = analyser(m.reponses, m.v2);
+        if (S.candidat) {
+          var c0 = an.cands.filter(function (c) { return c.i === S.candidat; })[0];
+          if (c0) return vueCandidat(m, an, c0);
+          S.candidat = null;
+        }
+        return vueMission(m, an);
+      }
+      S.courant = null;
+    }
+    var h = '<div class="stack"><h1>Vos missions</h1>' +
+      '<p class="lead">Une mission par entreprise cliente. La direction et l\'équipe décrivent le fonctionnement réel de l\'entreprise ; le radar montre où leurs descriptions divergent, puis une seconde vague cherche pourquoi.</p></div>';
+    h += '<form id="f-nouvelle" class="panel stack" autocomplete="off">' +
+      '<label class="label" for="in-nom">Nouvelle mission</label>' +
+      '<div class="row"><div class="grow"><input type="text" id="in-nom" maxlength="60" placeholder="Nom de l\'entreprise"></div>' +
+      '<button type="submit" id="btn-creer">Créer</button></div>' + blocMsg() + '</form>';
+    h += '<section class="panel stack"><h2>Sauvegarde</h2><p class="small">Vos missions sont enregistrées sur cet appareil, dans ce navigateur uniquement. Téléchargez une sauvegarde régulièrement, et restaurez-la pour retrouver vos missions sur un autre appareil.</p>' +
+      '<div class="row"><button type="button" class="ghost grow" id="btn-sauver">Télécharger une sauvegarde</button>' +
+      '<label class="btn ghost grow" for="in-restaurer">Restaurer une sauvegarde</label>' +
+      '<input type="file" id="in-restaurer" accept="application/json,.json" hidden></div></section>';
+    if (S.charge === "attente") {
+      h += '<p class="small" id="etat-charge">Chargement de vos missions…</p>';
+    } else if (S.charge === "lent" && !S.missions.length) {
+      h += '<p class="small" id="etat-charge">Les missions ne répondent pas encore. La liste apparaîtra dès que la connexion revient.</p>';
+    } else if (!S.missions.length) {
+      h += '<p class="small">Aucune mission pour l\'instant. Créez la première avec le nom d\'une entreprise.</p>';
+    } else {
+      h += '<ul class="mission-list">';
+      S.missions.forEach(function (m) {
+        var a = analyser(m.reponses, m.v2);
+        h += '<li><button type="button" class="mission-item" data-ouvrir="' + esc(m.id) + '">' +
+          '<span class="name">' + esc(m.nom) + (m.exemple ? ' <span class="tag">Exemple</span>' : "") + '</span>' +
+          '<span class="counts num">' + a.nd + ' dir. · ' + a.ne + ' équipe</span></button></li>';
+      });
+      h += '</ul>';
+    }
+    return h;
+  }
+
+  function vueMission(m, an) {
+    var h = '<div class="stack"><a href="#cabinet" data-retour="1" class="small">← Toutes les missions</a>' +
+      '<h1>' + esc(m.nom) + (m.exemple ? ' <span class="tag">Exemple</span>' : "") + '</h1>' +
+      '<p class="lead num">' + pl(an.nd, "réponse") + ' direction · ' + pl(an.ne, "réponse") + ' équipe · ' + pl(an.cands.length, "candidat") + '</p></div>';
+
+    if (an.pret) { h += vueAnalyse(an); h += vueSocle(an); h += vueV2(m, an); }
+    else {
+      var manque = [];
+      if (an.nd < 1) manque.push("1 réponse de la direction");
+      if (an.ne < MIN_TEAM) manque.push(pl(MIN_TEAM - an.ne, "réponse") + " de l'équipe");
+      h += '<div class="panel stack"><h2>Radar en attente</h2><p>Il manque encore ' + manque.join(" et ") +
+        '.</p><p class="small">Le radar s\'affiche à partir de ' + MIN_TEAM + ' réponses côté équipe, pour que personne ne soit identifiable dans les moyennes.</p></div>';
+    }
+
+    h += '<section class="stack"><h2>Candidats</h2>';
+    if (!an.cands.length) {
+      h += '<p class="small">Aucun candidat pour l\'instant. Envoyez le questionnaire candidat, puis ajoutez son code plus bas.</p>';
+    } else {
+      h += '<ul class="mission-list">';
+      an.cands.forEach(function (c) {
+        var txt = "En attente du radar";
+        if (an.pret) {
+          var nf = analyserCandidat(an, c).axes.filter(function (a) { return a.st[0] === "crit"; }).length;
+          txt = nf ? pl(nf, "friction") : "Aucune friction";
+        }
+        h += '<li><button type="button" class="mission-item" data-cand="' + esc(c.i) + '">' +
+          '<span class="name">' + esc(c.n) + '</span><span class="counts num">' + txt + '</span></button></li>';
+      });
+      h += '</ul>';
+    }
+    h += '</section>';
+
+    h += '<section class="panel stack"><h2>Envoyer le questionnaire</h2>' +
+      '<p class="small">Vague 1 : ' + N_DE + ' questions pour la direction et l\'équipe, ' + N_C + ' pour un candidat. Copiez le lien voulu et envoyez-le par e-mail ou SMS : il s\'ouvre directement sur le bon questionnaire.</p>' +
+      blocLien("Direction", "d-" + m.id) + blocLien("Équipe", "e-" + m.id) + blocLien("Candidat", "c-" + m.id) +
+      '<p class="small">Code de mission : <strong>' + esc(m.id) + '</strong></p></section>';
+
+    h += '<form id="f-import" class="panel stack"><h2>Ajouter une réponse</h2>' +
+      '<label class="small" for="in-code">Collez ici le code que le répondant vous a envoyé (il commence par CAIRN-). Vague 1, vague 2 et candidats : même champ.</label>' +
+      '<textarea id="in-code" class="code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
+      '<div class="row"><button type="submit" id="btn-import">Ajouter</button></div>' + blocMsg() + '</form>';
+
+    h += '<div class="row">' + (S.confirmeSuppr
+      ? '<span class="small">Supprimer cette mission et ses réponses ?</span><button type="button" class="danger" data-suppr="oui">Oui, supprimer</button><button type="button" class="ghost" data-suppr="non">Annuler</button>'
+      : '<button type="button" class="ghost" data-suppr="demande">Supprimer la mission</button>') + '</div>';
+    return h;
+  }
+
+  function vueAnalyse(an) {
+    var tri = an.axes.slice().sort(function (a, b) { return b.gap - a.gap; });
+    var marques = tri.filter(function (a) { return a.gap >= 1; });
+    var aClar = tri.filter(function (a) { return a.gap >= 0.5 && a.gap < 1; });
+    var synth;
+    if (marques.length) synth = marques.length + " écart" + (marques.length > 1 ? "s marqués" : " marqué") + " sur " + AXES.length + " thèmes : " +
+      marques.map(function (a) { return a.nom; }).join(", ") + ".";
+    else if (aClar.length) synth = "Aucun écart marqué. " + pl(aClar.length, "thème") + " à clarifier : " +
+      aClar.map(function (a) { return a.nom; }).join(", ") + ".";
+    else synth = "Direction et équipe décrivent la même entreprise sur les " + AXES.length + " thèmes.";
+
+    var h = '<section class="panel stack"><p class="label">Vague 1 · style de l\'entreprise</p><h2>' + esc(synth) + '</h2>' +
+      '<div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>' +
+      radarSvg(an.axes) +
+      '<p class="small">Échelle de 1 à 5. Plus un point s\'éloigne du centre, plus la réponse penche vers le second pôle du thème (' + esc(AXES.map(function (x) { return x.d.toLowerCase(); }).join(", ")) + '). Aucun pôle n\'est meilleur que l\'autre : seul l\'écart compte.</p></section>';
+
+    h += '<section class="panel"><div class="stack" style="margin-bottom:14px"><h2>Thème par thème</h2></div>';
+    tri.forEach(function (a) {
+      var st = statut(a.gap);
+      h += '<div class="axis"><div class="axis-head"><h3>' + esc(a.nom) + '</h3>' +
+        '<span class="pill ' + st[0] + '">' + st[1] + ' · <span class="num">' + fr(a.gap) + '</span></span></div>' +
+        piste(a, [["d", "Direction", a.dm], ["e", "Équipe", a.em]]) +
+        (a.partage ? '<p class="small">L\'équipe elle-même est partagée sur ce thème : la moyenne masque des avis opposés.</p>' : "") +
+        '</div>';
+    });
+    h += '</section>';
+
+    var creuser = an.items.slice().sort(function (a, b) { return b.gap - a.gap; })
+      .filter(function (i) { return i.gap >= 1; }).slice(0, 3);
+    if (creuser.length) {
+      h += '<section class="panel"><div class="stack" style="margin-bottom:14px"><h2>Les questions qui divisent le plus</h2></div>';
+      creuser.forEach(function (i) {
+        h += '<div class="dig"><p><q>' + esc(avecPoints(i.stem)) + '</q></p>' +
+          '<p class="small">La direction répond ' + esc(penche(i.dm, i.g, i.d)) + ' <span class="num">(' + fr(i.dm) + ')</span>, ' +
+          'l\'équipe ' + esc(penche(i.em, i.g, i.d)) + ' <span class="num">(' + fr(i.em) + ')</span>.</p></div>';
+      });
+      h += '</section>';
+    }
+    return h;
+  }
+
+  function vueSocle(an) {
+    var alertes = an.socle.filter(function (s) { return statutSocle(s.em, s.dm)[0] === "crit"; });
+    var vus = an.socle.filter(function (s) { return statutSocle(s.em, s.dm)[0] === "warn"; });
+    var synth = alertes.length ? pl(alertes.length, "signal") + " d'alerte : " + alertes.map(function (s) { return s.nom; }).join(", ") + "."
+      : vus.length ? "Pas d'alerte, mais " + (vus.length > 1 ? "des points vus" : "un point vu") + " différemment par la direction et l'équipe."
+      : "L'équipe juge le climat de travail solide.";
+    var h = '<section class="panel stack"><p class="label">Climat de travail</p><h2>' + esc(synth) + '</h2>' +
+      '<p class="small">Ici, il ne s\'agit pas d\'un style : plus c\'est haut, mieux c\'est. Un climat où l\'équipe signale un manque de respect ou de sécurité pèse plus lourd sur les départs que le salaire. À aborder avec la direction avant tout recrutement.</p><div>';
+    an.socle.forEach(function (s) {
+      var st = statutSocle(s.em, s.dm);
+      h += '<div class="axis"><div class="axis-head"><h3>' + esc(s.nom) + '</h3><span class="pill ' + st[0] + '">' + st[1] + '</span></div>' +
+        '<p class="small">' + esc(s.stem) + (s.bas ? ' <span class="num">' + pl(s.bas, "membre") + ' de l\'équipe sur ' + an.ne + ' répond' + (s.bas > 1 ? "ent" : "") + ' 1 ou 2.</span>' : "") + '</p>' +
+        piste({ g: "Rarement vrai", d: "Presque toujours vrai" }, [["d", "Direction", s.dm], ["e", "Équipe", s.em]]) + '</div>';
+    });
+    return h + '</div></section>';
+  }
+
+  function vueV2(m, an) {
+    var actuels = axesEnEcart(an);
+    var h = '<section class="panel stack"><p class="label">Vague 2</p><h2>Comprendre d\'où viennent les écarts</h2>';
+    if (!m.v2) {
+      if (!actuels) return h + '<p>Aucun écart à approfondir : la vague 2 n\'est pas nécessaire pour cette entreprise.</p></section>';
+      h += '<p>Thèmes concernés : <strong>' + esc(nomsAxes(actuels)) + '</strong>.</p>' +
+        '<p class="small">Sur chacun de ces thèmes, la direction et l\'équipe répondent à ' + PER2 + ' questions : quatre testent une explication possible de l\'écart, deux portent sur des situations vécues récemment. Un commentaire libre est proposé. Soit ' +
+        (actuels.length * PER2) + ' questions en tout.</p>' +
+        '<div class="row"><button type="button" data-v2="' + esc(actuels) + '">Lancer la vague 2</button></div></section>';
+      return h;
+    }
+    var w = an.v2;
+    h += '<p>Thèmes approfondis : <strong>' + esc(nomsAxes(m.v2)) + '</strong>. <span class="num">' + pl(w.nd, "réponse") + ' direction · ' + pl(w.ne, "réponse") + ' équipe.</span></p>' +
+      '<p class="small">Envoyez ces liens aux mêmes personnes que pour la vague 1.</p>' +
+      blocLien("Vague 2 direction", "d2-" + m.v2 + "-" + m.id) + blocLien("Vague 2 équipe", "e2-" + m.v2 + "-" + m.id);
+    if (!w.pret) {
+      var manque = [];
+      if (w.nd < 1) manque.push("1 réponse de la direction");
+      if (w.ne < MIN_TEAM) manque.push(pl(MIN_TEAM - w.ne, "réponse") + " de l'équipe");
+      h += '<p class="small">Résultats en attente : il manque ' + manque.join(" et ") + '.</p>';
+    }
+    if (actuels && actuels !== m.v2) {
+      h += '<p class="small">Les écarts ont changé depuis le lancement (aujourd\'hui : ' + esc(nomsAxes(actuels)) + '). Relancer met de côté les réponses de vague 2 déjà reçues.</p>' +
+        '<div class="row"><button type="button" class="ghost" data-v2="' + esc(actuels) + '">Relancer sur les écarts actuels</button></div>';
+    }
+    h += '</section>';
+    if (!w.pret) return h;
+
+    w.axes.forEach(function (ax) {
+      h += '<section class="panel stack"><p class="label">Vague 2 · ' + esc(ax.nom) + '</p><h2>Pistes d\'explication</h2><ul class="pistes">';
+      pistes(ax).forEach(function (p) { h += '<li>' + esc(p) + '</li>'; });
+      h += '</ul><h3>Situations vécues</h3><div>';
+      ax.conc.forEach(function (l) {
+        h += '<div class="axis"><p><strong>' + esc(avecPoints(l.stem)) + '</strong></p>' +
+          piste(l, [["d", "Direction", l.dm], ["e", "Équipe", l.em]]) + '</div>';
+      });
+      h += '</div>';
+      if (ax.verb.length) {
+        h += '<h3>Ce qu\'ils en disent</h3>';
+        ax.verb.forEach(function (v) {
+          h += '<p class="verb"><b>' + (v.r === "d" ? "Direction" : "Équipe") + ' :</b> <q>' + esc(v.t) + '</q></p>';
+        });
+      }
+      h += '</section>';
+    });
+    return h;
+  }
+
+  function vueCandidat(m, an, c) {
+    var h = '<div class="stack"><a href="#cabinet" data-retourc="1" class="small">← ' + esc(m.nom) + '</a>' +
+      '<p class="label">Candidat</p><h1>' + esc(c.n) + '</h1></div>';
+    if (!an.pret) {
+      h += '<div class="panel stack"><h2>Comparaison en attente</h2><p>Les réponses de ce candidat sont enregistrées. La comparaison s\'affichera quand le radar de l\'entreprise sera complet (1 réponse direction et ' + MIN_TEAM + ' réponses équipe).</p></div>';
+    } else {
+      var res = analyserCandidat(an, c);
+      var tri = res.axes.slice().sort(function (a, b) {
+        var o = { crit: 0, warn: 1, ok: 2 };
+        return (o[a.st[0]] - o[b.st[0]]) || (b.gap - a.gap);
+      });
+      var fr2 = tri.filter(function (a) { return a.st[0] === "crit"; });
+      var disc = tri.filter(function (a) { return a.st[0] === "warn"; });
+      var synth;
+      if (fr2.length) synth = fr2.length + " friction" + (fr2.length > 1 ? "s probables" : " probable") + " sur " + AXES.length + " thèmes : " +
+        fr2.map(function (a) { return a.nom; }).join(", ") + ".";
+      else if (disc.length) synth = "Aucune friction probable. " + pl(disc.length, "thème") + " à discuter : " +
+        disc.map(function (a) { return a.nom; }).join(", ") + ".";
+      else synth = "Ce que recherche le candidat correspond à ce que vit l'équipe sur les " + AXES.length + " thèmes.";
+      h += '<section class="panel stack"><p class="label">Lecture</p><h2>' + esc(synth) + '</h2>' +
+        '<div class="legend"><span><i class="sw c"></i>Candidat (préférence)</span><span><i class="sw e"></i>Équipe (vécu)</span><span><i class="sw d"></i>Direction (discours)</span></div>' +
+        radarSvg(an.axes, res.axes.map(function (a) { return a.cm; })) +
+        '<p class="small">Le candidat est comparé d\'abord à ce que vit l\'équipe : c\'est l\'environnement qu\'il trouvera en arrivant. Un écart ne devient une friction probable que sur un thème qu\'il juge important.</p></section>';
+
+      h += '<section class="panel"><div class="stack" style="margin-bottom:14px"><h2>Thème par thème</h2></div>';
+      tri.forEach(function (a) {
+        var sens = a.cm > a.em ? a.d : a.g;
+        h += '<div class="axis"><div class="axis-head"><h3>' + esc(a.nom) + '</h3>' +
+          '<span class="pill ' + a.st[0] + '">' + a.st[1] + ' · <span class="num">' + fr(a.gap) + '</span></span></div>' +
+          piste(a, [["d", "Direction", a.dm], ["e", "Équipe", a.em], ["c", "Candidat", a.cm]]) +
+          '<p class="small num">Importance pour lui : ' + a.imp + '/5' +
+          (a.gap >= 0.75 ? '. Il recherche un fonctionnement plus proche de « ' + esc(sens) + ' » que ce que vit l\'équipe.' : '.') + '</p>' +
+          (a.discours ? '<p class="small">Attention : le candidat correspond à ce que décrit la direction, pas à ce que vit l\'équipe. C\'est le cas typique d\'une déception après l\'embauche.</p>' : "") +
+          '</div>';
+      });
+      h += '</section>';
+
+      var dire = res.items.filter(function (i) { return i.gap >= 1.5 && res.axes[i.ai].imp >= 3; })
+        .sort(function (a, b) { return b.gap - a.gap; }).slice(0, 3);
+      if (dire.length) {
+        h += '<section class="panel"><div class="stack" style="margin-bottom:14px"><h2>À dire au candidat</h2>' +
+          '<p class="small">Les points où ce qu\'il recherche s\'éloigne le plus du quotidien de l\'équipe, sur des thèmes qui comptent pour lui. À présenter franchement en entretien : une description réaliste du poste réduit les départs précoces.</p></div>';
+        dire.forEach(function (i) {
+          h += '<div class="dig"><p><q>' + esc(avecPoints(i.stem)) + '</q></p>' +
+            '<p class="small">Le candidat recherche ' + esc(penche(i.cm, i.g, i.d)) + ' <span class="num">(' + i.cm + ')</span>, ' +
+            'l\'équipe vit ' + esc(penche(i.em, i.g, i.d)) + ' <span class="num">(' + fr(i.em) + ')</span>.</p></div>';
+        });
+        h += '</section>';
+      }
+    }
+    h += blocMsg() + '<div class="row">' + (S.confirmeSupprCand
+      ? '<span class="small">Retirer ce candidat de la mission ?</span><button type="button" class="danger" data-supprc="oui">Oui, retirer</button><button type="button" class="ghost" data-supprc="non">Annuler</button>'
+      : '<button type="button" class="ghost" data-supprc="demande">Retirer ce candidat</button>') + '</div>';
+    return h;
+  }
+
+  function radarSvg(axes, cv) {
+    var cx = 210, cy = 150, R = 96, n = axes.length;
+    function pt(k, v) {
+      var ang = (-90 + k * 360 / n) * Math.PI / 180, r = R * v / 5;
+      return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+    }
+    function poly(vals) { return vals.map(function (v, k) { var p = pt(k, v); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
+    var s = '<svg class="radar" viewBox="0 0 420 300" role="img" aria-label="Radar comparant les réponses sur sept thèmes">';
+    for (var ring = 1; ring <= 5; ring++) {
+      s += '<polygon points="' + poly(axes.map(function () { return ring; })) + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+    }
+    axes.forEach(function (a, k) {
+      var e = pt(k, 5), l = pt(k, 6.15);
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+      var anchor = Math.abs(l[0] - cx) < 4 ? "middle" : (l[0] > cx ? "start" : "end");
+      s += '<text x="' + l[0].toFixed(1) + '" y="' + (l[1] + 4).toFixed(1) + '" text-anchor="' + anchor + '">' + esc(a.court || a.nom) + '</text>';
+    });
+    s += '<text class="tick" x="' + (cx + 4) + '" y="' + (pt(0, 1)[1] + 3).toFixed(1) + '">1</text>';
+    s += '<text class="tick" x="' + (cx + 4) + '" y="' + (pt(0, 5)[1] + 11).toFixed(1) + '">5</text>';
+    s += '<polygon points="' + poly(axes.map(function (a) { return a.em; })) + '" fill="var(--team)" fill-opacity="0.22" stroke="var(--team)" stroke-width="2"/>';
+    if (cv) {
+      s += '<polygon points="' + poly(axes.map(function (a) { return a.dm; })) + '" fill="none" stroke="var(--dir)" stroke-width="1.5" stroke-dasharray="4 4"/>';
+      s += '<polygon points="' + poly(cv) + '" fill="var(--cand)" fill-opacity="0.14" stroke="var(--cand)" stroke-width="2"/>';
+    } else {
+      s += '<polygon points="' + poly(axes.map(function (a) { return a.dm; })) + '" fill="var(--dir)" fill-opacity="0.10" stroke="var(--dir)" stroke-width="2"/>';
+    }
+    axes.forEach(function (a, k) {
+      var e = pt(k, a.em), d = pt(k, a.dm);
+      s += '<circle cx="' + e[0].toFixed(1) + '" cy="' + e[1].toFixed(1) + '" r="3.5" fill="var(--team)"/>';
+      s += '<rect x="' + (d[0] - 3.5).toFixed(1) + '" y="' + (d[1] - 3.5).toFixed(1) + '" width="7" height="7" fill="var(--dir)" transform="rotate(45 ' + d[0].toFixed(1) + ' ' + d[1].toFixed(1) + ')"/>';
+    });
+    if (cv) cv.forEach(function (v, k) {
+      var c = pt(k, v);
+      s += '<polygon points="' + c[0].toFixed(1) + ',' + (c[1] - 4.5).toFixed(1) + ' ' + (c[0] + 4.5).toFixed(1) + ',' + (c[1] + 3.5).toFixed(1) + ' ' + (c[0] - 4.5).toFixed(1) + ',' + (c[1] + 3.5).toFixed(1) + '" fill="var(--cand)"/>';
+    });
+    return s + '</svg>';
+  }
+
+  /* ---------- Rendu : questionnaire ---------- */
+  function vueEntreeRepondant(intro) {
+    return '<div class="stack"><h1>Répondre au questionnaire</h1><p class="lead">' + esc(intro) + '</p></div>' +
+      '<form id="f-entree" class="panel stack" autocomplete="off">' +
+      '<label class="label" for="in-mission">Code de mission</label>' +
+      '<input type="text" id="in-mission" maxlength="40" autocapitalize="off" placeholder="ex. atelier-durand">' +
+      '<p class="label">Vous répondez en tant que</p>' +
+      '<div class="role-choice"><button type="submit" class="ghost" data-role="d" id="btn-role-d">Membre de la direction</button>' +
+      '<button type="submit" class="ghost" data-role="e" id="btn-role-e">Membre de l\'équipe</button>' +
+      '<button type="submit" class="ghost" data-role="c" id="btn-role-c">Candidat</button></div>' + blocMsg() + '</form>';
+  }
+
+  function vueRepondre() {
+    var r = S.rep;
+    if (!r.slug || !r.role) return vueEntreeRepondant("Cairn Partners compare la façon dont la direction, l'équipe et les candidats décrivent le fonctionnement d'une entreprise. Indiquez le code de mission reçu avec votre invitation.");
+    var retour = S.peutGerer ? '<a href="#cabinet" class="small">← Espace cabinet</a>' : "";
+    var roleTxt = r.role === "d" ? "Direction" : r.role === "c" ? "Candidat" : "Équipe";
+    var pages = pagesRep(r), total = r.a.length, minutes = Math.max(2, Math.round(total / 5));
+
+    if (r.code) {
+      return '<div class="stack">' + retour + '<h1>Merci, c\'est terminé</h1>' +
+        '<p class="lead">Dernière étape : envoyez ce code à votre contact Cairn Partners' + (CFG.email ? ' avec le bouton ci-dessous, ou' : ',') + ' par SMS ou par e-mail. Vos réponses ne sont transmises que par ce code.</p></div>' +
+        '<div class="panel stack"><label class="label" for="out-code">Votre code réponse</label>' +
+        '<textarea id="out-code" class="code" readonly>' + esc(r.code) + '</textarea>' +
+        '<div class="row">' + (CFG.email ? '<a class="btn grow" id="btn-mail" href="mailto:' + encodeURIComponent(CFG.email) + '?subject=' + encodeURIComponent("Radar Cairn · " + r.slug + " · " + roleTxt) + '&body=' + encodeURIComponent(r.code) + '">Envoyer par e-mail</a>' : "") +
+        (navigator.share ? '<button type="button" class="ghost grow" id="btn-partager">Partager (SMS…)</button>' : "") +
+        '<button type="button" class="' + (CFG.email ? "ghost " : "") + 'grow" id="btn-copier">Copier le code</button></div><span class="small" id="copie-etat" role="status"></span>' +
+        '<p class="small">' + (r.role === "e"
+          ? "Le code ne contient pas votre nom. Seul votre contact Cairn sait qui l'a envoyé ; la direction ne voit que des moyennes d'équipe" + (r.w === 2 ? " et des commentaires non signés." : ".")
+          : r.role === "c" ? "Le code contient le nom que vous avez indiqué, pour que votre contact vous reconnaisse. Vous pouvez lui demander la restitution de vos résultats."
+          : "Le code ne contient pas votre nom.") + '</p></div>' +
+        '<div class="row"><button type="button" class="ghost" id="btn-modifier">Modifier mes réponses</button></div>';
+    }
+
+    if (r.etape < 0) {
+      var deja = r.a.some(function (v) { return v > 0; });
+      var bouton = '<div class="row"><button type="button" id="btn-debut">' + (deja ? "Reprendre" : "Commencer") + '</button></div>';
+      var regle = '<p class="small">Pour chaque question, deux descriptions se font face. Le côté de chaque description change d\'une question à l\'autre : lisez les deux avant de répondre.</p>';
+      if (r.w === 2) return '<div class="stack">' + retour + '<p class="label">Vague 2 · ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
+        '<h1>Quelques questions pour aller plus loin</h1>' +
+        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="panel stack"><p>Sur ' + (pages.length > 1 ? "certains sujets" : "un sujet") + ' (<strong>' + esc(pages.map(function (p) { return p.titre; }).join(", ")) +
+        '</strong>), la direction et l\'équipe n\'ont pas décrit l\'entreprise de la même façon. C\'est fréquent et ce n\'est pas un reproche : ces questions servent à comprendre pourquoi.</p>' +
+        '<p class="small">Répondez à partir de situations que vous avez réellement vécues ces derniers mois. Un commentaire libre est possible sur chaque sujet ; évitez d\'y citer des noms.</p></div>' + bouton;
+      if (r.role === "c") return '<div class="stack">' + retour + '<p class="label">Questionnaire candidat · mission ' + esc(r.slug) + '</p>' +
+        '<h1>Dans quel environnement travaillez-vous le mieux ?</h1>' +
+        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="panel stack"><p><strong>Pensez au poste où vous avez été le plus efficace et le plus à l\'aise</strong>, et décrivez comment il fonctionnait. Il n\'y a pas de bonne réponse : aucun des deux côtés n\'est meilleur que l\'autre, et des réponses « idéales » vous desserviraient en vous orientant vers un poste qui ne vous convient pas.</p>' + regle + '</div>' +
+        '<div class="panel stack"><p class="label">Avant de commencer</p>' +
+        '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace, pour le comparer à celui de l\'entreprise qui recrute. Vos résultats sont confidentiels : ils ne servent qu\'à cette candidature, et vous pouvez en demander la restitution à votre contact Cairn Partners.</p>' +
+        '<label class="consent" for="in-accord"><input type="checkbox" id="in-accord"' + (r.accord ? " checked" : "") + '><span>J\'ai lu ces informations et j\'accepte de répondre.</span></label>' +
+        '<label class="label" for="in-prenom">Votre prénom et votre nom</label>' +
+        '<input type="text" id="in-prenom" maxlength="40" autocomplete="name" value="' + esc(r.nom) + '">' + blocMsg() + '</div>' + bouton;
+      return '<div class="stack">' + retour + '<p class="label">Questionnaire ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
+        '<h1>Comment fonctionne vraiment votre entreprise ?</h1>' +
+        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="panel stack"><p><strong>Décrivez ce que vous avez observé ces six derniers mois</strong>, pas ce qui serait souhaitable ni ce qui est écrit dans les documents officiels. Il n\'y a pas de bonne réponse : sur les ' + AXES.length + ' premiers thèmes, aucun des deux côtés n\'est meilleur que l\'autre.</p>' + regle +
+        '<p class="small">Le même questionnaire est proposé à la direction et à l\'équipe. Cairn Partners compare les descriptions pour recruter des personnes qui s\'y sentiront à leur place. ' +
+        (r.role === "e" ? "Vos réponses sont anonymes pour l'entreprise : elle ne voit que des moyennes d'au moins " + MIN_TEAM + " personnes." : "") + '</p></div>' + bouton;
+    }
+
+    var pg = pages[r.etape], k0 = debutPage(pages, r.etape), faits = r.a.filter(function (v) { return v > 0; }).length;
+    var h = '<div class="stack"><p class="label">' + (r.w === 2 ? "Vague 2 · " : "") + roleTxt + ' · partie ' + (r.etape + 1) + ' sur ' + pages.length + '</p>' +
+      '<div class="progress" aria-hidden="true"><i id="barre" style="width:' + (faits / total * 100).toFixed(0) + '%"></i></div>' +
+      '<h2>' + esc(pg.titre) + '</h2>' + (pg.lead ? '<p class="lead">' + esc(pg.lead) + '</p>' : "") + '</div><div>';
+    pg.q.forEach(function (q, j) {
+      var k = k0 + j, inv = q[3] === true;
+      var gauche = inv ? q[2] : q[1], droite = inv ? q[1] : q[2];
+      h += '<div class="q"><p class="q-stem" id="stem-' + k + '">' + esc(avecPoints(q[0])) + '</p>' +
+        '<div class="q-poles"><span>' + esc(gauche) + '</span><span>' + esc(droite) + '</span></div>' +
+        '<div class="scale" role="group" aria-labelledby="stem-' + k + '">';
+      for (var p = 1; p <= 5; p++) {
+        var sem = inv ? 6 - p : p;
+        h += '<button type="button" id="q' + k + '-' + p + '" data-q="' + k + '" data-v="' + sem + '" aria-pressed="' + (r.a[k] === sem) +
+          '" aria-label="' + p + ' sur 5, de « ' + esc(gauche) + ' » à « ' + esc(droite) + ' »">' + p + '</button>';
+      }
+      h += '</div></div>';
+    });
+    h += '</div>';
+    if (pg.com) h += '<div class="stack"><label class="label" for="in-com">Un exemple ou une précision ? (facultatif)</label>' +
+      '<textarea id="in-com" maxlength="' + MAXCOM + '" placeholder="Une situation récente qui illustre vos réponses, sans citer de nom">' + esc(r.k[r.etape] || "") + '</textarea></div>';
+    h += '<div class="row"><button type="button" class="ghost" id="btn-prec">Précédent</button>' +
+      '<button type="button" class="grow" id="btn-suiv"' + (etapeComplete() ? "" : " disabled") + '>' +
+      (r.etape === pages.length - 1 ? "Terminer" : "Suivant") + '</button></div>';
+    return h;
+  }
+  function etapeComplete() {
+    var r = S.rep, pages = pagesRep(r), k0 = debutPage(pages, r.etape), n = pages[r.etape].q.length;
+    for (var j = 0; j < n; j++) if (!r.a[k0 + j]) return false;
+    return true;
+  }
+  function garderCommentaire() {
+    var r = S.rep, c = document.getElementById("in-com");
+    if (r && c && r.etape >= 0) r.k[r.etape] = c.value.replace(/\s+/g, " ").trim().slice(0, MAXCOM);
+  }
+
+  function rendre() {
+    app.innerHTML = S.route.vue === "repondre" ? vueRepondre() : vueCabinet();
+  }
+
+  /* ---------- Actions ---------- */
+  function idAlea() {
+    var s = "", c = "abcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 10; i++) s += c[Math.floor(Math.random() * c.length)];
+    return s;
+  }
+  function missionCourante() { return S.missions.filter(function (x) { return x.id === S.courant; })[0] || null; }
+  function copieReponses(m) {
+    return (m.reponses || []).map(function (x) {
+      var o = { r: x.r, a: x.a, i: x.i, t: x.t || "" };
+      if (typeof x.v === "number") o.v = x.v;
+      if (x.w === 2) { o.w = 2; o.x = x.x; o.k = Array.isArray(x.k) ? x.k.map(String) : []; }
+      else if (x.r === "c") o.n = typeof x.n === "string" && x.n ? x.n : "Candidat";
+      return o;
+    });
+  }
+
+  function creerMission(nom) {
+    nom = nom.trim();
+    var base = slugify(nom);
+    if (!nom || !base) { S.msg = { t: "Indiquez le nom de l'entreprise." }; return rendre(); }
+    var slug = base, n = 2;
+    var pris = function (s) { return S.missions.some(function (m) { return m.id === s; }); };
+    while (pris(slug)) slug = base + "-" + (n++);
+    S.msg = null;
+    S.db.doc("missions/" + slug).set({ nom: nom.slice(0, 60), cree: new Date().toISOString().slice(0, 10), reponses: [] })
+      .then(function () { S.courant = slug; rendre(); window.scrollTo(0, 0); })
+      .catch(function () { S.msg = { t: "La mission n'a pas pu être créée. Vérifiez votre connexion et réessayez." }; rendre(); });
+  }
+
+  function importer(txt) {
+    var m = missionCourante(); if (!m) return;
+    var r = decodeReponse(txt);
+    if (!r) { S.msg = { t: "Ce code n'est pas lisible. Demandez au répondant de le copier en entier, de CAIRN- jusqu'au dernier caractère." }; return rendre(); }
+    if (r.ancien) { S.msg = { t: "Ce code vient d'une version précédente du questionnaire. Demandez au répondant de refaire le questionnaire actuel." }; return rendre(); }
+    if (r.m !== m.id) { S.msg = { t: "Ce code appartient à la mission « " + r.m + " », pas à celle-ci." }; return rendre(); }
+    if (r.w === 2) {
+      if (!m.v2) { S.msg = { t: "Ce code est une réponse de vague 2, mais la vague 2 n'est pas lancée pour cette mission." }; return rendre(); }
+      if (r.x !== m.v2) { S.msg = { t: "Ce code correspond à une vague 2 précédente, sur d'autres thèmes. Renvoyez le lien actuel au répondant." }; return rendre(); }
+    }
+    var liste = copieReponses(m);
+    if (liste.some(function (x) { return x.i === r.i; })) { S.msg = { t: "Cette réponse a déjà été ajoutée." }; return rendre(); }
+    var nv = { r: r.r, a: r.a, i: r.i, t: r.t, v: VERSION };
+    if (r.w === 2) { nv.w = 2; nv.x = r.x; nv.k = r.k; }
+    else if (r.r === "c") nv.n = r.n;
+    liste.push(nv);
+    var btn = document.getElementById("btn-import"); if (btn) btn.disabled = true;
+    var qui = r.r === "d" ? "direction" : "équipe";
+    S.db.doc("missions/" + m.id).update({ reponses: liste })
+      .then(function () {
+        S.msg = { ok: true, t: r.w === 2 ? "Réponse " + qui + " de vague 2 ajoutée." : r.r === "c" ? "Candidat " + r.n + " ajouté." : "Réponse " + qui + " ajoutée." };
+        rendre();
+      })
+      .catch(function () { S.msg = { t: "La réponse n'a pas pu être enregistrée. Réessayez dans un instant." }; rendre(); });
+  }
+
+  function lancerV2(axes) {
+    var m = missionCourante(); if (!m || !axesValides(axes)) return;
+    S.db.doc("missions/" + m.id).update({ v2: { axes: axes, t: new Date().toISOString().slice(0, 10) } })
+      .then(function () { S.msg = null; rendre(); })
+      .catch(function () { S.msg = { t: "La vague 2 n'a pas pu être lancée. Réessayez dans un instant." }; rendre(); });
+  }
+  function retirerCandidat() {
+    var m = missionCourante(), id = S.candidat; if (!m || !id) return;
+    var liste = copieReponses(m).filter(function (x) { return !(x.r === "c" && x.i === id); });
+    S.db.doc("missions/" + m.id).update({ reponses: liste })
+      .then(function () { S.candidat = null; S.confirmeSupprCand = false; S.msg = null; rendre(); window.scrollTo(0, 0); })
+      .catch(function () { S.confirmeSupprCand = false; S.msg = { t: "Le candidat n'a pas pu être retiré. Réessayez dans un instant." }; rendre(); });
+  }
+  function supprimerMission() {
+    var id = S.courant; if (!id) return;
+    S.db.doc("missions/" + id).delete()
+      .then(function () { S.courant = null; S.confirmeSuppr = false; S.msg = null; rendre(); })
+      .catch(function () { S.confirmeSuppr = false; S.msg = { t: "La mission n'a pas pu être supprimée." }; rendre(); });
+  }
+  function copier() {
+    var ta = document.getElementById("out-code"), etat = document.getElementById("copie-etat");
+    function repli() { ta.focus(); ta.select(); etat.textContent = "Code sélectionné : utilisez Copier."; }
+    try {
+      navigator.clipboard.writeText(S.rep.code).then(function () { etat.textContent = "Code copié."; }, repli);
+    } catch (e) { repli(); }
+  }
+
+  app.addEventListener("click", function (ev) {
+    var t = ev.target.closest("button, a"); if (!t) return;
+    var r = S.rep;
+    function haut() { rendre(); window.scrollTo(0, 0); }
+    if (t.dataset.ouvrir) { S.courant = t.dataset.ouvrir; S.candidat = null; S.msg = null; S.confirmeSuppr = false; return haut(); }
+    if (t.dataset.retour) { ev.preventDefault(); S.courant = null; S.candidat = null; S.msg = null; S.confirmeSuppr = false; return haut(); }
+    if (t.dataset.cand) { S.candidat = t.dataset.cand; S.msg = null; S.confirmeSuppr = false; S.confirmeSupprCand = false; return haut(); }
+    if (t.dataset.retourc) { ev.preventDefault(); S.candidat = null; S.msg = null; S.confirmeSupprCand = false; return haut(); }
+    if (t.dataset.v2) { lancerV2(t.dataset.v2); return; }
+    if (t.dataset.supprc) {
+      if (t.dataset.supprc === "demande") { S.confirmeSupprCand = true; rendre(); }
+      else if (t.dataset.supprc === "non") { S.confirmeSupprCand = false; rendre(); }
+      else retirerCandidat();
+      return;
+    }
+    if (t.dataset.suppr) {
+      if (t.dataset.suppr === "demande") { S.confirmeSuppr = true; rendre(); }
+      else if (t.dataset.suppr === "non") { S.confirmeSuppr = false; rendre(); }
+      else supprimerMission();
+      return;
+    }
+    if (t.dataset.q) {
+      var k = +t.dataset.q, v = +t.dataset.v;
+      r.a[k] = v; ecrireBrouillon();
+      for (var i = 1; i <= 5; i++) {
+        var b = document.getElementById("q" + k + "-" + i);
+        b.setAttribute("aria-pressed", String(+b.dataset.v === v));
+      }
+      document.getElementById("btn-suiv").disabled = !etapeComplete();
+      document.getElementById("barre").style.width = (r.a.filter(function (x) { return x > 0; }).length / r.a.length * 100).toFixed(0) + "%";
+      return;
+    }
+    if (t.id === "btn-debut") {
+      if (r.role === "c" && r.w !== 2) {
+        var champ = document.getElementById("in-prenom"), acc = document.getElementById("in-accord");
+        r.nom = champ ? champ.value.trim().slice(0, 40) : r.nom;
+        r.accord = acc ? acc.checked : r.accord;
+        if (!r.accord) { S.msg = { t: "Cochez la case pour confirmer que vous avez lu les informations." }; rendre(); return; }
+        if (!r.nom) { S.msg = { t: "Indiquez votre prénom et votre nom pour commencer." }; rendre(); return; }
+        S.msg = null;
+      }
+      var pages = pagesRep(r), prem = 0;
+      for (var q = 0; q < r.a.length; q++) if (!r.a[q]) {
+        for (var p = 0; p < pages.length; p++) if (q < debutPage(pages, p + 1)) { prem = p; break; }
+        break;
+      }
+      r.etape = prem; return haut();
+    }
+    if (t.id === "btn-prec") { garderCommentaire(); r.etape -= 1; return haut(); }
+    if (t.id === "btn-suiv") {
+      if (!etapeComplete()) return;
+      garderCommentaire();
+      if (r.etape < pagesRep(r).length - 1) r.etape += 1;
+      else {
+        var charge = { v: VERSION, m: r.slug, r: r.role, a: r.a.join(""), i: idAlea(), t: new Date().toISOString().slice(0, 10) };
+        if (r.w === 2) { charge.w = 2; charge.x = r.x.join(""); charge.k = r.k.slice(); }
+        else if (r.role === "c") charge.n = r.nom || "Candidat";
+        r.code = encodeReponse(charge);
+      }
+      return haut();
+    }
+    if (t.id === "btn-copier") { copier(); return; }
+    if (t.dataset.copie) { copierTexte(t.dataset.copie, t); return; }
+    if (t.id === "btn-partager") { try { navigator.share({ title: "Radar Cairn", text: r.code }); } catch (e) {} return; }
+    if (t.id === "btn-sauver") { sauvegarder(); return; }
+    if (t.id === "btn-modifier") { r.code = null; r.etape = 0; return haut(); }
+  });
+
+  app.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var f = ev.target;
+    if (f.id === "f-nouvelle") {
+      if (!S.db || S.charge === "attente") { S.msg = { t: "Vos missions sont encore en cours de chargement. Réessayez dans un instant." }; return rendre(); }
+      creerMission(document.getElementById("in-nom").value);
+    } else if (f.id === "f-import") {
+      importer(document.getElementById("in-code").value);
+    } else if (f.id === "f-entree") {
+      var role = ev.submitter && ev.submitter.dataset.role;
+      var slug = slugify(document.getElementById("in-mission").value);
+      if (!slug || !role) { S.msg = { t: "Indiquez le code de mission, puis choisissez votre rôle." }; return rendre(); }
+      location.hash = role + "-" + slug;
+    }
+  });
+
+  window.addEventListener("hashchange", router);
+
+  /* ---------- Démarrage ---------- */
+  S.route = lireHash();
+  if (S.route.vue === "repondre") demarrerReponse(S.route);
+  rendre();
+
+  /* Stockage local (cet appareil) : même interface que l'ancienne base. */
+  var CLE = "cairn-radar-missions";
+  var abonnes = [];
+  function lireTout() { try { var o = JSON.parse(localStorage.getItem(CLE) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+  function ecrireTout(o) { localStorage.setItem(CLE, JSON.stringify(o)); notifier(); }
+  function notifier() {
+    var o = lireTout();
+    var snap = { metadata: { fromCache: false }, docs: Object.keys(o).map(function (id) { return { id: id, data: function () { return o[id]; } }; }) };
+    abonnes.forEach(function (f) { f(snap); });
+  }
+  var DB = {
+    doc: function (chemin) {
+      var id = chemin.split("/")[1];
+      return {
+        set: function (v) { return new Promise(function (ok) { var o = lireTout(); o[id] = v; ecrireTout(o); ok(); }); },
+        update: function (v) { return new Promise(function (ok) { var o = lireTout(); o[id] = Object.assign({}, o[id] || {}, v); ecrireTout(o); ok(); }); },
+        delete: function () { return new Promise(function (ok) { var o = lireTout(); delete o[id]; ecrireTout(o); ok(); }); }
+      };
+    },
+    collection: function () { return { onSnapshot: function (f) { abonnes.push(f); setTimeout(notifier, 0); } }; }
+  };
+  window.addEventListener("storage", function (e) { if (e.key === CLE) notifier(); });
+
+  function sauvegarder() {
+    var blob = new Blob([JSON.stringify({ cairn: 1, date: new Date().toISOString(), missions: lireTout() }, null, 1)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "cairn-radar-sauvegarde-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  }
+  app.addEventListener("change", function (ev) {
+    if (ev.target.id !== "in-restaurer" || !ev.target.files[0]) return;
+    var fr_ = new FileReader();
+    fr_.onload = function () {
+      try {
+        var o = JSON.parse(fr_.result), m = o && o.missions;
+        if (!m || typeof m !== "object") throw 0;
+        var cur = lireTout(), n = 0;
+        Object.keys(m).forEach(function (id) {
+          if (!/^[a-z0-9-]{1,40}$/.test(id) || !m[id] || typeof m[id] !== "object") return;
+          var ex = cur[id], rs = Array.isArray(m[id].reponses) ? m[id].reponses : [];
+          if (ex && Array.isArray(ex.reponses)) {
+            var vus = {}; ex.reponses.forEach(function (x) { vus[x.i] = 1; });
+            rs = ex.reponses.concat(rs.filter(function (x) { return x && !vus[x.i]; }));
+          }
+          cur[id] = Object.assign({}, m[id], ex || {}, { reponses: rs }); n++;
+        });
+        ecrireTout(cur);
+        S.msg = { ok: true, t: pl(n, "mission") + " restaurée" + (n > 1 ? "s" : "") + "." };
+      } catch (e) { S.msg = { t: "Ce fichier n'est pas une sauvegarde du radar." }; }
+      rendre();
+    };
+    fr_.readAsText(ev.target.files[0]);
+  });
+
+  S.db = DB;
+  try { localStorage.setItem("cairn-test", "1"); localStorage.removeItem("cairn-test"); } catch (e) { S.charge = "absent"; }
+  S.peutGerer = Object.keys(lireTout()).length > 0;
+  DB.collection("missions").onSnapshot(function (snap) {
+    S.missions = snap.docs.map(function (d) {
+      var x = d.data() || {};
+      return { id: d.id, nom: typeof x.nom === "string" ? x.nom : d.id, exemple: x.exemple === true,
+               cree: typeof x.cree === "string" ? x.cree : "", reponses: Array.isArray(x.reponses) ? x.reponses : [],
+               v2: x.v2 && axesValides(x.v2.axes) ? x.v2.axes : null };
+    }).sort(function (a, b) { return (b.cree || "").localeCompare(a.cree || "") || a.nom.localeCompare(b.nom); });
+    if (S.charge !== "absent") S.charge = "ok";
+    if (S.missions.length) S.peutGerer = true;
+    var actif = document.activeElement;
+    var saisie = actif && (actif.id === "in-nom" || actif.id === "in-code") && actif.value;
+    if (S.route.vue !== "repondre" && !saisie) rendre();
+  });
+})();
+</script>
+
+</body></html>
