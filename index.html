@@ -119,6 +119,14 @@ p { margin: 0; }
 .atout div { display: flex; flex-direction: column; gap: 4px; }
 .atout i { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-style: normal; font-size: 15px; background: var(--sky-soft); color: var(--sky); margin-bottom: 4px; }
 @media (max-width: 480px) { .atouts { grid-template-columns: 1fr; } .atout { flex-direction: row; align-items: center; gap: 12px; } .atout i { margin: 0; flex: none; } .atout div { display: flex; flex-direction: column; } }
+.ecarts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ecarts > div, .piliers > div { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; padding: 14px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); }
+.ecarts b, .piliers b { font-family: var(--display); font-size: 15px; letter-spacing: -.01em; }
+.piliers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.piliers span { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.piliers b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--sky), var(--cand)); margin-right: 8px; vertical-align: middle; }
+.exemple { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--sky-soft) 45%, var(--surface))); }
+@media (max-width: 560px) { .ecarts, .piliers { grid-template-columns: 1fr; } }
 .chip { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
 
 /* Boutons */
@@ -923,10 +931,34 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   }
 
   /* ---------- Rendu : questionnaire ---------- */
+  /* Radar d'illustration pour la page d'accueil (données fictives). */
+  var EXEMPLE = [[2.1, 3.4], [2.9, 3.4], [3.0, 3.6], [3.7, 2.4], [3.3, 3.5], [3.4, 2.8], [2.9, 3.2]];
+  function vueExemple() {
+    var axes = AXES.map(function (a, i) { return { nom: a.nom, court: a.court, dm: EXEMPLE[i][0], em: EXEMPLE[i][1] }; });
+    return '<section class="panel stack exemple"><div class="row" style="justify-content:space-between"><p class="label">Exemple de radar obtenu</p><span class="tag">Illustration</span></div>' +
+      '<h2>Là où la direction et l\'équipe ne voient pas la même entreprise</h2>' +
+      '<div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>' +
+      radarSvg(axes) +
+      '<div class="ecarts"><div><span class="pill crit">Écart marqué</span><b>Franc-parler</b><span class="small">La direction se voit directe, l\'équipe vit plus de détours.</span></div>' +
+      '<div><span class="pill crit">Écart marqué</span><b>Prise de décision</b><span class="small">L\'équipe se sent plus autonome que ne le pense la direction.</span></div>' +
+      '<div><span class="pill ok">Aligné</span><b>Travail en équipe</b><span class="small">Tout le monde décrit la même façon de collaborer.</span></div></div>' +
+      '<p class="small">Sept thèmes, notés de 1 à 5 par la direction et par l\'équipe. Une seconde vague de questions explique ensuite d\'où viennent les écarts, avant de comparer le profil des candidats à la réalité vécue par l\'équipe.</p></section>';
+  }
+  function vueAPropos() {
+    return '<section class="panel stack apropos"><p class="label">À propos</p>' +
+      '<h2>Cairn Affinités, le recrutement par la compatibilité</h2>' +
+      '<p>Cairn Affinités est un cabinet de recrutement dédié aux PME et ETI. Plutôt que de promettre un candidat « parfait », nous mesurons honnêtement ce qui rapproche et ce qui sépare une entreprise, ses équipes et les personnes qu\'elle recrute.</p>' +
+      '<div class="piliers">' +
+        '<div><b>Comprendre</b><span>Le radar révèle le fonctionnement réel de l\'entreprise, vu par la direction et par l\'équipe.</span></div>' +
+        '<div><b>Recruter</b><span>Les candidats sont comparés à ce que vit l\'équipe au quotidien, pas seulement à une fiche de poste.</span></div>' +
+        '<div><b>Accompagner</b><span>Un suivi après l\'embauche pour que chacun reste à sa place, durablement.</span></div>' +
+      '</div>' +
+      '<p class="small">Comme un cairn, ces petits tas de pierres qui balisent un chemin : chaque pierre doit trouver son équilibre pour que l\'ensemble tienne.</p></section>';
+  }
   function vueEntreeRepondant(intro) {
     return '<div class="hero"><span class="eyebrow">Radar de compatibilité</span>' +
       '<h1>Décrivez l\'entreprise <span class="hl">telle qu\'elle est vraiment</span></h1>' +
-      '<p class="lead">' + esc(intro) + '</p></div>' +
+      '<p class="lead">' + esc(intro) + '</p></div>' + vueExemple() +
       '<div class="atouts">' +
         '<div class="atout"><i>◷</i><div><b>Moins de 10 min</b><span>Une trentaine de questions, sur téléphone ou ordinateur.</span></div></div>' +
         '<div class="atout"><i>◎</i><div><b>Confidentiel</b><span>Les réponses d\'équipe ne sont lues qu\'en moyenne.</span></div></div>' +
@@ -938,7 +970,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       '<p class="label">Vous répondez en tant que</p>' +
       '<div class="role-choice"><button type="submit" class="ghost" data-role="d" id="btn-role-d">Membre de la direction</button>' +
       '<button type="submit" class="ghost" data-role="e" id="btn-role-e">Membre de l\'équipe</button>' +
-      '<button type="submit" class="ghost" data-role="c" id="btn-role-c">Candidat</button></div>' + blocMsg() + '</form>';
+      '<button type="submit" class="ghost" data-role="c" id="btn-role-c">Candidat</button></div>' + blocMsg() + '</form>' + vueAPropos();
   }
 
   function vueRepondre() {
