@@ -127,6 +127,55 @@ p { margin: 0; }
 .piliers b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, var(--sky), var(--cand)); margin-right: 8px; vertical-align: middle; }
 .exemple { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--sky-soft) 45%, var(--surface))); }
 @media (max-width: 560px) { .ecarts, .piliers { grid-template-columns: 1fr; } }
+/* Page d'accueil commerciale */
+.topcta { display: none; margin-left: auto; min-height: 40px; padding: 8px 16px; font-size: 14px; }
+body.accueil .topcta { display: inline-flex; }
+body.accueil .topchip { display: none; }
+.hero-xl { padding-top: 24px; gap: 18px; }
+.hero-xl h1 { font-size: clamp(36px, 9vw, 58px); line-height: 1.04; letter-spacing: -.035em; }
+.hero-xl .lead { font-size: 18px; max-width: 34em; }
+.cta-row { gap: 12px; }
+.btn-xl { min-height: 54px; padding: 14px 24px; font-size: 16px; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.kpis > div { padding: 18px 16px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 4px; }
+.kpis b { font-family: var(--display); font-size: 40px; line-height: 1; letter-spacing: -.03em; background: linear-gradient(135deg, var(--sky), var(--cand)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kpis span { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.bloc { display: flex; flex-direction: column; gap: 18px; padding-top: 28px; scroll-margin-top: 80px; }
+.bloc-tete { display: flex; flex-direction: column; gap: 8px; }
+.h2-xl { font-size: clamp(26px, 6vw, 34px); font-weight: 700; letter-spacing: -.03em; }
+.cartes3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cartes2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.carte { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.carte i { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; font-style: normal; font-weight: 700; background: var(--crit-bg); color: var(--crit); }
+.carte b { font-family: var(--display); font-size: 17px; letter-spacing: -.01em; line-height: 1.25; }
+.carte span { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.cartes2 .carte b::before { content: "✓"; display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 8px; border-radius: 50%; font-size: 12px; background: var(--ok-bg); color: var(--ok); vertical-align: 2px; }
+.etapes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; position: relative; }
+.etapes li { display: flex; gap: 16px; align-items: flex-start; padding: 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.etapes .n { flex: none; width: 40px; height: 40px; border-radius: 14px; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 18px; color: #fff; background: linear-gradient(150deg, #3B8FCB, #14233B); box-shadow: 0 8px 18px -8px rgba(47,127,184,.7); }
+.etapes div { display: flex; flex-direction: column; gap: 4px; }
+.etapes b { font-family: var(--display); font-size: 17px; letter-spacing: -.01em; }
+.etapes span:not(.n) { font-size: 14.5px; color: var(--muted); }
+.offres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+.offre { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 22px 20px; border-radius: var(--r); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.offre b { font-family: var(--display); font-size: 19px; letter-spacing: -.02em; }
+.offre span:not(.tag) { font-size: 14px; color: var(--muted); }
+.offre.vedette { border: 2px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, var(--sky), var(--cand)) border-box; box-shadow: var(--shadow-lg); }
+.offre .tag { position: absolute; top: -11px; left: 18px; background: linear-gradient(135deg, var(--sky), var(--cand)); color: #fff; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips .chip { font-size: 14px; padding: 8px 14px; color: var(--ink); }
+.cta-final { margin-top: 28px; padding: 32px 24px; border-radius: 28px; color: #F7F4EE; display: flex; flex-direction: column; gap: 14px;
+  background: radial-gradient(30rem 20rem at 100% 0%, rgba(91,167,219,.45), transparent 60%), radial-gradient(24rem 18rem at 0% 100%, rgba(138,63,122,.45), transparent 60%), #14233B;
+  box-shadow: var(--shadow-lg); }
+.cta-final p { color: rgba(247,244,238,.82); font-size: 16px; }
+.cta-final .btn-clair, .cta-final .btn-clair:hover { background: #F7F4EE; color: #14233B; box-shadow: 0 10px 24px -10px rgba(0,0,0,.6); }
+@media (max-width: 600px) {
+  .kpis b { font-size: 32px; }
+  .cartes3, .cartes2, .offres { grid-template-columns: 1fr; }
+  .offres { gap: 20px; }
+  .cta-row > * { flex: 1 1 100%; }
+}
+@media (max-width: 380px) { .kpis { grid-template-columns: 1fr; } }
 .chip { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
 
 /* Boutons */
@@ -254,6 +303,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   @keyframes monte { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .scale button[aria-pressed="true"] { transform: none; } }
+body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
 </style>
 <script src="config.js"></script>
 </head>
@@ -270,7 +320,8 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       <div class="brand-sub">Radar de compatibilité</div>
     </div>
   </header></a>
-  <span class="chip">Confidentiel</span>
+  <span class="chip topchip">Confidentiel</span>
+  <a class="btn topcta" id="top-cta" href="#">Nous contacter</a>
 </div></div>
 <div class="wrap">
   <main id="app" class="stack-lg"></main>
@@ -935,7 +986,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   var EXEMPLE = [[2.1, 3.4], [2.9, 3.4], [3.0, 3.6], [3.7, 2.4], [3.3, 3.5], [3.4, 2.8], [2.9, 3.2]];
   function vueExemple() {
     var axes = AXES.map(function (a, i) { return { nom: a.nom, court: a.court, dm: EXEMPLE[i][0], em: EXEMPLE[i][1] }; });
-    return '<section class="panel stack exemple"><div class="row" style="justify-content:space-between"><p class="label">Exemple de radar obtenu</p><span class="tag">Illustration</span></div>' +
+    return '<section class="panel stack exemple"><div class="row" style="justify-content:space-between"><p class="label">Ce que vous obtenez</p><span class="tag">Illustration</span></div>' +
       '<h2>Là où la direction et l\'équipe ne voient pas la même entreprise</h2>' +
       '<div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>' +
       radarSvg(axes) +
@@ -948,34 +999,96 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
     return '<section class="panel stack apropos"><p class="label">À propos</p>' +
       '<h2>Cairn Affinités, le recrutement par la compatibilité</h2>' +
       '<p>Cairn Affinités est un cabinet de recrutement dédié aux PME et ETI. Plutôt que de promettre un candidat « parfait », nous mesurons honnêtement ce qui rapproche et ce qui sépare une entreprise, ses équipes et les personnes qu\'elle recrute.</p>' +
-      '<div class="piliers">' +
-        '<div><b>Comprendre</b><span>Le radar révèle le fonctionnement réel de l\'entreprise, vu par la direction et par l\'équipe.</span></div>' +
-        '<div><b>Recruter</b><span>Les candidats sont comparés à ce que vit l\'équipe au quotidien, pas seulement à une fiche de poste.</span></div>' +
-        '<div><b>Accompagner</b><span>Un suivi après l\'embauche pour que chacun reste à sa place, durablement.</span></div>' +
-      '</div>' +
+
       '<p class="small">Comme un cairn, ces petits tas de pierres qui balisent un chemin : chaque pierre doit trouver son équilibre pour que l\'ensemble tienne.</p></section>';
   }
-  function vueEntreeRepondant(intro) {
-    return '<div class="hero"><span class="eyebrow">Radar de compatibilité</span>' +
-      '<h1>Décrivez l\'entreprise <span class="hl">telle qu\'elle est vraiment</span></h1>' +
-      '<p class="lead">' + esc(intro) + '</p></div>' + vueExemple() +
-      '<div class="atouts">' +
-        '<div class="atout"><i>◷</i><div><b>Moins de 10 min</b><span>Une trentaine de questions, sur téléphone ou ordinateur.</span></div></div>' +
-        '<div class="atout"><i>◎</i><div><b>Confidentiel</b><span>Les réponses d\'équipe ne sont lues qu\'en moyenne.</span></div></div>' +
-        '<div class="atout"><i>⇄</i><div><b>Sans bonne réponse</b><span>Aucun style n\'est meilleur qu\'un autre.</span></div></div>' +
-      '</div>' +
-      '<form id="f-entree" class="panel stack" autocomplete="off">' +
+  function lienContact(sujet) {
+    var mail = CFG.email || "cairn.affinites@gmail.com";
+    return "mailto:" + mail + "?subject=" + encodeURIComponent(sujet || "Prise de contact · Cairn Affinités");
+  }
+  function formEntree() {
+    return '<form id="f-entree" class="panel stack" autocomplete="off">' +
       '<label class="label" for="in-mission">Code de mission</label>' +
       '<input type="text" id="in-mission" maxlength="40" autocapitalize="off" placeholder="ex. atelier-durand">' +
       '<p class="label">Vous répondez en tant que</p>' +
       '<div class="role-choice"><button type="submit" class="ghost" data-role="d" id="btn-role-d">Membre de la direction</button>' +
       '<button type="submit" class="ghost" data-role="e" id="btn-role-e">Membre de l\'équipe</button>' +
-      '<button type="submit" class="ghost" data-role="c" id="btn-role-c">Candidat</button></div>' + blocMsg() + '</form>' + vueAPropos();
+      '<button type="submit" class="ghost" data-role="c" id="btn-role-c">Candidat</button></div>' + blocMsg() + '</form>';
+  }
+  function vueEntreeRepondant(intro) {
+    return '<div class="hero"><span class="eyebrow">Radar de compatibilité</span><h1>Répondre au questionnaire</h1>' +
+      '<p class="lead">' + esc(intro) + '</p></div>' + formEntree();
+  }
+  function section(id, label, titre, corps, extra) {
+    return '<section class="bloc' + (extra ? " " + extra : "") + '"' + (id ? ' id="' + id + '"' : "") + '>' +
+      '<div class="bloc-tete"><p class="label">' + label + '</p><h2 class="h2-xl">' + titre + '</h2></div>' + corps + '</section>';
+  }
+  function vueAccueil() {
+    var h = '';
+    /* Hero */
+    h += '<div class="hero hero-xl"><span class="eyebrow">Cabinet de recrutement · PME &amp; ETI</span>' +
+      '<h1>Recrutez des personnes <span class="hl">qui vont rester.</span></h1>' +
+      '<p class="lead">Un recrutement réussi ne se joue pas seulement sur les compétences. Cairn Affinités mesure le fonctionnement réel de votre entreprise, tel que le vivent vos équipes, puis recrute des candidats faits pour cette réalité.</p>' +
+      '<div class="row cta-row"><a class="btn btn-xl" href="' + lienContact("Demande de rendez-vous · Cairn Affinités") + '">Parlons de votre recrutement</a>' +
+      '<button type="button" class="ghost btn-xl" data-scroll="methode">Découvrir la méthode</button></div>' +
+      '<p class="small">Vous avez reçu une invitation ? <a href="#" data-scroll="repondre-bloc">Répondre au questionnaire →</a></p></div>';
+    /* Chiffres clés de la méthode */
+    h += '<div class="kpis"><div><b>7</b><span>dimensions de la culture d\'entreprise analysées</span></div>' +
+      '<div><b>3</b><span>regards croisés : direction, équipe, candidat</span></div>' +
+      '<div><b>12</b><span>mois de suivi après l\'embauche</span></div></div>';
+    /* Problème */
+    h += section("", "Le constat", "Un recrutement raté ne se lit pas sur un CV",
+      '<div class="cartes3">' +
+      '<div class="carte"><i>✕</i><b>La fiche de poste ne dit pas tout</b><span>Rythme, franc-parler, autonomie : ce qui fait partir un collaborateur est rarement écrit quelque part.</span></div>' +
+      '<div class="carte"><i>≠</i><b>Direction et équipe ne vivent pas la même entreprise</b><span>Le discours officiel et le quotidien divergent souvent, et le candidat découvre l\'écart après son arrivée.</span></div>' +
+      '<div class="carte"><i>↺</i><b>Un départ précoce coûte cher</b><span>Du temps de recrutement perdu, une équipe déstabilisée, un poste à pourvoir de nouveau.</span></div>' +
+      '</div>');
+    /* Exemple de radar */
+    h += vueExemple();
+    /* Méthode */
+    h += section("methode", "La méthode", "Quatre étapes, de votre culture à l\'intégration réussie",
+      '<ol class="etapes">' +
+      '<li><span class="n">1</span><div><b>Le radar de votre entreprise</b><span>Direction et équipe répondent au même questionnaire de 10 minutes, en toute confidentialité. Le radar montre où leurs descriptions se rejoignent et où elles divergent.</span></div></li>' +
+      '<li><span class="n">2</span><div><b>Comprendre les écarts</b><span>Une seconde vague de questions, uniquement sur les thèmes en écart, identifie d\'où vient la différence : discours, pratiques qui varient selon les équipes, changement récent, attentes mal expliquées.</span></div></li>' +
+      '<li><span class="n">3</span><div><b>Des candidats compatibles</b><span>Chaque candidat décrit l\'environnement dans lequel il est le plus efficace. Il est comparé à ce que vit réellement votre équipe, pas seulement à la fiche de poste.</span></div></li>' +
+      '<li><span class="n">4</span><div><b>Une intégration suivie</b><span>Nous restons présents pendant douze mois après l\'embauche pour repérer tôt les signaux de décalage.</span></div></li>' +
+      '</ol>');
+    /* Bénéfices */
+    h += section("", "Ce que vous y gagnez", "Un recrutement honnête, des deux côtés",
+      '<div class="cartes2">' +
+      '<div class="carte"><b>Des recrues qui restent</b><span>Un candidat qui sait à quoi s\'attendre s\'intègre mieux et plus durablement.</span></div>' +
+      '<div class="carte"><b>Une lecture claire de votre culture</b><span>Le radar est aussi un outil de management : il révèle ce que vos équipes vivent vraiment.</span></div>' +
+      '<div class="carte"><b>Des entretiens plus justes</b><span>Nous vous indiquons les points à aborder franchement avec chaque candidat, avant qu\'ils ne deviennent des frictions.</span></div>' +
+      '<div class="carte"><b>Une méthode fondée sur la recherche</b><span>Nos questionnaires s\'appuient sur les travaux en psychologie du travail et en management sur l\'adéquation entre une personne et son environnement.</span></div>' +
+      '</div>');
+    /* Offres */
+    h += section("offres", "Nos formules", "Un accompagnement à la mesure de vos besoins",
+      '<div class="offres">' +
+      '<div class="offre"><p class="label">Ponctuel</p><b>Un recrutement</b><span>Le radar de votre entreprise et un recrutement mené de bout en bout, candidats compatibles à l\'appui.</span></div>' +
+      '<div class="offre vedette"><span class="tag">Le plus choisi</span><p class="label">Partenaire</p><b>Vos recrutements de l\'année</b><span>Un interlocuteur unique pour plusieurs recrutements, avec un radar mis à jour au fil de l\'eau.</span></div>' +
+      '<div class="offre"><p class="label">Gardien</p><b>Recruter et fidéliser</b><span>Les recrutements, le suivi d\'intégration sur douze mois et un point régulier sur le climat de vos équipes.</span></div>' +
+      '</div><p class="small">Tarifs sur devis, selon le nombre de postes et la taille de vos équipes.</p>');
+    /* Pour qui */
+    h += section("", "Pour qui", "Les PME et ETI qui veulent recruter juste",
+      '<div class="chips"><span class="chip">Commercial</span><span class="chip">Finance</span><span class="chip">RH &amp; juridique</span><span class="chip">Marketing</span><span class="chip">Cadres</span><span class="chip">Agents de maîtrise</span><span class="chip">CDI</span><span class="chip">Partout en France</span></div>');
+    h += vueAPropos();
+    /* CTA final */
+    h += '<section class="cta-final"><h2 class="h2-xl">Parlons de votre prochain recrutement</h2>' +
+      '<p>Un premier échange de trente minutes, sans engagement, pour comprendre votre besoin et vous montrer le radar.</p>' +
+      '<div class="row cta-row"><a class="btn btn-xl btn-clair" href="' + lienContact("Demande de rendez-vous · Cairn Affinités") + '">Prendre rendez-vous</a></div></section>';
+    /* Répondants */
+    h += section("repondre-bloc", "Vous avez reçu une invitation ?", "Répondre au questionnaire",
+      '<div class="atouts">' +
+        '<div class="atout"><i>◷</i><div><b>Moins de 10 min</b><span>Une trentaine de questions, sur téléphone ou ordinateur.</span></div></div>' +
+        '<div class="atout"><i>◎</i><div><b>Confidentiel</b><span>Les réponses d\'équipe ne sont lues qu\'en moyenne.</span></div></div>' +
+        '<div class="atout"><i>⇄</i><div><b>Sans bonne réponse</b><span>Aucun style n\'est meilleur qu\'un autre.</span></div></div>' +
+      '</div>' + formEntree());
+    return h;
   }
 
   function vueRepondre() {
     var r = S.rep;
-    if (!r.slug || !r.role) return vueEntreeRepondant("Cairn Affinités compare la façon dont la direction, l'équipe et les candidats décrivent le fonctionnement d'une entreprise. Indiquez le code de mission reçu avec votre invitation.");
+    if (!r.slug || !r.role) return vueAccueil("Cairn Affinités compare la façon dont la direction, l'équipe et les candidats décrivent le fonctionnement d'une entreprise. Indiquez le code de mission reçu avec votre invitation.");
     var retour = S.peutGerer ? '<a href="#cabinet" class="small">← Espace cabinet</a>' : "";
     var roleTxt = r.role === "d" ? "Direction" : r.role === "c" ? "Candidat" : "Équipe";
     var pages = pagesRep(r), total = r.a.length, minutes = Math.max(2, Math.round(total / 5));
@@ -1059,6 +1172,9 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 
   function rendre() {
     app.innerHTML = S.route.vue === "repondre" ? vueRepondre() : vueCabinet();
+    var acc = S.route.vue === "repondre" && S.rep && !S.rep.slug;
+    document.body.classList.toggle("accueil", !!acc);
+    var tc = document.getElementById("top-cta"); if (tc) tc.href = lienContact("Demande de rendez-vous · Cairn Affinités");
   }
 
   /* ---------- Actions ---------- */
@@ -1206,6 +1322,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       return haut();
     }
     if (t.id === "btn-copier") { copier(); return; }
+    if (t.dataset.scroll) { ev.preventDefault(); var cible = document.getElementById(t.dataset.scroll); if (cible) cible.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     if (t.dataset.copie) { copierTexte(t.dataset.copie, t); return; }
     if (t.id === "btn-partager") { try { navigator.share({ title: "Radar Cairn", text: r.code }); } catch (e) {} return; }
     if (t.id === "btn-sauver") { sauvegarder(); return; }
