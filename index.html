@@ -3,184 +3,273 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Radar de compatibilité · Cairn Partners</title>
-<meta name="description" content="Cairn Partners — radar de compatibilité entre une entreprise, ses équipes et ses candidats.">
+<title>Radar de compatibilité · Cairn Affinités</title>
+<meta name="description" content="Cairn Affinités — radar de compatibilité entre une entreprise, ses équipes et ses candidats.">
 <meta name="theme-color" content="#14233B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 38'%3E%3Cellipse cx='17' cy='31' rx='15' ry='6' fill='%2314233B'/%3E%3Cellipse cx='17' cy='19.5' rx='11' ry='5' fill='%2355627A'/%3E%3Cellipse cx='17' cy='9.5' rx='7' ry='4' fill='%232F7FB8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
-/* Layout : une colonne étroite pensée pour le téléphone ; le radar et les jauges à repères (direction / équipe / candidat) portent l'analyse. */
+/* Cairn Affinités — design 2026 : fond lin à halos doux, cartes arrondies flottantes, boutons pilule, échelle de réponse tactile. */
 :root {
-  --bg: #F5F2EC;        /* lin */
+  --bg: #F4F1EA;
   --surface: #FFFFFF;
-  --ink: #14233B;       /* marine */
-  --muted: #55627A;     /* ardoise */
-  --sky: #2F7FB8;       /* bleu ciel, assombri pour le contraste */
-  --sky-soft: #DCEBF6;
-  --line: #DAD4C8;
+  --surface-2: #FAF8F4;
+  --ink: #14233B;
+  --muted: #5A667C;
+  --sky: #2F7FB8;
+  --sky-2: #5BA7DB;
+  --sky-soft: #E3EFF8;
+  --line: #E4DED3;
+  --line-strong: #D3CBBD;
   --dir: #14233B;
   --team: #2F7FB8;
   --cand: #8A3F7A;
-  --ok: #2B7355; --ok-bg: #DDEFE6;
-  --warn: #8F5E12; --warn-bg: #F6E9CC;
-  --crit: #A63A31; --crit-bg: #F7DEDB;
-  --on-ink: #F5F2EC;
+  --ok: #2B7355; --ok-bg: #DFF1E7;
+  --warn: #8F5E12; --warn-bg: #F8EBCF;
+  --crit: #A63A31; --crit-bg: #F8E0DC;
+  --on-ink: #F7F4EE;
+  --glow-1: rgba(91,167,219,.28);
+  --glow-2: rgba(214,180,140,.30);
+  --shadow: 0 1px 2px rgba(20,35,59,.04), 0 10px 30px -12px rgba(20,35,59,.14);
+  --shadow-lg: 0 2px 4px rgba(20,35,59,.04), 0 24px 48px -20px rgba(20,35,59,.28);
+  --glass: rgba(244,241,234,.72);
   --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r: 20px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F1826; --surface: #172336; --ink: #E8EDF5; --muted: #9AA7BD;
-    --sky: #7DBDE8; --sky-soft: #1E3550; --line: #2B3B55;
+    --bg: #0C1422; --surface: #142034; --surface-2: #18263C; --ink: #E9EEF6; --muted: #9DAAC0;
+    --sky: #7DBDE8; --sky-2: #A9D4F2; --sky-soft: #1B3250; --line: #24344D; --line-strong: #31445F;
     --dir: #EDE6D6; --team: #7DBDE8; --cand: #DB94CC;
-    --ok: #6CC79B; --ok-bg: #173A2C; --warn: #E3B05A; --warn-bg: #3D2F12;
-    --crit: #EE8A80; --crit-bg: #47201C; --on-ink: #0F1826;
+    --ok: #6CC79B; --ok-bg: #163829; --warn: #E3B05A; --warn-bg: #3A2D12;
+    --crit: #EE8A80; --crit-bg: #441F1B; --on-ink: #0C1422;
+    --glow-1: rgba(125,189,232,.16); --glow-2: rgba(219,148,204,.10);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -12px rgba(0,0,0,.5);
+    --shadow-lg: 0 24px 48px -20px rgba(0,0,0,.6);
+    --glass: rgba(12,20,34,.72);
     color-scheme: dark;
   }
 }
-:root[data-theme="dark"] {
-  --bg: #0F1826; --surface: #172336; --ink: #E8EDF5; --muted: #9AA7BD;
-  --sky: #7DBDE8; --sky-soft: #1E3550; --line: #2B3B55;
-  --dir: #EDE6D6; --team: #7DBDE8; --cand: #DB94CC;
-  --ok: #6CC79B; --ok-bg: #173A2C; --warn: #E3B05A; --warn-bg: #3D2F12;
-  --crit: #EE8A80; --crit-bg: #47201C; --on-ink: #0F1826;
-  color-scheme: dark;
-}
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
-  background: var(--bg); color: var(--ink);
-  font-family: var(--body); font-size: 16px; line-height: 1.5;
-  padding-block: 20px 48px;
+  margin: 0; min-height: 100vh;
+  background:
+    radial-gradient(60rem 40rem at 110% -10%, var(--glow-1), transparent 60%),
+    radial-gradient(50rem 36rem at -20% 30%, var(--glow-2), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--glass);
+  -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.topbar-in { max-width: 680px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+header.brand { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+header.brand svg { flex: none; }
+.brand-name { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: -.01em; line-height: 1.1; }
+.brand-sub { color: var(--muted); font-size: 12px; letter-spacing: .02em; }
+.topbar .chip { margin-left: auto; }
+.wrap {
+  max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;
+  padding: 28px 16px calc(56px + env(safe-area-inset-bottom, 0px));
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.wrap { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-header.brand { display: flex; align-items: center; gap: 12px; }
-header.brand svg { flex: none; }
-.brand-name { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
-.brand-sub { color: var(--muted); font-size: 13px; }
-h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.2; }
-h1 { font-size: 28px; font-weight: 700; }
-h2 { font-size: 20px; font-weight: 600; }
-h3 { font-size: 16px; font-weight: 600; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; letter-spacing: -.02em; }
+h1 { font-size: clamp(30px, 7vw, 42px); font-weight: 700; }
+h2 { font-size: 21px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; letter-spacing: -.01em; }
 p { margin: 0; }
-.lead { color: var(--muted); }
+.lead { color: var(--muted); font-size: 17px; }
 .stack { display: flex; flex-direction: column; gap: 12px; }
 .stack-lg { display: flex; flex-direction: column; gap: 20px; }
-.label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 22px; box-shadow: var(--shadow);
+}
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .row > .grow { flex: 1 1 180px; min-width: 0; }
-.small { font-size: 13px; color: var(--muted); }
+.small { font-size: 13.5px; color: var(--muted); }
 .num { font-variant-numeric: tabular-nums; }
 
+/* Hero & atouts */
+.hero { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
+.eyebrow {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 600; color: var(--sky);
+  background: var(--sky-soft); padding: 6px 12px; border-radius: 999px;
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--sky); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 22%, transparent); }
+.hl { background: linear-gradient(100deg, var(--sky), var(--cand)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.atouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.atout { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px; box-shadow: var(--shadow); }
+.atout b { font-family: var(--display); font-size: 15px; letter-spacing: -.01em; }
+.atout span { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+.atout i { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-style: normal; font-size: 15px; background: var(--sky-soft); color: var(--sky); margin-bottom: 4px; }
+@media (max-width: 480px) { .atouts { grid-template-columns: 1fr; } .atout { flex-direction: row; align-items: center; gap: 12px; } .atout i { margin: 0; flex: none; } .atout div { display: flex; flex-direction: column; } }
+.chip { font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+
+/* Boutons */
 button, .btn {
   font: inherit; font-weight: 600; font-size: 15px; cursor: pointer;
-  border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-ink);
-  padding: 11px 16px; min-height: 44px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; border: 1px solid transparent;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 88%, var(--sky)), var(--ink));
+  color: var(--on-ink);
+  padding: 12px 20px; min-height: 48px; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 6px 16px -8px rgba(20,35,59,.55);
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease;
 }
-button.ghost, .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-button.danger { background: transparent; color: var(--crit); border-color: var(--crit); }
-button:disabled { opacity: .45; cursor: not-allowed; }
+button:hover:not(:disabled), .btn:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 10px 22px -10px rgba(20,35,59,.6); }
+button:active:not(:disabled), .btn:active { transform: translateY(0) scale(.98); }
+button.ghost, .btn.ghost {
+  background: var(--surface); color: var(--ink); border-color: var(--line-strong); box-shadow: none;
+}
+button.ghost:hover:not(:disabled), .btn.ghost:hover { border-color: var(--ink); box-shadow: none; }
+button.danger { background: transparent; color: var(--crit); border-color: color-mix(in srgb, var(--crit) 50%, transparent); box-shadow: none; }
+button:disabled { opacity: .4; cursor: not-allowed; box-shadow: none; }
 button:focus-visible, .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 3px solid var(--sky); outline-offset: 2px;
+  outline: 3px solid color-mix(in srgb, var(--sky) 55%, transparent); outline-offset: 2px;
 }
-a { color: var(--sky); }
+a { color: var(--sky); text-underline-offset: 3px; }
+a.small { text-decoration: none; font-weight: 500; }
+a.small:hover { text-decoration: underline; }
 input[type="text"], textarea {
-  font: inherit; width: 100%; padding: 11px 12px; border-radius: 8px;
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  font: inherit; width: 100%; padding: 13px 16px; border-radius: 14px;
+  border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--ink);
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
-textarea { min-height: 88px; resize: vertical; }
+input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--sky); background: var(--surface); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sky) 18%, transparent); }
+input.lien { font-size: 13px; color: var(--muted); }
+textarea { min-height: 96px; resize: vertical; }
 textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; word-break: break-all; }
-.msg { font-size: 14px; padding: 10px 12px; border-radius: 8px; }
+.msg { font-size: 14px; padding: 12px 14px; border-radius: 14px; }
 .msg.err { background: var(--crit-bg); color: var(--crit); }
 .msg.good { background: var(--ok-bg); color: var(--ok); }
 
-.mission-list { display: flex; flex-direction: column; gap: 8px; list-style: none; margin: 0; padding: 0; }
+/* Listes de missions / candidats */
+.mission-list { display: flex; flex-direction: column; gap: 10px; list-style: none; margin: 0; padding: 0; }
 .mission-item {
   width: 100%; text-align: left; background: var(--surface); color: var(--ink);
-  border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; min-height: 60px;
   display: flex; justify-content: space-between; align-items: center; gap: 12px; font-weight: 500;
+  box-shadow: var(--shadow);
 }
-.mission-item .name { min-width: 0; overflow-wrap: anywhere; font-family: var(--display); font-weight: 600; }
-.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; padding: 2px 7px; border-radius: 999px; background: var(--sky-soft); color: var(--ink); font-weight: 600; }
-.counts { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.mission-item:hover:not(:disabled) { border-color: var(--sky); box-shadow: var(--shadow-lg); }
+.mission-item .name { min-width: 0; overflow-wrap: anywhere; font-family: var(--display); font-weight: 600; font-size: 16px; }
+.mission-item::after { content: "→"; color: var(--muted); margin-left: 4px; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; padding: 3px 8px; border-radius: 999px; background: var(--sky-soft); color: var(--sky); font-weight: 700; }
+.counts { color: var(--muted); font-size: 13px; white-space: nowrap; margin-left: auto; }
 
-.pill { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.pill { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
 .pill.ok { background: var(--ok-bg); color: var(--ok); }
 .pill.warn { background: var(--warn-bg); color: var(--warn); }
 .pill.crit { background: var(--crit-bg); color: var(--crit); }
 
-.axis { display: flex; flex-direction: column; gap: 8px; padding-block: 14px; border-top: 1px solid var(--line); }
+/* Lecture du radar */
+.axis { display: flex; flex-direction: column; gap: 10px; padding-block: 16px; border-top: 1px solid var(--line); }
 .axis:first-child { border-top: 0; padding-top: 0; }
 .axis-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.track { position: relative; height: 22px; }
-.track::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--line); }
-.mark { position: absolute; top: 4px; width: 14px; height: 14px; margin-left: -7px; }
-.mark.d { background: var(--dir); transform: rotate(45deg); border-radius: 2px; }
+.track { position: relative; height: 24px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--sky-soft), var(--line)); }
+.mark { position: absolute; top: 5px; width: 14px; height: 14px; margin-left: -7px; box-shadow: 0 0 0 3px var(--surface); }
+.mark.d { background: var(--dir); transform: rotate(45deg); border-radius: 3px; }
 .mark.e { background: var(--team); border-radius: 50%; }
-.mark.c { background: var(--cand); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.poles { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+.mark.c { background: var(--cand); clip-path: polygon(50% 0, 100% 100%, 0 100%); box-shadow: none; }
+.poles { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: var(--muted); }
 .poles span { flex: 1 1 0; min-width: 0; }
 .poles span:last-child { text-align: right; }
-.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-.legend span { display: inline-flex; align-items: center; gap: 7px; }
-.sw { width: 11px; height: 11px; display: inline-block; }
+.legend { display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); }
+.sw { width: 10px; height: 10px; display: inline-block; }
 .sw.d { background: var(--dir); transform: rotate(45deg); border-radius: 2px; }
 .sw.e { background: var(--team); border-radius: 50%; }
 .sw.c { background: var(--cand); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.radar { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; }
-.radar text { font-family: var(--body); font-size: 12px; fill: var(--ink); }
+.radar { width: 100%; max-width: 460px; height: auto; display: block; margin: 4px auto; }
+.radar text { font-family: var(--body); font-size: 12px; font-weight: 500; fill: var(--ink); }
 .radar .tick { font-size: 10px; fill: var(--muted); }
-.dig { padding-block: 12px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.dig { padding-block: 14px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
 .dig:first-child { border-top: 0; padding-top: 0; }
 .dig q, .verb q { quotes: "« " " »"; }
 .dig q { font-weight: 600; }
-.pistes { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
-.verb { font-size: 14px; overflow-wrap: anywhere; }
+.pistes { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.pistes li::marker { color: var(--sky); }
+.verb { font-size: 14px; overflow-wrap: anywhere; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
 .verb b { font-weight: 600; }
 
-.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
-.progress > i { display: block; height: 100%; background: var(--sky); }
-.q { display: flex; flex-direction: column; gap: 10px; padding-block: 18px; border-top: 1px solid var(--line); }
-.q:first-of-type { border-top: 0; padding-top: 4px; }
-.q-stem { font-weight: 600; font-size: 17px; }
-.q-poles { display: flex; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--muted); }
+/* Questionnaire */
+.progress { height: 8px; background: color-mix(in srgb, var(--line) 80%, transparent); border-radius: 999px; overflow: hidden; }
+.progress > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--sky-2), var(--sky), var(--cand)); }
+.q {
+  display: flex; flex-direction: column; gap: 12px; padding: 20px; margin-bottom: 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
+}
+.q-stem { font-weight: 600; font-size: 17px; font-family: var(--display); letter-spacing: -.01em; line-height: 1.35; }
+.q-poles { display: flex; justify-content: space-between; gap: 16px; font-size: 13.5px; color: var(--muted); }
 .q-poles span { flex: 1 1 0; min-width: 0; }
 .q-poles span:last-child { text-align: right; }
-.scale { display: flex; justify-content: space-between; gap: 6px; }
+.scale { display: flex; justify-content: space-between; gap: 8px; }
 .scale button {
-  flex: 1 1 0; min-width: 0; padding: 0; height: 46px; border-radius: 8px;
-  background: var(--surface); color: var(--muted); border: 1px solid var(--line); font-weight: 600;
+  flex: 1 1 0; min-width: 0; padding: 0; height: 50px; border-radius: 14px;
+  background: var(--surface-2); color: var(--muted); border: 1px solid var(--line-strong); font-weight: 600; box-shadow: none;
 }
-.scale button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
-.role-choice { display: flex; flex-direction: column; gap: 10px; }
+.scale button:hover:not(:disabled):not([aria-pressed="true"]) { border-color: var(--sky); color: var(--ink); box-shadow: none; }
+.scale button[aria-pressed="true"] {
+  background: linear-gradient(160deg, #3B8FCB, #14233B); color: #fff; border-color: transparent;
+  box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--sky) 70%, transparent); transform: scale(1.04);
+}
+.role-choice { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.role-choice button { justify-content: flex-start; padding-inline: 18px; min-height: 56px; border-radius: 16px; }
+.role-choice button::after { content: "→"; margin-left: auto; color: var(--muted); }
 .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
-.consent input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--ink); }
-.consent input:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
-@media (prefers-reduced-motion: no-preference) { .progress > i { transition: width .25s ease; } }
-.site-foot { color: var(--muted); font-size: 12px; text-align: center; }
-body { margin: 0; }
+.consent input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--sky); }
+.site-foot { color: var(--muted); font-size: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 12px; }
+.site-foot svg { opacity: .6; }
+@media (prefers-reduced-motion: no-preference) {
+  .progress > i { transition: width .35s cubic-bezier(.2,.8,.2,1); }
+  #app > * { animation: monte .35s cubic-bezier(.2,.8,.2,1) both; }
+  #app > *:nth-child(2) { animation-delay: .04s; }
+  #app > *:nth-child(3) { animation-delay: .08s; }
+  #app > *:nth-child(4) { animation-delay: .12s; }
+  @keyframes monte { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } .scale button[aria-pressed="true"] { transform: none; } }
 </style>
 <script src="config.js"></script>
 </head>
 <body>
-<div class="wrap">
-  <header class="brand">
-    <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+<div class="topbar"><div class="topbar-in">
+  <a class="brand-link" href="./" style="text-decoration:none;color:inherit"><header class="brand">
+    <svg width="30" height="34" viewBox="0 0 34 38" aria-hidden="true">
       <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
       <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
       <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
     </svg>
     <div>
-      <div class="brand-name">Cairn Partners</div>
+      <div class="brand-name">Cairn Affinités</div>
       <div class="brand-sub">Radar de compatibilité</div>
     </div>
-  </header>
+  </header></a>
+  <span class="chip">Confidentiel</span>
+</div></div>
+<div class="wrap">
   <main id="app" class="stack-lg"></main>
-  <footer class="site-foot">© Cairn Partners · Vos réponses restent confidentielles.</footer>
+  <footer class="site-foot"><svg width="20" height="23" viewBox="0 0 34 38" aria-hidden="true">
+      <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
+      <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
+      <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
+    </svg><span>© Cairn Affinités · Recruter des personnes qui se sentiront à leur place</span></footer>
 </div>
 
 <script>
@@ -529,9 +618,9 @@ body { margin: 0; }
   function urlDe(hash) { return location.origin + location.pathname + "#" + hash; }
   function blocLien(titre, hash) {
     return '<div class="stack" style="gap:6px"><span class="label">' + esc(titre) + '</span>' +
-      '<div class="row"><input type="text" readonly class="grow lien" value="' + esc(urlDe(hash)) + '" aria-label="Lien ' + esc(titre) + '">' +
-      '<button type="button" class="ghost" data-copie="' + esc(urlDe(hash)) + '">Copier</button>' +
-      '<a class="btn ghost" href="#' + esc(hash) + '">Ouvrir</a></div></div>';
+      '<input type="text" readonly class="lien" value="' + esc(urlDe(hash)) + '" aria-label="Lien ' + esc(titre) + '">' +
+      '<div class="row"><button type="button" class="grow" data-copie="' + esc(urlDe(hash)) + '">Copier le lien</button>' +
+      '<a class="btn ghost grow" href="#' + esc(hash) + '">Aperçu</a></div></div>';
   }
   function copierTexte(txt, btn) {
     function ok() { var l = btn.textContent; btn.textContent = "Copié"; setTimeout(function () { btn.textContent = l; }, 1500); }
@@ -834,7 +923,14 @@ body { margin: 0; }
 
   /* ---------- Rendu : questionnaire ---------- */
   function vueEntreeRepondant(intro) {
-    return '<div class="stack"><h1>Répondre au questionnaire</h1><p class="lead">' + esc(intro) + '</p></div>' +
+    return '<div class="hero"><span class="eyebrow">Radar de compatibilité</span>' +
+      '<h1>Décrivez l\'entreprise <span class="hl">telle qu\'elle est vraiment</span></h1>' +
+      '<p class="lead">' + esc(intro) + '</p></div>' +
+      '<div class="atouts">' +
+        '<div class="atout"><i>◷</i><div><b>Moins de 10 min</b><span>Une trentaine de questions, sur téléphone ou ordinateur.</span></div></div>' +
+        '<div class="atout"><i>◎</i><div><b>Confidentiel</b><span>Les réponses d\'équipe ne sont lues qu\'en moyenne.</span></div></div>' +
+        '<div class="atout"><i>⇄</i><div><b>Sans bonne réponse</b><span>Aucun style n\'est meilleur qu\'un autre.</span></div></div>' +
+      '</div>' +
       '<form id="f-entree" class="panel stack" autocomplete="off">' +
       '<label class="label" for="in-mission">Code de mission</label>' +
       '<input type="text" id="in-mission" maxlength="40" autocapitalize="off" placeholder="ex. atelier-durand">' +
@@ -846,14 +942,14 @@ body { margin: 0; }
 
   function vueRepondre() {
     var r = S.rep;
-    if (!r.slug || !r.role) return vueEntreeRepondant("Cairn Partners compare la façon dont la direction, l'équipe et les candidats décrivent le fonctionnement d'une entreprise. Indiquez le code de mission reçu avec votre invitation.");
+    if (!r.slug || !r.role) return vueEntreeRepondant("Cairn Affinités compare la façon dont la direction, l'équipe et les candidats décrivent le fonctionnement d'une entreprise. Indiquez le code de mission reçu avec votre invitation.");
     var retour = S.peutGerer ? '<a href="#cabinet" class="small">← Espace cabinet</a>' : "";
     var roleTxt = r.role === "d" ? "Direction" : r.role === "c" ? "Candidat" : "Équipe";
     var pages = pagesRep(r), total = r.a.length, minutes = Math.max(2, Math.round(total / 5));
 
     if (r.code) {
       return '<div class="stack">' + retour + '<h1>Merci, c\'est terminé</h1>' +
-        '<p class="lead">Dernière étape : envoyez ce code à votre contact Cairn Partners' + (CFG.email ? ' avec le bouton ci-dessous, ou' : ',') + ' par SMS ou par e-mail. Vos réponses ne sont transmises que par ce code.</p></div>' +
+        '<p class="lead">Dernière étape : envoyez ce code à votre contact Cairn Affinités' + (CFG.email ? ' avec le bouton ci-dessous, ou' : ',') + ' par SMS ou par e-mail. Vos réponses ne sont transmises que par ce code.</p></div>' +
         '<div class="panel stack"><label class="label" for="out-code">Votre code réponse</label>' +
         '<textarea id="out-code" class="code" readonly>' + esc(r.code) + '</textarea>' +
         '<div class="row">' + (CFG.email ? '<a class="btn grow" id="btn-mail" href="mailto:' + encodeURIComponent(CFG.email) + '?subject=' + encodeURIComponent("Radar Cairn · " + r.slug + " · " + roleTxt) + '&body=' + encodeURIComponent(r.code) + '">Envoyer par e-mail</a>' : "") +
@@ -872,24 +968,24 @@ body { margin: 0; }
       var regle = '<p class="small">Pour chaque question, deux descriptions se font face. Le côté de chaque description change d\'une question à l\'autre : lisez les deux avant de répondre.</p>';
       if (r.w === 2) return '<div class="stack">' + retour + '<p class="label">Vague 2 · ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
         '<h1>Quelques questions pour aller plus loin</h1>' +
-        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p>Sur ' + (pages.length > 1 ? "certains sujets" : "un sujet") + ' (<strong>' + esc(pages.map(function (p) { return p.titre; }).join(", ")) +
         '</strong>), la direction et l\'équipe n\'ont pas décrit l\'entreprise de la même façon. C\'est fréquent et ce n\'est pas un reproche : ces questions servent à comprendre pourquoi.</p>' +
         '<p class="small">Répondez à partir de situations que vous avez réellement vécues ces derniers mois. Un commentaire libre est possible sur chaque sujet ; évitez d\'y citer des noms.</p></div>' + bouton;
       if (r.role === "c") return '<div class="stack">' + retour + '<p class="label">Questionnaire candidat · mission ' + esc(r.slug) + '</p>' +
         '<h1>Dans quel environnement travaillez-vous le mieux ?</h1>' +
-        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p><strong>Pensez au poste où vous avez été le plus efficace et le plus à l\'aise</strong>, et décrivez comment il fonctionnait. Il n\'y a pas de bonne réponse : aucun des deux côtés n\'est meilleur que l\'autre, et des réponses « idéales » vous desserviraient en vous orientant vers un poste qui ne vous convient pas.</p>' + regle + '</div>' +
         '<div class="panel stack"><p class="label">Avant de commencer</p>' +
-        '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace, pour le comparer à celui de l\'entreprise qui recrute. Vos résultats sont confidentiels : ils ne servent qu\'à cette candidature, et vous pouvez en demander la restitution à votre contact Cairn Partners.</p>' +
+        '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace, pour le comparer à celui de l\'entreprise qui recrute. Vos résultats sont confidentiels : ils ne servent qu\'à cette candidature, et vous pouvez en demander la restitution à votre contact Cairn Affinités.</p>' +
         '<label class="consent" for="in-accord"><input type="checkbox" id="in-accord"' + (r.accord ? " checked" : "") + '><span>J\'ai lu ces informations et j\'accepte de répondre.</span></label>' +
         '<label class="label" for="in-prenom">Votre prénom et votre nom</label>' +
         '<input type="text" id="in-prenom" maxlength="40" autocomplete="name" value="' + esc(r.nom) + '">' + blocMsg() + '</div>' + bouton;
       return '<div class="stack">' + retour + '<p class="label">Questionnaire ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
         '<h1>Comment fonctionne vraiment votre entreprise ?</h1>' +
-        '<p class="lead">' + total + ' questions, environ ' + minutes + ' minutes.</p></div>' +
+        '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p><strong>Décrivez ce que vous avez observé ces six derniers mois</strong>, pas ce qui serait souhaitable ni ce qui est écrit dans les documents officiels. Il n\'y a pas de bonne réponse : sur les ' + AXES.length + ' premiers thèmes, aucun des deux côtés n\'est meilleur que l\'autre.</p>' + regle +
-        '<p class="small">Le même questionnaire est proposé à la direction et à l\'équipe. Cairn Partners compare les descriptions pour recruter des personnes qui s\'y sentiront à leur place. ' +
+        '<p class="small">Le même questionnaire est proposé à la direction et à l\'équipe. Cairn Affinités compare les descriptions pour recruter des personnes qui s\'y sentiront à leur place. ' +
         (r.role === "e" ? "Vos réponses sont anonymes pour l'entreprise : elle ne voit que des moyennes d'au moins " + MIN_TEAM + " personnes." : "") + '</p></div>' + bouton;
     }
 
