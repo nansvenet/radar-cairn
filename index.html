@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Radar de compatibilité · Cairn Affinités</title>
-<meta name="description" content="Cairn Affinités — radar de compatibilité entre une entreprise, ses équipes et ses candidats.">
+<meta name="description" content="Cairn Affinités — le radar de compatibilité qui compare la culture réelle d'une entreprise et ses candidats. Pour les PME, ETI et cabinets de recrutement.">
 <meta name="theme-color" content="#14233B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 38'%3E%3Cellipse cx='17' cy='31' rx='15' ry='6' fill='%2314233B'/%3E%3Cellipse cx='17' cy='19.5' rx='11' ry='5' fill='%2355627A'/%3E%3Cellipse cx='17' cy='9.5' rx='7' ry='4' fill='%232F7FB8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -162,6 +162,18 @@ body.accueil .topchip { display: none; }
 .offre span:not(.tag) { font-size: 14px; color: var(--muted); }
 .offre.vedette { border: 2px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, var(--sky), var(--cand)) border-box; box-shadow: var(--shadow-lg); }
 .offre .tag { position: absolute; top: -11px; left: 18px; background: linear-gradient(135deg, var(--sky), var(--cand)); color: #fff; }
+.offres4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.offre .prix { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin: 2px 0; }
+.offre .prix strong { font-family: var(--display); font-size: 28px; letter-spacing: -.03em; line-height: 1.1; }
+.offre .prix em { font-style: normal; font-size: 13px; color: var(--muted); }
+.offre .btn { margin-top: auto; min-height: 44px; font-size: 14px; padding-inline: 12px; white-space: nowrap; }
+.offre .prix small { display: block; width: 100%; font-family: var(--body); font-size: 12.5px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.inclus { list-style: none; margin: 4px 0 8px; padding: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13.5px; }
+.inclus li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.4; }
+.inclus li::before { content: "✓"; flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--ok-bg); color: var(--ok); margin-top: 1px; }
+.cible { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--sky-soft) 40%, var(--surface))); }
+.cartes2 .cible b::before { content: none; }
+@media (max-width: 900px) { .offres4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chips .chip { font-size: 14px; padding: 8px 14px; color: var(--ink); }
 .cta-final { margin-top: 28px; padding: 32px 24px; border-radius: 28px; color: #F7F4EE; display: flex; flex-direction: column; gap: 14px;
@@ -171,7 +183,7 @@ body.accueil .topchip { display: none; }
 .cta-final .btn-clair, .cta-final .btn-clair:hover { background: #F7F4EE; color: #14233B; box-shadow: 0 10px 24px -10px rgba(0,0,0,.6); }
 @media (max-width: 600px) {
   .kpis b { font-size: 32px; }
-  .cartes3, .cartes2, .offres { grid-template-columns: 1fr; }
+  .cartes3, .cartes2, .offres, .offres4 { grid-template-columns: 1fr; }
   .offres { gap: 20px; }
   .cta-row > * { flex: 1 1 100%; }
 }
@@ -329,7 +341,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
       <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
       <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
       <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
-    </svg><span>© Cairn Affinités · Recruter des personnes qui se sentiront à leur place</span></footer>
+    </svg><span>© Cairn Affinités · Le radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></footer>
 </div>
 
 <script>
@@ -997,9 +1009,8 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
   }
   function vueAPropos() {
     return '<section class="panel stack apropos"><p class="label">À propos</p>' +
-      '<h2>Cairn Affinités, le recrutement par la compatibilité</h2>' +
-      '<p>Cairn Affinités est un cabinet de recrutement dédié aux PME et ETI. Plutôt que de promettre un candidat « parfait », nous mesurons honnêtement ce qui rapproche et ce qui sépare une entreprise, ses équipes et les personnes qu\'elle recrute.</p>' +
-
+      '<h2>Cairn Affinités, la compatibilité mesurée</h2>' +
+      '<p>Cairn Affinités conçoit le radar de compatibilité : un outil qui mesure honnêtement ce qui rapproche et ce qui sépare une entreprise, ses équipes et les personnes qu\'elle recrute. Il s\'adresse aux PME et ETI qui recrutent, comme aux cabinets de recrutement qui veulent offrir à leurs clients une lecture plus fine de la culture d\'entreprise.</p>' +
       '<p class="small">Comme un cairn, ces petits tas de pierres qui balisent un chemin : chaque pierre doit trouver son équilibre pour que l\'ensemble tienne.</p></section>';
   }
   function lienContact(sujet) {
@@ -1023,59 +1034,75 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
     return '<section class="bloc' + (extra ? " " + extra : "") + '"' + (id ? ' id="' + id + '"' : "") + '>' +
       '<div class="bloc-tete"><p class="label">' + label + '</p><h2 class="h2-xl">' + titre + '</h2></div>' + corps + '</section>';
   }
+  function offre(cl, label, titre, prix, unite, pitch, points, cta, tag) {
+    return '<div class="offre' + (cl ? " " + cl : "") + '">' + (tag ? '<span class="tag">' + tag + '</span>' : "") +
+      '<p class="label">' + label + '</p><b>' + titre + '</b>' +
+      '<p class="prix">' + prix.replace(/^(<small>.*?<\/small>)?(.*)$/, "$1<strong>$2</strong>") + (unite ? '<em>' + unite + '</em>' : "") + '</p>' +
+      '<span>' + pitch + '</span><ul class="inclus">' + points.map(function (p) { return '<li>' + p + '</li>'; }).join("") + '</ul>' +
+      '<a class="btn ' + (cl === "vedette" ? "" : "ghost ") + 'grow" href="' + lienContact("Formule " + label + " · Cairn Affinités") + '">' + cta + '</a></div>';
+  }
   function vueAccueil() {
     var h = '';
+    var rdv = lienContact("Demande de démonstration · Radar Cairn Affinités");
     /* Hero */
-    h += '<div class="hero hero-xl"><span class="eyebrow">Cabinet de recrutement · PME &amp; ETI</span>' +
+    h += '<div class="hero hero-xl"><span class="eyebrow">Radar de compatibilité · Entreprises &amp; cabinets</span>' +
       '<h1>Recrutez des personnes <span class="hl">qui vont rester.</span></h1>' +
-      '<p class="lead">Un recrutement réussi ne se joue pas seulement sur les compétences. Cairn Affinités mesure le fonctionnement réel de votre entreprise, tel que le vivent vos équipes, puis recrute des candidats faits pour cette réalité.</p>' +
-      '<div class="row cta-row"><a class="btn btn-xl" href="' + lienContact("Demande de rendez-vous · Cairn Affinités") + '">Parlons de votre recrutement</a>' +
-      '<button type="button" class="ghost btn-xl" data-scroll="methode">Découvrir la méthode</button></div>' +
+      '<p class="lead">Un recrutement réussi ne se joue pas seulement sur les compétences. Le radar Cairn Affinités mesure le fonctionnement réel d\'une entreprise, tel que le vivent ses équipes, puis compare chaque candidat à cette réalité.</p>' +
+      '<div class="row cta-row"><a class="btn btn-xl" href="' + lienContact("Essai gratuit · Radar Cairn Affinités") + '">Essayer gratuitement</a>' +
+      '<button type="button" class="ghost btn-xl" data-scroll="offres">Voir les formules</button></div>' +
       '<p class="small">Vous avez reçu une invitation ? <a href="#" data-scroll="repondre-bloc">Répondre au questionnaire →</a></p></div>';
-    /* Chiffres clés de la méthode */
     h += '<div class="kpis"><div><b>7</b><span>dimensions de la culture d\'entreprise analysées</span></div>' +
       '<div><b>3</b><span>regards croisés : direction, équipe, candidat</span></div>' +
-      '<div><b>12</b><span>mois de suivi après l\'embauche</span></div></div>';
-    /* Problème */
+      '<div><b>10</b><span>minutes pour répondre, sur téléphone ou ordinateur</span></div></div>';
+    /* Constat */
     h += section("", "Le constat", "Un recrutement raté ne se lit pas sur un CV",
       '<div class="cartes3">' +
       '<div class="carte"><i>✕</i><b>La fiche de poste ne dit pas tout</b><span>Rythme, franc-parler, autonomie : ce qui fait partir un collaborateur est rarement écrit quelque part.</span></div>' +
       '<div class="carte"><i>≠</i><b>Direction et équipe ne vivent pas la même entreprise</b><span>Le discours officiel et le quotidien divergent souvent, et le candidat découvre l\'écart après son arrivée.</span></div>' +
       '<div class="carte"><i>↺</i><b>Un départ précoce coûte cher</b><span>Du temps de recrutement perdu, une équipe déstabilisée, un poste à pourvoir de nouveau.</span></div>' +
       '</div>');
-    /* Exemple de radar */
     h += vueExemple();
     /* Méthode */
-    h += section("methode", "La méthode", "Quatre étapes, de votre culture à l\'intégration réussie",
+    h += section("methode", "Comment ça marche", "Trois questionnaires, une lecture claire",
       '<ol class="etapes">' +
-      '<li><span class="n">1</span><div><b>Le radar de votre entreprise</b><span>Direction et équipe répondent au même questionnaire de 10 minutes, en toute confidentialité. Le radar montre où leurs descriptions se rejoignent et où elles divergent.</span></div></li>' +
+      '<li><span class="n">1</span><div><b>Le radar de l\'entreprise</b><span>Direction et équipe répondent au même questionnaire de 10 minutes, en toute confidentialité. Le radar montre où leurs descriptions se rejoignent et où elles divergent.</span></div></li>' +
       '<li><span class="n">2</span><div><b>Comprendre les écarts</b><span>Une seconde vague de questions, uniquement sur les thèmes en écart, identifie d\'où vient la différence : discours, pratiques qui varient selon les équipes, changement récent, attentes mal expliquées.</span></div></li>' +
-      '<li><span class="n">3</span><div><b>Des candidats compatibles</b><span>Chaque candidat décrit l\'environnement dans lequel il est le plus efficace. Il est comparé à ce que vit réellement votre équipe, pas seulement à la fiche de poste.</span></div></li>' +
-      '<li><span class="n">4</span><div><b>Une intégration suivie</b><span>Nous restons présents pendant douze mois après l\'embauche pour repérer tôt les signaux de décalage.</span></div></li>' +
+      '<li><span class="n">3</span><div><b>Comparer les candidats</b><span>Chaque candidat décrit l\'environnement dans lequel il est le plus efficace. Il est comparé à ce que vit réellement l\'équipe, pas seulement à la fiche de poste.</span></div></li>' +
+      '<li><span class="n">4</span><div><b>Passer à l\'action</b><span>Pour chaque candidat, les points à aborder franchement en entretien ; pour l\'entreprise, les sujets de management révélés par les écarts.</span></div></li>' +
       '</ol>');
+    /* Pour qui */
+    h += section("pour-qui", "Pour qui", "Un outil, deux façons de l\'utiliser",
+      '<div class="cartes2">' +
+      '<div class="carte cible"><p class="label">Entreprises · PME &amp; ETI</p><b>Recruter juste, garder ses talents</b><span>Comprenez ce que vivent vraiment vos équipes avant d\'ouvrir un poste, et choisissez le candidat qui s\'y sentira à sa place.</span>' +
+        '<ul class="inclus"><li>Diagnostic de culture d\'équipe</li><li>Comparaison des finalistes</li><li>Sujets de management mis en lumière</li></ul></div>' +
+      '<div class="carte cible"><p class="label">Cabinets de recrutement &amp; RH</p><b>Une méthode qui vous distingue</b><span>Ajoutez une lecture objective de la culture de vos clients à chaque mission, et présentez des candidats argumentés.</span>' +
+        '<ul class="inclus"><li>Missions clients illimitées</li><li>Rapports à votre nom</li><li>Un argument commercial différenciant</li></ul></div>' +
+      '</div>');
     /* Bénéfices */
     h += section("", "Ce que vous y gagnez", "Un recrutement honnête, des deux côtés",
       '<div class="cartes2">' +
       '<div class="carte"><b>Des recrues qui restent</b><span>Un candidat qui sait à quoi s\'attendre s\'intègre mieux et plus durablement.</span></div>' +
-      '<div class="carte"><b>Une lecture claire de votre culture</b><span>Le radar est aussi un outil de management : il révèle ce que vos équipes vivent vraiment.</span></div>' +
-      '<div class="carte"><b>Des entretiens plus justes</b><span>Nous vous indiquons les points à aborder franchement avec chaque candidat, avant qu\'ils ne deviennent des frictions.</span></div>' +
-      '<div class="carte"><b>Une méthode fondée sur la recherche</b><span>Nos questionnaires s\'appuient sur les travaux en psychologie du travail et en management sur l\'adéquation entre une personne et son environnement.</span></div>' +
+      '<div class="carte"><b>Une lecture claire de la culture</b><span>Le radar est aussi un outil de management : il révèle ce que les équipes vivent vraiment.</span></div>' +
+      '<div class="carte"><b>Des entretiens plus justes</b><span>Les points de friction probables sont identifiés avant l\'embauche, pas après.</span></div>' +
+      '<div class="carte"><b>Une méthode fondée sur la recherche</b><span>Les questionnaires s\'appuient sur les travaux en psychologie du travail et en management sur l\'adéquation entre une personne et son environnement.</span></div>' +
       '</div>');
-    /* Offres */
-    h += section("offres", "Nos formules", "Un accompagnement à la mesure de vos besoins",
-      '<div class="offres">' +
-      '<div class="offre"><p class="label">Ponctuel</p><b>Un recrutement</b><span>Le radar de votre entreprise et un recrutement mené de bout en bout, candidats compatibles à l\'appui.</span></div>' +
-      '<div class="offre vedette"><span class="tag">Le plus choisi</span><p class="label">Partenaire</p><b>Vos recrutements de l\'année</b><span>Un interlocuteur unique pour plusieurs recrutements, avec un radar mis à jour au fil de l\'eau.</span></div>' +
-      '<div class="offre"><p class="label">Gardien</p><b>Recruter et fidéliser</b><span>Les recrutements, le suivi d\'intégration sur douze mois et un point régulier sur le climat de vos équipes.</span></div>' +
-      '</div><p class="small">Tarifs sur devis, selon le nombre de postes et la taille de vos équipes.</p>');
-    /* Pour qui */
-    h += section("", "Pour qui", "Les PME et ETI qui veulent recruter juste",
-      '<div class="chips"><span class="chip">Commercial</span><span class="chip">Finance</span><span class="chip">RH &amp; juridique</span><span class="chip">Marketing</span><span class="chip">Cadres</span><span class="chip">Agents de maîtrise</span><span class="chip">CDI</span><span class="chip">Partout en France</span></div>');
+    /* Formules */
+    h += section("offres", "Formules", "Commencez gratuitement, payez à l\'usage ou abonnez-vous",
+      '<div class="offres offres4">' +
+      offre("", "Découverte", "Tester le radar", "0 €", "", "Le radar d\'une équipe pour voir ce qu\'il révèle.",
+        ["1 équipe, jusqu\'à 10 répondants", "Vague 1 et radar direction / équipe", "Synthèse des écarts"], "Commencer") +
+      offre("", "Diagnostic", "Un recrutement", "490 €", "HT / mission", "Tout le radar pour un poste à pourvoir.",
+        ["Vagues 1 et 2, répondants illimités", "5 candidats comparés", "Rapport complet et restitution d\'une heure", "Candidat supplémentaire : 29 € HT"], "Lancer un diagnostic") +
+      offre("vedette", "Entreprise", "Recruter toute l\'année", "190 €", "HT / mois", "Pour les PME et ETI qui recrutent régulièrement.",
+        ["Jusqu\'à 5 équipes suivies", "Candidats illimités", "Radar remis à jour chaque semestre", "Engagement 12 mois"], "Demander une démo", "Recommandé") +
+      offre("", "Cabinet", "Pour les recruteurs", "<small>À partir de</small>390 €", "HT / mois", "Pour les cabinets de recrutement et consultants RH.",
+        ["Missions clients illimitées", "Rapports à votre nom (marque blanche)", "Plusieurs consultants", "Accompagnement à la prise en main"], "Nous contacter") +
+      '</div><p class="small">Tarifs de lancement indicatifs. Une formule sur mesure est possible pour les grands volumes.</p>');
     h += vueAPropos();
     /* CTA final */
-    h += '<section class="cta-final"><h2 class="h2-xl">Parlons de votre prochain recrutement</h2>' +
-      '<p>Un premier échange de trente minutes, sans engagement, pour comprendre votre besoin et vous montrer le radar.</p>' +
-      '<div class="row cta-row"><a class="btn btn-xl btn-clair" href="' + lienContact("Demande de rendez-vous · Cairn Affinités") + '">Prendre rendez-vous</a></div></section>';
+    h += '<section class="cta-final"><h2 class="h2-xl">Voyez ce que le radar révèle sur vos équipes</h2>' +
+      '<p>Une démonstration de trente minutes, puis un premier radar offert sur une équipe. Sans engagement.</p>' +
+      '<div class="row cta-row"><a class="btn btn-xl btn-clair" href="' + rdv + '">Demander une démo</a></div></section>';
     /* Répondants */
     h += section("repondre-bloc", "Vous avez reçu une invitation ?", "Répondre au questionnaire",
       '<div class="atouts">' +
