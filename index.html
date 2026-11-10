@@ -316,6 +316,125 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .scale button[aria-pressed="true"] { transform: none; } }
 body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
+/* Navigation vitrine */
+.topnav { display: none; gap: 4px; margin-left: auto; }
+body.accueil .topnav { display: flex; }
+.topnav button { background: transparent; color: var(--ink); box-shadow: none; min-height: 40px; padding: 8px 12px; font-size: 14px; font-weight: 500; }
+.topnav button:hover:not(:disabled) { background: var(--surface); box-shadow: none; transform: none; }
+body.accueil .topcta { margin-left: 4px; }
+@media (max-width: 720px) { .topnav { display: none !important; } body.accueil .topcta { margin-left: auto; } }
+.site-foot nav { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.site-foot nav a { color: var(--muted); }
+.sommaire { display: flex; flex-wrap: wrap; gap: 8px; }
+.sommaire .chip { cursor: pointer; min-height: 36px; font-size: 13px; box-shadow: none; background: var(--surface); color: var(--ink); }
+.ancre { scroll-margin-top: 80px; height: 0; }
+.btn-contour { background: transparent !important; color: #F7F4EE !important; border-color: rgba(247,244,238,.4) !important; }
+
+/* Pages du rapport */
+.doc-page { background: #FFFFFF; color: #14233B; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-lg); padding: 28px 30px 20px; display: flex; flex-direction: column; gap: 18px;
+  --ink: #14233B; --muted: #55627A; --line: #E4DED3; --surface: #FFFFFF; --surface-2: #FAF8F4; --sky-soft: #E3EFF8; --dir: #14233B; --team: #2F7FB8; --cand: #8A3F7A;
+  --ok: #2B7355; --ok-bg: #DFF1E7; --warn: #8F5E12; --warn-bg: #F8EBCF; --crit: #A63A31; --crit-bg: #F8E0DC; }
+.doc-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.doc-brand { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 14px; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.doc-body { display: flex; flex-direction: column; gap: 16px; }
+.doc-foot { display: flex; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); }
+.doc-h1 { font-size: 24px; letter-spacing: -.02em; }
+.doc-h2 { font-size: 21px; }
+.doc-page h3 { font-size: 16px; }
+.doc-page h4 { margin: 4px 0 0; font-family: var(--display); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.doc-p { font-size: 14.5px; line-height: 1.55; color: #1E2A3D; }
+.doc-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.doc-meta span { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); }
+.doc-meta b { color: var(--ink); font-family: var(--display); }
+.doc-grid2 { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.doc-list { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; }
+.doc-list li { padding-left: 14px; position: relative; }
+.doc-list li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--sky); }
+.doc-list li .pill { margin-right: 4px; }
+.doc-note { font-size: 14px; padding: 12px 14px; border-radius: 12px; background: var(--sky-soft); color: #14233B; }
+.doc-axes .axis { padding-block: 12px; }
+.doc-ecart, .fiche-theme { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2); }
+.doc-ecart-tete { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.doc-verb { display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; font-style: italic; color: #1E2A3D; border-left: 3px solid var(--line); padding-left: 12px; }
+.doc-verb b { font-style: normal; }
+.vigil { display: flex; flex-direction: column; gap: 12px; }
+.vigil-item { display: flex; gap: 14px; padding: 16px; border-radius: 14px; border: 1px solid var(--line); }
+.vigil-item.crit { background: color-mix(in srgb, var(--crit-bg) 55%, #fff); }
+.vigil-item.warn { background: color-mix(in srgb, var(--warn-bg) 55%, #fff); }
+.vigil-item > div { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5; }
+.vigil-n { flex: none; width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-family: var(--display); font-weight: 700; color: #fff; }
+.vigil-item.crit .vigil-n { background: var(--crit); }
+.vigil-item.warn .vigil-n { background: var(--warn); }
+.doc-reco { font-size: 13.5px; padding: 10px 12px; border-radius: 10px; background: #fff; border: 1px solid var(--line); }
+.doc-climat { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.doc-climat > div { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; padding: 12px; border-radius: 12px; border: 1px solid var(--line); font-size: 14px; }
+.fiche-tete { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.fiche-champs { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+.fiche-q { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.5; font-weight: 500; }
+.fiche-q li::marker { color: var(--sky); font-weight: 700; }
+.fiche-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fiche-notes { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); padding-top: 40px; border-bottom: 1px dashed var(--line-strong, #D3CBBD); padding-bottom: 6px; }
+.fiche-decision { display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 14px; border: 2px solid var(--ink); font-size: 14px; }
+.fiche-ligne { display: block; height: 22px; border-bottom: 1px dashed #D3CBBD; }
+@media (max-width: 640px) {
+  .doc-page { padding: 20px 16px 16px; border-radius: 12px; }
+  .doc-grid2, .fiche-2 { grid-template-columns: 1fr; }
+  .doc-climat { grid-template-columns: 1fr 1fr; }
+  .doc-head > span:last-child { display: none; }
+}
+
+/* Comparatif */
+.compare { display: flex; flex-direction: column; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+.compare-row { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr) minmax(0, 1fr); border-top: 1px solid var(--line); }
+.compare-row:first-child { border-top: 0; }
+.compare-row > span { padding: 14px 16px; font-size: 14px; line-height: 1.45; }
+.compare-row > span:first-child { font-weight: 600; font-family: var(--display); }
+.compare-row > span:nth-child(2) { color: var(--muted); }
+.compare-row > span:nth-child(3) { background: color-mix(in srgb, var(--sky-soft) 55%, var(--surface)); font-weight: 500; }
+.compare-tete > span { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); }
+.compare-tete > span:nth-child(3) { color: var(--sky); }
+@media (max-width: 640px) {
+  .compare-row { grid-template-columns: 1fr 1fr; }
+  .compare-row > span:first-child { grid-column: 1 / -1; padding-bottom: 0; }
+  .compare-tete > span:first-child { display: none; }
+}
+.pos .carte i { background: var(--sky-soft); color: var(--sky); }
+.refs { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: var(--muted); }
+.carte sup { color: var(--sky); font-size: 11px; margin-left: 2px; }
+
+/* Aperçu du livrable sur l'accueil */
+.apercu { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.apercu-pages { position: relative; height: 300px; background: color-mix(in srgb, var(--sky-soft) 50%, var(--surface)); border: 1px solid var(--line); border-radius: var(--r); box-shadow: none; padding: 0; overflow: hidden; }
+.apercu-pages:hover:not(:disabled) { transform: none; box-shadow: var(--shadow-lg); }
+.mini { position: absolute; width: 150px; height: 210px; background: #fff; border-radius: 8px; box-shadow: 0 12px 30px -12px rgba(20,35,59,.35); padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: transform .25s ease; }
+.mini-1 { left: 12%; top: 46px; transform: rotate(-6deg); }
+.mini-2 { left: 34%; top: 30px; transform: rotate(1deg); z-index: 1; }
+.mini-3 { left: 56%; top: 50px; transform: rotate(7deg); z-index: 2; }
+.apercu-pages:hover .mini-1 { transform: rotate(-9deg) translateX(-8px); }
+.apercu-pages:hover .mini-3 { transform: rotate(10deg) translateX(8px); }
+.mini i { display: block; border-radius: 4px; background: #E4DED3; }
+.mini-t { height: 10px; width: 70%; background: #14233B !important; }
+.mini-r { height: 80px; width: 80px; margin: 4px auto; border-radius: 50% !important; background: radial-gradient(circle, rgba(47,127,184,.35) 0 40%, transparent 41%), conic-gradient(from 0deg, #E3EFF8, #fff, #E3EFF8) !important; }
+.mini-l { height: 6px; width: 100%; }
+.mini-l.c { width: 60%; }
+.mini-p { height: 14px; width: 45%; border-radius: 999px !important; }
+.mini-p.crit { background: #F8E0DC !important; }
+.mini-p.warn { background: #F8EBCF !important; }
+.mini-q { height: 22px; width: 100%; background: #FAF8F4 !important; border: 1px solid #E4DED3; }
+.inclus-lg { font-size: 15px; gap: 10px; }
+@media (max-width: 640px) { .apercu { grid-template-columns: 1fr; } .apercu-pages { height: 260px; } .mini { width: 120px; height: 170px; } .mini-1 { left: 6%; } .mini-2 { left: 30%; } .mini-3 { left: 54%; } }
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff !important; }
+  .topbar, .site-foot, .no-print, .cta-final, .hero .small, .hero .eyebrow { display: none !important; }
+  .hero h1 { font-size: 26px; }
+  #app > * { animation: none !important; }
+  .wrap { max-width: none; padding: 0; gap: 0; }
+  .doc-page { box-shadow: none; border: 0; border-radius: 0; padding: 0; break-after: page; page-break-after: always; }
+  .doc-ecart, .fiche-theme, .vigil-item { break-inside: avoid; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 <script src="config.js"></script>
 </head>
@@ -332,6 +451,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
       <div class="brand-sub">Radar de compatibilité</div>
     </div>
   </header></a>
+  <nav class="topnav" aria-label="Navigation principale"><button type="button" data-navtop="approche">Notre approche</button><button type="button" data-navtop="rapport">Exemple de rapport</button></nav>
   <span class="chip topchip">Confidentiel</span>
   <a class="btn topcta" id="top-cta" href="#">Nous contacter</a>
 </div></div>
@@ -341,7 +461,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
       <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
       <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
       <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
-    </svg><span>© Cairn Affinités · Le radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></footer>
+    </svg><nav><a href="./">Accueil</a><a href="#approche">Notre approche</a><a href="#rapport">Exemple de rapport</a></nav><span>© Cairn Affinités · Le radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></footer>
 </div>
 
 <script>
@@ -635,6 +755,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
     m = h.match(/^([dec])-([a-z0-9-]{1,40})$/);
     if (m) return { vue: "repondre", role: m[1], slug: m[2], w: 1, x: "" };
     if (h === "cabinet" || h === "missions") return { vue: "cabinet" };
+    if (h === "rapport" || h === "approche") return { vue: h };
     return { vue: "repondre", role: null, slug: null, w: 1, x: "" };
   }
   /* Pages du questionnaire : { titre, lead, q: [...], com, n (questions par page) } */
@@ -1062,6 +1183,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
       '<div class="carte"><i>↺</i><b>Un départ précoce coûte cher</b><span>Du temps de recrutement perdu, une équipe déstabilisée, un poste à pourvoir de nouveau.</span></div>' +
       '</div>');
     h += vueExemple();
+    h += vueApercuRapport();
     /* Méthode */
     h += section("methode", "Comment ça marche", "Trois questionnaires, une lecture claire",
       '<ol class="etapes">' +
@@ -1111,6 +1233,226 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
         '<div class="atout"><i>⇄</i><div><b>Sans bonne réponse</b><span>Aucun style n\'est meilleur qu\'un autre.</span></div></div>' +
       '</div>' + formEntree());
     return h;
+  }
+
+  /* ---------- Pages vitrine : exemple de rapport et approche ---------- */
+  var EX_CAND = { nom: "Camille M.", v: [3.8, 3.0, 2.0, 3.9, 3.2, 3.6, 2.4], imp: [3, 2, 4, 4, 3, 2, 5] };
+  function exAxes() {
+    return AXES.map(function (a, i) { return { nom: a.nom, court: a.court, g: a.g, d: a.d, dm: EXEMPLE[i][0], em: EXEMPLE[i][1], gap: Math.abs(EXEMPLE[i][0] - EXEMPLE[i][1]) }; });
+  }
+  function docPage(num, total, titre, corps) {
+    return `<article class="doc-page"><header class="doc-head"><span class="doc-brand"><svg width="18" height="20" viewBox="0 0 34 38" aria-hidden="true"><ellipse cx="17" cy="31" rx="15" ry="6" fill="#14233B"/><ellipse cx="17" cy="19.5" rx="11" ry="5" fill="#55627A"/><ellipse cx="17" cy="9.5" rx="7" ry="4" fill="#2F7FB8"/></svg>Cairn Affinités</span><span>${titre}</span></header>
+      <div class="doc-body">${corps}</div>
+      <footer class="doc-foot"><span>Rapport de compatibilité · Atelier Durand (exemple fictif)</span><span class="num">${num} / ${total}</span></footer></article>`;
+  }
+  function ligneAxe(a, avecCand, cm) {
+    var st = statut(a.gap);
+    var marques = [["d", "Direction", a.dm], ["e", "Équipe", a.em]];
+    if (avecCand) marques.push(["c", "Candidat", cm]);
+    return '<div class="axis"><div class="axis-head"><h3>' + esc(a.nom) + '</h3>' +
+      (avecCand ? "" : '<span class="pill ' + st[0] + '">' + st[1] + ' · <span class="num">' + fr(a.gap) + '</span></span>') + '</div>' +
+      piste(a, marques) + '</div>';
+  }
+  function vueRapport() {
+    var ax = exAxes(), T = 5;
+    var tri = ax.slice().sort(function (a, b) { return b.gap - a.gap; });
+    var h = `<div class="hero"><a href="./" class="small">← Accueil</a><span class="eyebrow">Exemple de livrable</span>
+      <h1>Le rapport que vous <span class="hl">recevez</span></h1>
+      <p class="lead">Pour chaque mission : le radar de l'entreprise, l'explication des écarts, les zones de vigilance, la comparaison de chaque candidat et une fiche d'entretien prête à l'emploi. L'exemple ci-dessous est entièrement fictif.</p>
+      <div class="row cta-row no-print"><button type="button" class="btn-xl" data-print="1">Imprimer ou enregistrer en PDF</button><a class="btn ghost btn-xl" href="${lienContact("Demande de démonstration · Radar Cairn Affinités")}">Demander une démo</a></div>
+      <nav class="sommaire no-print" aria-label="Sommaire du rapport">
+        <button type="button" class="chip" data-scroll="p1">1 · Synthèse</button><button type="button" class="chip" data-scroll="p2">2 · Les écarts expliqués</button><button type="button" class="chip" data-scroll="p3">3 · Zones de vigilance</button><button type="button" class="chip" data-scroll="p4">4 · Candidat</button><button type="button" class="chip" data-scroll="p5">5 · Fiche d'entretien</button></nav></div>`;
+
+    /* Page 1 : synthèse */
+    h += '<div id="p1" class="ancre"></div>' + docPage(1, T, "Synthèse", `
+      <p class="label">Rapport de compatibilité · Novembre 2026</p>
+      <h2 class="doc-h1">Atelier Durand · Responsable commercial·e</h2>
+      <div class="doc-meta"><span><b class="num">1</b> direction</span><span><b class="num">8</b> membres de l'équipe</span><span><b class="num">3</b> candidats</span><span><b class="num">2</b> vagues</span></div>
+      <div class="doc-grid2">
+        <div><div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>${radarSvg(ax)}</div>
+        <div class="stack">
+          <h3>En bref</h3>
+          <ul class="doc-list">
+            <li><span class="pill crit">2 écarts marqués</span> Franc-parler et Prise de décision : la direction et l'équipe ne décrivent pas la même entreprise.</li>
+            <li><span class="pill warn">3 thèmes à clarifier</span> Organisation du travail, Rapport au changement, Relation à la hiérarchie.</li>
+            <li><span class="pill ok">2 thèmes alignés</span> Travail en équipe et Disponibilité.</li>
+            <li><span class="pill warn">Climat : 1 point vu différemment</span> le droit à l'erreur.</li>
+          </ul>
+          <p class="doc-note">À retenir : sur le franc-parler, la direction se décrit plus directe que ce que vit l'équipe. Un candidat attiré par ce discours risque d'être déçu.</p>
+        </div>
+      </div>
+      <h3>Thème par thème</h3>
+      <div class="doc-axes">${tri.map(function (a) { return ligneAxe(a); }).join("")}</div>`);
+
+    /* Page 2 : écarts expliqués */
+    h += '<div id="p2" class="ancre"></div>' + docPage(2, T, "Les écarts expliqués", `
+      <h2 class="doc-h2">D'où viennent les écarts ?</h2>
+      <p class="doc-p">La seconde vague a interrogé à nouveau la direction et l'équipe, uniquement sur les deux thèmes en écart marqué. Quatre explications sont testées pour chacun : décalage entre l'annoncé et le pratiqué, différences entre équipes, changement récent, attentes mal expliquées.</p>
+      <section class="doc-ecart">
+        <div class="doc-ecart-tete"><h3>Franc-parler</h3><span class="pill crit">Écart marqué · 1,3</span></div>
+        ${piste(ax[3], [["d", "Direction", ax[3].dm], ["e", "Équipe", ax[3].em]])}
+        <p class="doc-p"><b>Ce que dit la direction :</b> les critiques et les désaccords s'expriment directement. <b>Ce que vit l'équipe :</b> les remarques passent plutôt par des tête-à-tête et des formules prudentes.</p>
+        <h4>Pistes d'explication</h4>
+        <ul class="doc-list"><li><b>Attentes mal expliquées.</b> L'équipe ne sait pas si la franchise est vraiment attendue (équipe 3,9 · direction 2,1).</li>
+        <li><b>Pratiques variables.</b> Le franc-parler dépend beaucoup du manager (équipe 3,8 · direction 3,0).</li></ul>
+        <div class="doc-verb"><p><b>Équipe :</b> « On nous dit qu'on peut tout se dire, mais en réunion personne ne contredit le dirigeant. »</p><p><b>Direction :</b> « Ma porte est toujours ouverte, je préfère qu'on me dise les choses. »</p></div>
+      </section>
+      <section class="doc-ecart">
+        <div class="doc-ecart-tete"><h3>Prise de décision</h3><span class="pill crit">Écart marqué · 1,3</span></div>
+        ${piste(ax[0], [["d", "Direction", ax[0].dm], ["e", "Équipe", ax[0].em]])}
+        <p class="doc-p"><b>Ce que dit la direction :</b> les décisions restent centralisées. <b>Ce que vit l'équipe :</b> une vraie marge d'initiative au quotidien.</p>
+        <h4>Pistes d'explication</h4>
+        <ul class="doc-list"><li><b>Changement récent.</b> La délégation a beaucoup progressé depuis un an (équipe 3,9 · direction 3,6) : la direction décrit encore l'organisation d'avant.</li></ul>
+        <div class="doc-verb"><p><b>Équipe :</b> « Depuis la réorganisation, on valide beaucoup moins de choses. »</p></div>
+      </section>`);
+
+    /* Page 3 : zones de vigilance */
+    h += '<div id="p3" class="ancre"></div>' + docPage(3, T, "Zones de vigilance", `
+      <h2 class="doc-h2">Ce qui peut faire échouer ce recrutement</h2>
+      <div class="vigil">
+        <div class="vigil-item crit"><span class="vigil-n">1</span><div><h3>Promettre une culture du franc-parler</h3><p>Si l'annonce et les entretiens reprennent le discours de la direction (« ici on se dit tout »), le candidat découvrira un quotidien plus feutré. C'est le cas typique de déception après l'embauche.</p><p class="doc-reco"><b>Recommandation :</b> décrire le fonctionnement tel que le vit l'équipe, et chercher un profil capable de décoder les messages indirects.</p></div></div>
+        <div class="vigil-item warn"><span class="vigil-n">2</span><div><h3>Un rythme plus réactif qu'annoncé</h3><p>L'équipe vit des priorités qui changent souvent (3,6 sur 5). Un candidat qui a besoin de planifier ses semaines s'y épuisera.</p><p class="doc-reco"><b>Recommandation :</b> en parler dès le premier entretien, exemples à l'appui.</p></div></div>
+        <div class="vigil-item warn"><span class="vigil-n">3</span><div><h3>Le droit à l'erreur, vu différemment</h3><p>La direction estime qu'on peut signaler une erreur sans crainte (4,5 sur 5) ; l'équipe est plus réservée (3,2). Ce n'est pas une alerte, mais un sujet à aborder avec la direction avant l'arrivée de la nouvelle recrue.</p><p class="doc-reco"><b>Recommandation :</b> préparer l'intégration avec le futur manager : comment seront traitées les premières erreurs.</p></div></div>
+      </div>
+      <h3>Climat de travail</h3>
+      <div class="doc-climat">
+        <div><b>Respect</b><span class="pill ok">Solide</span></div><div><b>Droit à l'erreur</b><span class="pill warn">Vu différemment</span></div>
+        <div><b>Solidarité</b><span class="pill ok">Solide</span></div><div><b>Équité des règles</b><span class="pill ok">Solide</span></div></div>`);
+
+    /* Page 4 : candidat */
+    var cAx = ax.map(function (a, i) {
+      var gap = Math.abs(EX_CAND.v[i] - a.em);
+      return { a: a, cm: EX_CAND.v[i], imp: EX_CAND.imp[i], gap: gap, st: statutC(gap, EX_CAND.imp[i]) };
+    });
+    var ordre = { crit: 0, warn: 1, ok: 2 };
+    var cTri = cAx.slice().sort(function (x, y) { return (ordre[x.st[0]] - ordre[y.st[0]]) || (y.gap - x.gap); });
+    h += '<div id="p4" class="ancre"></div>' + docPage(4, T, "Candidat", `
+      <p class="label">Comparaison candidat</p>
+      <h2 class="doc-h1">${EX_CAND.nom} · 2 frictions probables</h2>
+      <div class="doc-grid2">
+        <div><div class="legend"><span><i class="sw c"></i>Candidat</span><span><i class="sw e"></i>Équipe (vécu)</span><span><i class="sw d"></i>Direction</span></div>${radarSvg(ax, EX_CAND.v)}</div>
+        <div class="stack"><h3>Lecture</h3>
+          <p class="doc-p">Le candidat est comparé à ce que vit l'équipe : c'est l'environnement qu'il trouvera en arrivant. Un écart ne devient une friction probable que sur un thème important pour lui.</p>
+          <p class="doc-note">Sur le franc-parler, ${EX_CAND.nom} correspond au discours de la direction, pas au vécu de l'équipe : point à vérifier en priorité.</p></div>
+      </div>
+      <div class="doc-axes">${cTri.map(function (c) {
+        return '<div class="axis"><div class="axis-head"><h3>' + esc(c.a.nom) + '</h3><span class="pill ' + c.st[0] + '">' + c.st[1] + '</span></div>' +
+          piste(c.a, [["d", "Direction", c.a.dm], ["e", "Équipe", c.a.em], ["c", "Candidat", c.cm]]) +
+          '<p class="small num">Importance pour le candidat : ' + c.imp + '/5</p></div>';
+      }).join("")}</div>`);
+
+    /* Page 5 : fiche d'entretien */
+    function bloc(theme, pill, pillTxt, contexte, questions, ecouter, dire) {
+      return `<section class="fiche-theme"><div class="doc-ecart-tete"><h3>${theme}</h3><span class="pill ${pill}">${pillTxt}</span></div>
+        <p class="doc-p">${contexte}</p>
+        <h4>Questions à poser</h4><ol class="fiche-q">${questions.map(function (q) { return "<li>" + q + "</li>"; }).join("")}</ol>
+        <div class="fiche-2"><div><h4>Signaux rassurants</h4><ul class="doc-list">${ecouter[0].map(function (q) { return "<li>" + q + "</li>"; }).join("")}</ul></div>
+        <div><h4>Signaux de vigilance</h4><ul class="doc-list">${ecouter[1].map(function (q) { return "<li>" + q + "</li>"; }).join("")}</ul></div></div>
+        <p class="doc-reco"><b>À dire franchement :</b> ${dire}</p>
+        <div class="fiche-notes"><span>Notes</span><span>Appréciation : ☐ Rassurant ☐ À creuser ☐ Bloquant</span></div></section>`;
+    }
+    h += '<div id="p5" class="ancre"></div>' + docPage(5, T, "Fiche d'entretien", `
+      <div class="fiche-tete"><div><p class="label">Fiche d'entretien</p><h2 class="doc-h1">${EX_CAND.nom} · Responsable commercial·e</h2></div>
+        <div class="fiche-champs"><span>Date : ..................</span><span>Recruteur : ..................</span></div></div>
+      <p class="doc-p">Trois sujets à aborder, du plus important au moins important. Demandez des exemples vécus (« racontez-moi une fois où… ») plutôt que des avis généraux, puis présentez honnêtement le fonctionnement de l'équipe.</p>
+      ${bloc("Franc-parler", "crit", "Friction probable", "Le candidat recherche des échanges sans détour (3,9) ; l'équipe vit un fonctionnement plus feutré (2,4). Il correspond au discours de la direction, pas au quotidien.",
+        ["Racontez-moi une critique que vous avez reçue de façon indirecte. Comment l'avez-vous comprise, et qu'en avez-vous fait ?",
+         "Dans votre dernier poste, comment exprimiez-vous un désaccord avec votre responsable ? Donnez un exemple précis.",
+         "Ici, les remarques passent souvent par des tête-à-tête et des formules prudentes. Comment le vivriez-vous ?"],
+        [["Sait adapter sa façon de dire les choses au contexte", "Cite des situations où il a décodé un message implicite"], ["A besoin de retours très directs pour avancer", "Décrit les échanges feutrés comme de l'hypocrisie"]],
+        "les désaccords se règlent plutôt en privé, et la franchise varie selon les managers.")}
+      ${bloc("Organisation du travail", "crit", "Friction probable", "Le candidat a besoin de planifier (2,0) ; l'équipe vit des priorités qui changent souvent (3,6). Thème important pour lui (4/5).",
+        ["Décrivez une semaine où vos priorités ont changé plusieurs fois. Comment vous êtes-vous organisé ?",
+         "Qu'est-ce qui vous fatigue le plus dans un poste, au quotidien ?"],
+        [["Garde une méthode tout en acceptant l'imprévu", "Parle des urgences sans tension particulière"], ["Évoque les changements de cap comme une cause de départ", "Insiste sur un besoin de visibilité à plusieurs semaines"]],
+        "les urgences sont fréquentes, presque chaque semaine.")}
+      ${bloc("Disponibilité", "warn", "À discuter", "Le candidat préfère des horaires cadrés (2,4) ; l'équipe est un peu plus souple (3,2). Écart modéré, mais thème capital pour lui (5/5).",
+        ["Quelles sont, pour vous, les limites à ne pas dépasser sur les horaires et la joignabilité ?"],
+        [["Accepte des pics ponctuels s'ils sont prévisibles"], ["Exclut tout échange en dehors des horaires"]],
+        "lors des pics d'activité, quelques échanges ont lieu le soir.")}
+      <div class="fiche-decision"><h4>Synthèse de l'entretien</h4><span>☐ Compatible  ☐ Compatible sous conditions  ☐ Risque de départ précoce</span><span class="fiche-ligne"></span><span class="fiche-ligne"></span></div>`);
+
+    h += `<section class="cta-final no-print"><h2 class="h2-xl">Recevez ce rapport pour votre prochain recrutement</h2>
+      <p>Un premier radar offert sur une équipe, puis le rapport complet à partir de la formule Diagnostic.</p>
+      <div class="row cta-row"><a class="btn btn-xl btn-clair" href="${lienContact("Demande de démonstration · Radar Cairn Affinités")}">Demander une démo</a><button type="button" class="ghost btn-xl btn-contour" data-nav="approche">Notre approche</button></div></section>`;
+    return h;
+  }
+
+  function vueApproche() {
+    var lignes = [
+      ["Ce qui est mesuré", "Des traits de la personne, pris isolément", "L'accord entre une personne et un environnement de travail réel"],
+      ["Point de comparaison", "Une norme générale, issue d'une population de référence", "Votre entreprise, telle que la vit votre équipe"],
+      ["Qui répond", "Le candidat seul", "La direction, l'équipe et le candidat"],
+      ["Bonnes réponses", "Certains profils paraissent plus désirables : le candidat est tenté de se présenter sous son meilleur jour", "Deux pôles également acceptables : rien à gagner à « bien répondre »"],
+      ["Ce que vous obtenez", "Un profil, à interpréter", "Des écarts concrets et des questions d'entretien prêtes à l'emploi"],
+      ["Utilité pour l'entreprise", "Aucune lecture de son propre fonctionnement", "Un diagnostic de culture réutilisable pour manager et recruter"],
+      ["Cadre légal", "Doit rester en lien direct avec le poste (article L1221-6)", "Porte uniquement sur l'environnement de travail"]
+    ];
+    var preuves = [
+      ["L'accord entre une personne et son entreprise prédit d'abord la satisfaction au travail, puis les départs.", "Un éclairage pour décider, jamais un verdict automatique.", 1],
+      ["Seule la proximité sur les préférences de travail est pertinente ; celle de mode de vie fait trier sur des critères étrangers au poste.", "Aucune question sur la vie personnelle ou les convictions.", 2],
+      ["Les dirigeants décrivent leur culture plus favorablement que leurs équipes, surtout sur la décision et la liberté de parole.", "Le même questionnaire pour tous ; l'écart est la donnée centrale.", 3],
+      ["Une culture toxique (irrespect, manquements à l'éthique, rivalités) prédit les départs bien mieux que la rémunération.", "Le climat de travail, mesuré à part, déclenche une alerte.", 4],
+      ["Une description réaliste du poste, présentée avant l'embauche, réduit les départs.", "Chaque rapport liste les points à dire franchement au candidat.", 5],
+      ["Les entreprises les plus performantes allient diversité des points de vue et accord sur l'essentiel.", "Une alerte quand l'équipe elle-même est partagée sur un thème.", 6]
+    ];
+    var h = `<div class="hero hero-xl"><a href="./" class="small">← Accueil</a><span class="eyebrow">Notre approche</span>
+      <h1>Mesurer la compatibilité, <span class="hl">pas la personnalité.</span></h1>
+      <p class="lead">Un recrutement peut échouer sans aucune erreur sur les compétences : il suffit que la personne découvre un fonctionnement différent de celui qu'on lui avait décrit. Le radar compare la description de la direction à celle de l'équipe, puis confronte chaque candidat au fonctionnement réel de l'entreprise.</p></div>`;
+    h += section("", "Qui sommes-nous", "Cairn Affinités",
+      `<div class="cartes2"><div class="carte"><b>Un outil né du terrain</b><span>Cairn Affinités est né d'une conviction forgée en recrutement et en accompagnement d'entreprises : la plupart des départs précoces ne viennent pas d'un manque de compétences, mais d'un décalage entre ce qu'on promet au candidat et ce qu'il vit en arrivant.</span></div>
+       <div class="carte"><b>Pourquoi « cairn »</b><span>Un cairn est un petit tas de pierres qui balise un chemin. Chaque pierre doit trouver son équilibre pour que l'ensemble tienne : c'est exactement ce que nous cherchons entre une entreprise, ses équipes et les personnes qu'elle recrute.</span></div></div>`);
+    h += section("", "Compatibilité ou personnalité ?", "Deux questions différentes",
+      `<p class="doc-p">Un test de personnalité répond à la question « qui est ce candidat ? ». Le radar répond à une autre question, plus utile au moment de recruter : « ce candidat sera-t-il à l'aise dans cette entreprise-là, telle qu'elle fonctionne vraiment ? ».</p>
+      <div class="compare" role="table" aria-label="Comparaison entre test de personnalité et radar de compatibilité">
+        <div class="compare-row compare-tete" role="row"><span role="columnheader"></span><span role="columnheader">Test de personnalité</span><span role="columnheader">Radar de compatibilité</span></div>
+        ${lignes.map(function (l) { return '<div class="compare-row" role="row"><span role="rowheader">' + l[0] + '</span><span role="cell">' + l[1] + '</span><span role="cell">' + l[2] + '</span></div>'; }).join("")}
+      </div>`);
+    h += section("", "Pourquoi c'est plus pertinent", "Le bon profil dépend de l'entreprise",
+      `<div class="cartes3 pos">
+        <div class="carte"><i>⇄</i><b>Un même profil réussit ici et échoue ailleurs</b><span>Un commercial très direct s'épanouit dans une équipe qui se dit tout, et s'épuise dans une équipe feutrée. Sa personnalité n'a pas changé : l'environnement, si.</span></div>
+        <div class="carte"><i>≠</i><b>Le discours ne suffit pas</b><span>Le radar s'appuie sur ce que vit l'équipe, pas seulement sur ce que décrit la direction. C'est là que se cachent la plupart des déceptions après l'embauche.</span></div>
+        <div class="carte"><i>+</i><b>Complémentaire, pas concurrent</b><span>Vous utilisez déjà un test de personnalité ? Gardez-le. Le radar ajoute ce qui lui manque : la lecture de l'environnement dans lequel le candidat va travailler.</span></div></div>`);
+    h += section("", "Sur quoi repose la méthode", "Fondée sur la recherche",
+      `<p class="doc-p">Chaque choix du radar répond à un résultat de la recherche en psychologie du travail et en management.</p>
+      <div class="cartes2">${preuves.map(function (p) { return '<div class="carte"><b>' + p[0] + '<sup>' + p[2] + '</sup></b><span>Dans le radar : ' + p[1] + '</span></div>'; }).join("")}</div>`);
+    h += section("", "Garanties", "Ce que le radar ne mesure pas",
+      `<div class="cartes3">
+        <div class="carte"><b>Ni la personne, ni ses opinions</b><span>Ni la personnalité, ni les compétences, ni les opinions, ni la vie personnelle. Le radar décrit un environnement et des préférences de travail ; il ne juge pas les personnes.</span></div>
+        <div class="carte"><b>Des précautions de mesure</b><span>Des faits observés ces six derniers mois plutôt que des opinions, des options également acceptables, un ordre inversé une question sur deux, des moyennes d'équipe à partir de trois répondants.</span></div>
+        <div class="carte"><b>Un cadre légal respecté</b><span>Questions limitées à l'environnement de travail (L1221-6), candidat informé et consentant, résultats confidentiels et restituables (L1221-8), données traitées conformément au RGPD.</span></div></div>
+      <p class="small">Le radar est un outil en cours de validation : sa fiabilité sera mesurée sur les premières missions, puis sa capacité à prédire les départs grâce au suivi des recrutements. Il complète l'entretien et le jugement du recruteur ; il ne décide pas à leur place.</p>`);
+    h += section("", "Références", "Pour aller plus loin",
+      `<ol class="refs">
+        <li>Arthur, W., Bell, S. T., Villado, A. J. et Doverspike, D. (2006). <i>Journal of Applied Psychology</i>, 91(4), 786-801.</li>
+        <li>Stein, S. K., Goldberg, A. et Srivastava, S. B. (2018). <i>Distinguishing Round from Square Pegs</i>. Stanford GSB, document de travail n° 3627.</li>
+        <li>Grenny, J. et Maxfield, D. (2016). Enquête VitalSmarts auprès de plus de 1 200 salariés, managers et dirigeants.</li>
+        <li>Sull, D., Sull, C. et Zweig, B. (2022). <i>Toxic Culture Is Driving the Great Resignation</i>. MIT Sloan Management Review.</li>
+        <li>Phillips, J. M. (1998). <i>Academy of Management Journal</i>, 41(6), 673-690.</li>
+        <li>Corritore, M., Goldberg, A. et Srivastava, S. B. (2020). <i>Duality in Diversity</i>. Administrative Science Quarterly.</li>
+        <li>Code du travail, articles L1221-6 à L1221-9 ; Règlement général sur la protection des données (RGPD).</li></ol>`);
+    h += `<section class="cta-final"><h2 class="h2-xl">Voyez ce que le radar révèle sur vos équipes</h2>
+      <p>Une démonstration de trente minutes, puis un premier radar offert sur une équipe. Sans engagement.</p>
+      <div class="row cta-row"><a class="btn btn-xl btn-clair" href="${lienContact("Demande de démonstration · Radar Cairn Affinités")}">Demander une démo</a><button type="button" class="ghost btn-xl btn-contour" data-nav="rapport">Voir un exemple de rapport</button></div></section>`;
+    return h;
+  }
+
+  function vueApercuRapport() {
+    return section("livrable", "Le livrable", "Un rapport complet, et une fiche pour l'entretien",
+      `<div class="apercu">
+        <button type="button" class="apercu-pages" data-nav="rapport" aria-label="Voir l'exemple de rapport complet">
+          <span class="mini mini-1"><i class="mini-t"></i><i class="mini-r"></i><i class="mini-l"></i><i class="mini-l c"></i><i class="mini-l"></i></span>
+          <span class="mini mini-2"><i class="mini-t"></i><i class="mini-l"></i><i class="mini-p crit"></i><i class="mini-l"></i><i class="mini-p warn"></i><i class="mini-l c"></i></span>
+          <span class="mini mini-3"><i class="mini-t"></i><i class="mini-q"></i><i class="mini-q"></i><i class="mini-q"></i><i class="mini-l c"></i></span>
+        </button>
+        <div class="stack"><ul class="inclus inclus-lg">
+          <li>Le radar direction / équipe et la synthèse des écarts</li>
+          <li>L'explication de chaque écart, issue de la seconde vague</li>
+          <li>Les zones de vigilance pour le recrutement</li>
+          <li>La comparaison de chaque candidat au vécu de l'équipe</li>
+          <li>Une fiche d'entretien par candidat : questions à poser, signaux à écouter, points à dire franchement</li></ul>
+          <div class="row"><button type="button" class="grow" data-nav="rapport">Voir l'exemple de rapport</button><button type="button" class="ghost grow" data-nav="approche">Notre approche</button></div></div>
+      </div>`);
   }
 
   function vueRepondre() {
@@ -1198,8 +1540,9 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
   }
 
   function rendre() {
-    app.innerHTML = S.route.vue === "repondre" ? vueRepondre() : vueCabinet();
-    var acc = S.route.vue === "repondre" && S.rep && !S.rep.slug;
+    var v = S.route.vue;
+    app.innerHTML = v === "repondre" ? vueRepondre() : v === "rapport" ? vueRapport() : v === "approche" ? vueApproche() : vueCabinet();
+    var acc = v === "rapport" || v === "approche" || (v === "repondre" && S.rep && !S.rep.slug);
     document.body.classList.toggle("accueil", !!acc);
     var tc = document.getElementById("top-cta"); if (tc) tc.href = lienContact("Demande de rendez-vous · Cairn Affinités");
   }
@@ -1349,6 +1692,8 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
       return haut();
     }
     if (t.id === "btn-copier") { copier(); return; }
+    if (t.dataset.nav) { location.hash = t.dataset.nav; return; }
+    if (t.dataset.print) { window.print(); return; }
     if (t.dataset.scroll) { ev.preventDefault(); var cible = document.getElementById(t.dataset.scroll); if (cible) cible.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     if (t.dataset.copie) { copierTexte(t.dataset.copie, t); return; }
     if (t.id === "btn-partager") { try { navigator.share({ title: "Radar Cairn", text: r.code }); } catch (e) {} return; }
@@ -1373,6 +1718,7 @@ body.accueil .wrap, body.accueil .topbar-in { max-width: 960px; }
   });
 
   window.addEventListener("hashchange", router);
+  document.addEventListener("click", function (ev) { var b = ev.target.closest("[data-navtop]"); if (b) location.hash = b.dataset.navtop; });
 
   /* ---------- Démarrage ---------- */
   S.route = lireHash();
