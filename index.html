@@ -370,6 +370,13 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 .refs i { font-style: normal; }
 .carte sup { color: var(--muted); font-size: 11px; margin-left: 2px; }
 
+.lang-wrap { display: inline-flex; margin-left: 8px; }
+.topbar .chip ~ .lang-wrap, .topcta ~ .lang-wrap { margin-left: 8px; }
+.lang { font: inherit; font-size: 13px; font-weight: 500; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); padding: 6px 8px; min-height: 36px; cursor: pointer; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+body.cabinet .lang-wrap { display: none; }
+@media (max-width: 440px) { .brand-sub { display: none; } .brand-name { white-space: nowrap; } body.accueil .topcta { padding: 8px 12px; } .topbar-in { gap: 8px; } }
+
 /* Mouvement : une seule entrée, courte */
 @media (prefers-reduced-motion: no-preference) {
   .progress > i { transition: width 300ms var(--ease); }
@@ -392,6 +399,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 }
 </style>
 <script src="config.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body>
 <div class="topbar"><div class="topbar-in">
@@ -409,6 +417,8 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   <nav class="topnav" aria-label="Navigation principale"><button type="button" data-navtop="approche">Notre approche</button><button type="button" data-navtop="rapport">Exemple de rapport</button></nav>
   <span class="chip topchip">Confidentiel</span>
   <a class="btn topcta" id="top-cta" href="#">Nous contacter</a>
+  <label class="lang-wrap"><span class="nt sr">Langue</span><select id="lang" class="lang" aria-label="Langue / Language">
+    <option value="fr">FR</option><option value="en">EN</option><option value="es">ES</option><option value="de">DE</option><option value="it">IT</option></select></label>
 </div></div>
 <div class="wrap">
   <main id="app" class="stack-lg"></main>
@@ -703,6 +713,89 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   };
   var app = document.getElementById("app");
 
+  /* ---------- Langues ---------- */
+  var LANGUES = ["fr", "en", "es", "de", "it"];
+  var DICO = window.CAIRN_I18N || {};
+  function langueInitiale() {
+    var p = null;
+    try { p = new URLSearchParams(location.search).get("lang"); } catch (e) {}
+    if (p && LANGUES.indexOf(p) >= 0) return p;
+    try { var m = localStorage.getItem("cairn-lang"); if (m && LANGUES.indexOf(m) >= 0) return m; } catch (e) {}
+    var n = (navigator.language || "fr").slice(0, 2).toLowerCase();
+    return LANGUES.indexOf(n) >= 0 ? n : "fr";
+  }
+  var LANG = langueInitiale();
+  var RE_NUM = /\d+(?:[.,]\d+)?/g;
+  function chercher(core) {
+    var d = DICO[LANG]; if (!d) return null;
+    var key = core.replace(/ /g, " ").replace(/\s+/g, " ");
+    var nums = key.match(RE_NUM) || [];
+    var k2 = key.replace(RE_NUM, "{n}");
+    var tr = d[k2];
+    if (tr == null && key.indexOf(", ") > 0) {
+      var parts = key.split(", "), ok = true;
+      var out = parts.map(function (p) { var t = d[p.replace(RE_NUM, "{n}")]; if (t == null) ok = false; return t; });
+      if (ok) return out.join(", ");
+      return null;
+    }
+    if (tr == null) return null;
+    var i = 0;
+    return tr.replace(/\{n\}/g, function () {
+      var v = nums[i++] || "";
+      return LANG === "en" ? v.replace(",", ".") : v;
+    });
+  }
+  function T(txt) {
+    if (LANG === "fr") return txt;
+    var m = String(txt).match(/^(\s*)([\s\S]*?)(\s*)$/);
+    var r = m[2] ? chercher(m[2]) : null;
+    return r == null ? txt : m[1] + r + m[3];
+  }
+  function traduireNoeuds(racine) {
+    var w = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) {
+      var p = n.parentNode;
+      if (!p || p.closest("script, style, textarea, .nt")) continue;
+      if (n.__src == null) n.__src = n.nodeValue;
+      if (!/[A-Za-zÀ-ÿ]/.test(n.__src)) continue;
+      n.nodeValue = T(n.__src);
+    }
+    racine.querySelectorAll("[placeholder], [aria-label]").forEach(function (el) {
+      ["placeholder", "aria-label"].forEach(function (a) {
+        if (!el.hasAttribute(a)) return;
+        var k = "__" + a; if (el[k] == null) el[k] = el.getAttribute(a);
+        el.setAttribute(a, T(el[k]));
+      });
+    });
+  }
+  function traduirePage() {
+    document.documentElement.lang = LANG;
+    var cab = S.route && S.route.vue === "cabinet";
+    document.body.classList.toggle("cabinet", !!cab);
+    var top = document.querySelector(".topbar"), pied = document.querySelector(".site-foot");
+    if (top) traduireNoeuds(top);
+    if (pied) traduireNoeuds(pied);
+    if (!cab) traduireNoeuds(app);
+    if (document.__titre == null) document.__titre = document.title;
+    document.title = T(document.__titre);
+    var sel = document.getElementById("lang"); if (sel) sel.value = LANG;
+  }
+  function changerLangue(l) {
+    if (LANGUES.indexOf(l) < 0) return;
+    LANG = l;
+    try { localStorage.setItem("cairn-lang", l); } catch (e) {}
+    try {
+      var u = new URL(location.href);
+      if (l === "fr") u.searchParams.delete("lang"); else u.searchParams.set("lang", l);
+      history.replaceState(null, "", u.toString());
+    } catch (e) {}
+    rendre();
+  }
+  document.addEventListener("change", function (ev) {
+    if (ev.target && ev.target.id === "lang") changerLangue(ev.target.value);
+    if (ev.target && ev.target.id === "lien-lang") { S.lienLang = ev.target.value; rendre(); }
+  });
+
   function lireHash() {
     var h = (location.hash || "").slice(1), m;
     m = h.match(/^([de])2-([0-6]{1,7})-([a-z0-9-]{1,40})$/);
@@ -757,13 +850,13 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
     return S.msg ? '<p class="msg ' + (S.msg.ok ? "good" : "err") + '" role="status">' + esc(S.msg.t) + '</p>' : "";
   }
   function piste(l, marques) {
-    var h = '<div class="track" role="img" aria-label="' + esc(marques.map(function (m) { return m[1] + " " + fr(m[2]) + " sur 5"; }).join(", ")) + '">';
+    var h = '<div class="track" role="img" aria-label="' + esc(marques.map(function (m) { return T(m[1]) + " " + fr(m[2]) + "/5"; }).join(" · ")) + '">';
     marques.forEach(function (m) { h += '<i class="mark ' + m[0] + '" style="left:' + pct(m[2]) + '%"></i>'; });
     return h + '</div><div class="poles"><span>' + esc(l.g) + '</span><span>' + esc(l.d) + '</span></div>';
   }
 
   var CFG = window.CAIRN_CONFIG || {};
-  function urlDe(hash) { return location.origin + location.pathname + "#" + hash; }
+  function urlDe(hash) { var l = S.lienLang || "fr"; return location.origin + location.pathname + (l !== "fr" ? "?lang=" + l : "") + "#" + hash; }
   function blocLien(titre, hash) {
     return '<div class="stack" style="gap:6px"><span class="label">' + esc(titre) + '</span>' +
       '<input type="text" readonly class="lien" value="' + esc(urlDe(hash)) + '" aria-label="Lien ' + esc(titre) + '">' +
@@ -771,7 +864,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       '<a class="btn ghost grow" href="#' + esc(hash) + '">Aperçu</a></div></div>';
   }
   function copierTexte(txt, btn) {
-    function ok() { var l = btn.textContent; btn.textContent = "Copié"; setTimeout(function () { btn.textContent = l; }, 1500); }
+    function ok() { var l = btn.textContent; btn.textContent = T("Copié"); setTimeout(function () { btn.textContent = l; }, 1500); }
     try { navigator.clipboard.writeText(txt).then(ok, function () {}); } catch (e) {}
   }
 
@@ -854,6 +947,9 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
     h += '</section>';
 
     h += '<section class="panel stack"><h2>Envoyer le questionnaire</h2>' +
+      '<label class="small row" for="lien-lang" style="gap:8px">Langue des questionnaires <select id="lien-lang" class="lang">' +
+      [["fr", "Français"], ["en", "English"], ["es", "Español"], ["de", "Deutsch"], ["it", "Italiano"]].map(function (o) {
+        return '<option value="' + o[0] + '"' + ((S.lienLang || "fr") === o[0] ? " selected" : "") + '>' + o[1] + '</option>'; }).join("") + '</select></label>' +
       '<p class="small">Vague 1 : ' + N_DE + ' questions pour la direction et l\'équipe, ' + N_C + ' pour un candidat. Copiez le lien voulu et envoyez-le par e-mail ou SMS : il s\'ouvre directement sur le bon questionnaire.</p>' +
       blocLien("Direction", "d-" + m.id) + blocLien("Équipe", "e-" + m.id) + blocLien("Candidat", "c-" + m.id) +
       '<p class="small">Code de mission : <strong>' + esc(m.id) + '</strong></p></section>';
@@ -1461,13 +1557,13 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       var deja = r.a.some(function (v) { return v > 0; });
       var bouton = '<div class="row"><button type="button" id="btn-debut">' + (deja ? "Reprendre" : "Commencer") + '</button></div>';
       var regle = '<p class="small">Pour chaque question, deux descriptions se font face. Le côté de chaque description change d\'une question à l\'autre : lisez les deux avant de répondre.</p>';
-      if (r.w === 2) return '<div class="stack">' + retour + '<p class="label">Vague 2 · ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
+      if (r.w === 2) return '<div class="stack">' + retour + '<p class="label">Vague 2 · ' + roleTxt + ' · mission <span class="nt">' + esc(r.slug) + '</span></p>' +
         '<h1>Quelques questions pour aller plus loin</h1>' +
         '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p>Sur ' + (pages.length > 1 ? "certains sujets" : "un sujet") + ' (<strong>' + esc(pages.map(function (p) { return p.titre; }).join(", ")) +
         '</strong>), la direction et l\'équipe n\'ont pas décrit l\'entreprise de la même façon. C\'est fréquent et ce n\'est pas un reproche : ces questions servent à comprendre pourquoi.</p>' +
         '<p class="small">Répondez à partir de situations que vous avez réellement vécues ces derniers mois. Un commentaire libre est possible sur chaque sujet ; évitez d\'y citer des noms.</p></div>' + bouton;
-      if (r.role === "c") return '<div class="stack">' + retour + '<p class="label">Questionnaire candidat · mission ' + esc(r.slug) + '</p>' +
+      if (r.role === "c") return '<div class="stack">' + retour + '<p class="label">Questionnaire candidat · mission <span class="nt">' + esc(r.slug) + '</span></p>' +
         '<h1>Dans quel environnement travaillez-vous le mieux ?</h1>' +
         '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p><strong>Pensez au poste où vous avez été le plus efficace et le plus à l\'aise</strong>, et décrivez comment il fonctionnait. Il n\'y a pas de bonne réponse : aucun des deux côtés n\'est meilleur que l\'autre, et des réponses « idéales » vous desserviraient en vous orientant vers un poste qui ne vous convient pas.</p>' + regle + '</div>' +
@@ -1476,7 +1572,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
         '<label class="consent" for="in-accord"><input type="checkbox" id="in-accord"' + (r.accord ? " checked" : "") + '><span>J\'ai lu ces informations et j\'accepte de répondre.</span></label>' +
         '<label class="label" for="in-prenom">Votre prénom et votre nom</label>' +
         '<input type="text" id="in-prenom" maxlength="40" autocomplete="name" value="' + esc(r.nom) + '">' + blocMsg() + '</div>' + bouton;
-      return '<div class="stack">' + retour + '<p class="label">Questionnaire ' + roleTxt + ' · mission ' + esc(r.slug) + '</p>' +
+      return '<div class="stack">' + retour + '<p class="label">Questionnaire ' + roleTxt + ' · mission <span class="nt">' + esc(r.slug) + '</span></p>' +
         '<h1>Comment fonctionne vraiment votre entreprise ?</h1>' +
         '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p><strong>Décrivez ce que vous avez observé ces six derniers mois</strong>, pas ce qui serait souhaitable ni ce qui est écrit dans les documents officiels. Il n\'y a pas de bonne réponse : sur les ' + AXES.length + ' premiers thèmes, aucun des deux côtés n\'est meilleur que l\'autre.</p>' + regle +
@@ -1497,7 +1593,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
       for (var p = 1; p <= 5; p++) {
         var sem = inv ? 6 - p : p;
         h += '<button type="button" id="q' + k + '-' + p + '" data-q="' + k + '" data-v="' + sem + '" aria-pressed="' + (r.a[k] === sem) +
-          '" aria-label="' + p + ' sur 5, de « ' + esc(gauche) + ' » à « ' + esc(droite) + ' »">' + p + '</button>';
+          '" aria-label="' + p + '/5 · ' + esc(T(gauche)) + ' → ' + esc(T(droite)) + '">' + p + '</button>';
       }
       h += '</div></div>';
     });
@@ -1526,6 +1622,7 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
     var acc = v === "rapport" || v === "approche" || (v === "repondre" && S.rep && !S.rep.slug);
     document.body.classList.toggle("accueil", !!acc);
     var tc = document.getElementById("top-cta"); if (tc) tc.href = lienContact("Demande de rendez-vous · Cairn Affinités");
+    traduirePage();
   }
 
   /* ---------- Actions ---------- */
@@ -1605,9 +1702,9 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
   }
   function copier() {
     var ta = document.getElementById("out-code"), etat = document.getElementById("copie-etat");
-    function repli() { ta.focus(); ta.select(); etat.textContent = "Code sélectionné : utilisez Copier."; }
+    function repli() { ta.focus(); ta.select(); etat.textContent = T("Code sélectionné : utilisez Copier."); }
     try {
-      navigator.clipboard.writeText(S.rep.code).then(function () { etat.textContent = "Code copié."; }, repli);
+      navigator.clipboard.writeText(S.rep.code).then(function () { etat.textContent = T("Code copié."); }, repli);
     } catch (e) { repli(); }
   }
 
