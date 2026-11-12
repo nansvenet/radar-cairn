@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cairn Affinités · Radar de compatibilité</title>
+<meta name="description" content="Recrutez des personnes qui vont rester : le radar compare le fonctionnement réel de votre entreprise au profil de chaque candidat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+:root{
+  --bg:#F7F4EE; --surface:#FDFBF7; --surface-2:#EFE9DF;
+  --ink:#14233B; --text-2:#4A566B; --muted:#646E80;
+  --line:rgba(20,35,59,.10); --line-strong:rgba(20,35,59,.18);
+  --sky:#276D9E; --sky-soft:#E6EEF4;
+  --dir:#14233B; --team:#2F7FB8; --cand:#8A3F7A;
+  --crit:#A63A31; --crit-bg:#F6E2DE;
+  --btn:#14233B; --on-btn:#FDFBF7;
+  --display:"Newsreader",Georgia,"Times New Roman",serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1726; --surface:#162034; --surface-2:#1C2840;
+  --ink:#E9EEF6; --text-2:#B5C0D2; --muted:#8C98AD;
+  --line:rgba(233,238,246,.10); --line-strong:rgba(233,238,246,.20);
+  --sky:#7DB6E0; --sky-soft:#1A2D45;
+  --dir:#E9EEF6; --team:#6FB2E6; --cand:#D58EC4;
+  --crit:#EE8F86; --crit-bg:#3A1F22;
+  --btn:#E9EEF6; --on-btn:#0F1726;
+  color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:16px;padding-right:16px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5.5vw,3.6rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--sky);font-weight:600}
+.lead{font-size:1.15rem;color:var(--text-2);max-width:60ch}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:1.35rem;font-weight:500;display:flex;align-items:center;gap:10px;text-decoration:none}
+nav.menu{display:flex;gap:20px;font-size:.95rem;flex-wrap:wrap}
+nav.menu a{text-decoration:none;color:var(--text-2)}
+nav.menu a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:.98rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--btn);color:var(--on-btn)}
+.btn-ghost{border-color:var(--line-strong);color:var(--ink);background:transparent}
+.btn:hover{filter:brightness(1.08)}
+section{padding-block:clamp(48px,8vw,88px)}
+section+section{border-top:1px solid var(--line)}
+.hero{padding-block:clamp(48px,9vw,96px) clamp(40px,6vw,64px)}
+.hero .stack{display:grid;gap:22px;max-width:760px}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
+.door{display:grid;gap:8px;padding:22px 24px;border:1px solid var(--line-strong);border-radius:16px;background:var(--surface);text-decoration:none;transition:border-color .2s,transform .2s}
+.door:hover{border-color:var(--sky);transform:translateY(-2px)}
+.door .who{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.door strong{font-family:var(--display);font-weight:500;font-size:1.3rem}
+.door .go{color:var(--sky);font-weight:600;font-size:.95rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(28px,5vw,64px);align-items:start}
+.two>*{min-width:0}
+.facts{display:grid;gap:18px;margin-top:8px}
+.fact{border-left:2px solid var(--line-strong);padding-left:16px}
+.fact p{color:var(--text-2)}
+.fact .src{font-size:.8rem;color:var(--muted);margin-top:4px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:36px}
+.step{display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--display);font-size:2rem;color:var(--sky);line-height:1}
+.step p{color:var(--text-2)}
+.report{background:var(--surface);border:1px solid var(--line-strong);border-radius:20px;padding:clamp(18px,3vw,28px);display:grid;gap:16px}
+.report-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--text-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+.radar{width:100%;max-width:420px;margin:0 auto;display:block}
+.friction{background:var(--crit-bg);border-radius:12px;padding:14px 16px;display:grid;gap:4px}
+.friction b{color:var(--crit);font-size:.82rem;text-transform:uppercase;letter-spacing:.07em}
+.friction p{font-size:.95rem}
+.audience{display:grid;gap:28px}
+.gains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.gain h3{font-size:1.1rem;margin-bottom:4px}
+.gain p{color:var(--text-2);font-size:.97rem}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.price{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:10px;align-content:start}
+.price.star{border-color:var(--sky);box-shadow:0 0 0 1px var(--sky)}
+.price .lbl{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.tag{background:var(--sky-soft);color:var(--sky);padding:2px 8px;border-radius:99px;font-size:.72rem;letter-spacing:.04em}
+.amount{font-family:var(--display);font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.amount small{font-family:var(--body);font-size:.85rem;color:var(--muted)}
+.price ul{margin:0;padding-left:18px;color:var(--text-2);font-size:.93rem;display:grid;gap:4px}
+.cab{background:var(--surface-2)}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.trust h3{font-size:1.1rem;margin-bottom:6px}
+.trust p{color:var(--text-2);font-size:.95rem}
+.cta{display:grid;gap:18px;max-width:640px}
+.cta .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.mail{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.92rem;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:6px;text-decoration:none;overflow-wrap:anywhere}
+footer{border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px}
+footer a{color:var(--sky);font-weight:600;text-decoration:none}
+@media (prefers-reduced-motion:reduce){.door{transition:none}.door:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#haut" aria-label="Cairn Affinités">
+    <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><ellipse cx="13" cy="21" rx="10" ry="3.6" fill="var(--ink)"/><ellipse cx="13" cy="14.5" rx="7" ry="3" fill="var(--sky)"/><ellipse cx="13" cy="8.6" rx="4.4" ry="2.4" fill="var(--ink)"/><ellipse cx="13" cy="3.9" rx="2.4" ry="1.6" fill="var(--sky)"/></svg>
+    Cairn Affinités
+  </a>
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="#entreprises">Entreprises</a>
+    <a href="#cabinets">Cabinets</a>
+    <a href="index.html#rapport">Exemple de rapport</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div></header>
+
+<main id="haut">
+<section class="hero"><div class="wrap">
+  <div class="stack">
+    <span class="eyebrow">Radar de compatibilité</span>
+    <h1>Recrutez des personnes qui vont rester</h1>
+    <p class="lead">Le radar mesure le fonctionnement réel de votre entreprise, tel que le vivent vos équipes, puis compare chaque candidat à cette réalité.</p>
+  </div>
+  <div class="doors">
+    <a class="door" href="#entreprises">
+      <span class="who">PME &amp; ETI</span>
+      <strong>Vous recrutez pour votre entreprise</strong>
+      <span class="go">Voir ce que le radar vous apporte →</span>
+    </a>
+    <a class="door" href="#cabinets">
+      <span class="who">Cabinets &amp; consultants RH</span>
+      <strong>Vous recrutez pour vos clients</strong>
+      <span class="go">Voir l'offre cabinet →</span>
+    </a>
+  </div>
+</div></section>
+
+<section><div class="wrap two">
+  <div style="display:grid;gap:16px">
+    <span class="eyebrow">Le constat</span>
+    <h2>Un recrutement raté ne se lit pas sur un CV</h2>
+    <p class="lead">Un recrutement peut échouer sans aucune erreur sur les compétences : il suffit que la personne découvre un fonctionnement différent de celui qu'on lui avait décrit.</p>
+  </div>
+  <div class="facts">
+    <div class="fact"><p>Les dirigeants décrivent leur culture plus favorablement que leurs équipes, surtout sur la décision et la liberté de parole.</p></div>
+    <div class="fact"><p>Un commercial très direct s'épanouit dans une équipe qui se dit tout, et s'épuise dans une équipe feutrée. Sa personnalité n'a pas changé : l'environnement, si.</p></div>
+    <div class="fact"><p>Une description réaliste du poste, présentée avant l'embauche, réduit les départs.</p><p class="src">Phillips, J. M.</p></div>
+  </div>
+</div></section>
+
+<section id="comment"><div class="wrap">
+  <span class="eyebrow">Comment ça marche</span>
+  <h2 style="margin-top:12px">Trois questionnaires, une lecture claire</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>Direction et équipe répondent</h3><p>Le même questionnaire, une trentaine de questions, en toute confidentialité. L'équipe n'est lue qu'en moyenne.</p></div>
+    <div class="step"><span class="n">2</span><h3>Les écarts sont expliqués</h3><p>Une seconde vague, uniquement sur les thèmes en écart : discours, pratiques qui varient selon les équipes, changement récent, attentes mal expliquées.</p></div>
+    <div class="step"><span class="n">3</span><h3>Chaque candidat est comparé</h3><p>Au vécu de l'équipe, pas seulement à la fiche de poste. Vous recevez une fiche d'entretien prête à l'emploi.</p></div>
+  </div>
+</div></section>
+
+<section id="exemple"><div class="wrap two">
+  <div style="display:grid;gap:16px">
+    <span class="eyebrow">Le livrable</span>
+    <h2>Les frictions probables, identifiées avant l'embauche</h2>
+    <p class="lead">Pour chaque mission : le radar de l'entreprise, l'explication des écarts, la comparaison de chaque candidat et une fiche d'entretien.</p>
+    <div><a class="btn btn-ghost" href="index.html#rapport">Voir l'exemple de rapport complet</a></div>
+  </div>
+  <div class="report" aria-label="Exemple de radar de compatibilité">
+    <div class="report-head"><span>Atelier Durand · Responsable commercial·e</span><span>Exemple fictif</span></div>
+    <svg class="radar" viewBox="-170 -150 340 300" role="img" aria-label="Radar comparant direction, équipe et candidat sur sept thèmes">
+      <g id="grid"></g>
+      <polygon id="p-dir" fill="none" stroke="var(--dir)" stroke-width="2" stroke-dasharray="5 4"/>
+      <polygon id="p-team" fill="var(--team)" fill-opacity=".14" stroke="var(--team)" stroke-width="2.2"/>
+      <polygon id="p-cand" fill="none" stroke="var(--cand)" stroke-width="2.2"/>
+      <g id="labels"></g>
+    </svg>
+    <div class="legend">
+      <span><i style="background:var(--dir)"></i>Direction</span>
+      <span><i style="background:var(--team)"></i>Équipe</span>
+      <span><i style="background:var(--cand)"></i>Camille M., candidate</span>
+    </div>
+    <div class="friction">
+      <b>Friction probable · Franc-parler</b>
+      <p>Le candidat recherche des échanges sans détour ; l'équipe vit un fonctionnement plus feutré. Il correspond au discours de la direction, pas au quotidien.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="entreprises"><div class="wrap audience">
+  <div style="display:grid;gap:14px">
+    <span class="eyebrow">Entreprises · PME &amp; ETI</span>
+    <h2>Votre entreprise, telle que la vit votre équipe</h2>
+    <p class="lead">Comprenez ce que vivent vraiment vos équipes avant d'ouvrir un poste, et choisissez le candidat qui s'y sentira à sa place.</p>
+  </div>
+  <div class="gains">
+    <div class="gain"><h3>Des recrues qui restent</h3><p>Un candidat qui sait à quoi s'attendre s'intègre mieux et plus durablement.</p></div>
+    <div class="gain"><h3>Des entretiens plus justes</h3><p>Chaque rapport liste les points à dire franchement au candidat.</p></div>
+    <div class="gain"><h3>Un outil de management</h3><p>Le radar révèle ce que vos équipes vivent vraiment.</p></div>
+  </div>
+  <div class="prices">
+    <div class="price"><div class="lbl">Découverte</div><div class="amount">0 €</div><ul><li>1 équipe, jusqu'à 10 répondants</li><li>Radar direction / équipe</li><li>Synthèse des écarts</li></ul><a class="btn btn-ghost" href="index.html">Commencer</a></div>
+    <div class="price"><div class="lbl">Diagnostic</div><div class="amount">490 € <small>HT / mission</small></div><ul><li>Répondants illimités</li><li>5 candidats comparés</li><li>Rapport complet et restitution d'une heure</li><li>Candidat supplémentaire : 29 € HT</li></ul><a class="btn btn-ghost" href="mailto:cairn.affinites@gmail.com?subject=Diagnostic%20radar">Lancer un diagnostic</a></div>
+    <div class="price star"><div class="lbl">Entreprise <span class="tag">Recommandé</span></div><div class="amount">190 € <small>HT / mois</small></div><ul><li>Jusqu'à 5 équipes suivies</li><li>Candidats illimités</li><li>Radar remis à jour chaque semestre</li><li>Engagement 12 mois</li></ul><a class="btn btn-primary" href="mailto:cairn.affinites@gmail.com?subject=Demande%20de%20d%C3%A9mo">Demander une démo</a></div>
+  </div>
+</div></section>
+
+<section id="cabinets" class="cab"><div class="wrap two">
+  <div style="display:grid;gap:14px">
+    <span class="eyebrow">Cabinets &amp; consultants RH</span>
+    <h2>Une méthode qui vous distingue</h2>
+    <p class="lead">Ajoutez une lecture objective de la culture de vos clients à chaque mission, et présentez des candidats argumentés.</p>
+    <p class="muted">Vous utilisez déjà un test de personnalité ? Gardez-le. Le radar ajoute ce qui lui manque : la lecture de l'environnement dans lequel le candidat va travailler.</p>
+    <div><a class="btn btn-ghost" href="index.html#cabinet">Accéder à l'espace cabinet</a></div>
+  </div>
+  <div class="price star"><div class="lbl">Cabinet</div><div class="amount"><small>À partir de</small> 390 € <small>HT / mois</small></div><ul><li>Missions clients illimitées</li><li>Rapports à votre nom (marque blanche)</li><li>Plusieurs consultants</li><li>Accompagnement à la prise en main</li></ul><a class="btn btn-primary" href="mailto:cairn.affinites@gmail.com?subject=Offre%20cabinet">Nous contacter</a></div>
+</div></section>
+
+<section><div class="wrap trust">
+  <div><h3>Fondée sur la recherche</h3><p>Chaque choix du radar répond à un résultat de la recherche en psychologie du travail et en management.</p></div>
+  <div><h3>Un cadre légal respecté</h3><p>Questions limitées à l'environnement de travail, candidat informé et consentant, données traitées conformément au RGPD.</p></div>
+  <div><h3>Un éclairage, pas un verdict</h3><p>Le radar complète l'entretien et le jugement du recruteur ; il ne décide pas à leur place. Sa fiabilité sera mesurée sur les premières missions.</p></div>
+</div></section>
+
+<section id="contact"><div class="wrap cta">
+  <h2>Voyez ce que le radar révèle sur vos équipes</h2>
+  <p class="lead">Une démonstration de trente minutes, puis un premier radar offert sur une équipe. Sans engagement.</p>
+  <div class="row"><a class="btn btn-primary" href="mailto:cairn.affinites@gmail.com?subject=Demande%20de%20d%C3%A9mo">Demander une démo</a><a class="mail" href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>© Cairn Affinités · Le radar de compatibilité</span>
+  <span>Vous êtes candidat ? <a href="index.html#libre">Découvrez votre profil de travail, gratuit →</a></span>
+</div></footer>
+
+<script>
+(function(){
+  var themes=["Prise de décision","Hiérarchie","Organisation","Franc-parler","Travail en équipe","Changement","Disponibilité"];
+  var dir=[3.4,3.6,2.6,4.4,3.4,3.0,2.6], team=[2.2,2.4,3.6,2.2,3.2,3.4,3.0], cand=[2.6,2.8,1.8,4.6,3.0,2.4,2.0];
+  var R=110,n=themes.length,NS="http://www.w3.org/2000/svg";
+  function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n;return [Math.cos(a)*R*v/5,Math.sin(a)*R*v/5];}
+  var g=document.getElementById("grid");
+  [1,2,3,4,5].forEach(function(l){var p=document.createElementNS(NS,"polygon");
+    p.setAttribute("points",themes.map(function(_,i){return pt(i,l).join(",")}).join(" "));
+    p.setAttribute("fill","none");p.setAttribute("stroke","var(--line-strong)");p.setAttribute("stroke-width","1");g.appendChild(p);});
+  themes.forEach(function(t,i){var e=pt(i,5),l=document.createElementNS(NS,"line");
+    l.setAttribute("x1",0);l.setAttribute("y1",0);l.setAttribute("x2",e[0]);l.setAttribute("y2",e[1]);
+    l.setAttribute("stroke","var(--line)");g.appendChild(l);
+    var p=pt(i,6.1),tx=document.createElementNS(NS,"text");
+    tx.setAttribute("x",p[0]);tx.setAttribute("y",p[1]+4);tx.setAttribute("font-size","11");
+    tx.setAttribute("fill",i===3?"var(--crit)":"var(--text-2)");tx.setAttribute("font-weight",i===3?"600":"400");
+    tx.setAttribute("text-anchor",Math.abs(p[0])<8?"middle":(p[0]>0?"start":"end"));
+    tx.setAttribute("font-family","Instrument Sans, system-ui, sans-serif");tx.textContent=t;
+    document.getElementById("labels").appendChild(tx);});
+  function set(id,v){document.getElementById(id).setAttribute("points",v.map(function(x,i){return pt(i,x).join(",")}).join(" "));}
+  set("p-dir",dir);set("p-team",team);set("p-cand",cand);
+})();
+</script>
+</body>
+</html>
