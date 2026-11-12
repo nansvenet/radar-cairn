@@ -344,10 +344,67 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 .fiche-notes { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); padding-top: 40px; border-bottom: 1px dashed var(--line-strong); padding-bottom: 8px; }
 .fiche-decision { display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: 12px; border: 1px solid var(--ink); font-size: 14px; }
 .fiche-ligne { display: block; height: 24px; border-bottom: 1px dashed var(--line-strong); }
+/* Rapport : visuels de lecture rapide */
+.track .bande { position: absolute; top: 8px; height: 8px; border-radius: 4px; opacity: .3; }
+.bande.ok { background: var(--ok); } .bande.warn { background: #C98A1B; } .bande.crit { background: var(--crit); }
+.axe-rap { padding-left: 14px !important; border-left: 3px solid transparent; }
+.axe-rap.crit { border-left-color: var(--crit); } .axe-rap.warn { border-left-color: #D9A441; } .axe-rap.ok { border-left-color: #8DBFA4; }
+.doc-axes .axe-rap { border-top: 0; margin-top: 8px; padding-block: 10px; background: var(--surface); border-radius: 0 8px 8px 0; }
+.lect { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 13px; color: var(--text-2); }
+.lect > span { display: inline-flex; align-items: center; gap: 6px; }
+.lect b { color: var(--ink); font-weight: 500; }
+.lect-imp { margin-left: auto; }
+.verdict { display: flex; gap: 16px; align-items: flex-start; padding: 20px 24px; border-radius: 12px; background: #14233B; color: #FDFBF7; }
+.verdict-ic { flex: none; color: #8FD1AE; margin-top: 2px; }
+.verdict-l { margin: 0; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #B8C2D3; }
+.verdict-t { margin: 2px 0 6px; font-family: var(--display); font-size: 24px; line-height: 1.2; }
+.verdict-x { margin: 0; font-size: 14px; line-height: 1.55; color: #DDE3EC; }
+.tuiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tuile { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: 12px; border-top: 4px solid; }
+.tuile b { font-family: var(--display); font-weight: 500; font-size: 40px; line-height: 1; }
+.tuile-t { font-weight: 500; font-size: 15px; color: var(--ink); margin-top: 4px; }
+.tuile-x { font-size: 13px; line-height: 1.45; color: var(--text-2); }
+.tuile.crit { background: var(--crit-bg); border-color: var(--crit); } .tuile.crit b { color: var(--crit); }
+.tuile.warn { background: var(--warn-bg); border-color: #C98A1B; } .tuile.warn b { color: var(--warn); }
+.tuile.ok { background: var(--ok-bg); border-color: var(--ok); } .tuile.ok b { color: var(--ok); }
+.lire { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.lire li { display: flex; gap: 12px; align-items: flex-start; }
+.lire li > i { flex: none; margin-top: 6px; }
+.lire li div { display: flex; flex-direction: column; font-size: 14px; line-height: 1.45; color: var(--text-2); }
+.lire li b { color: var(--ink); font-weight: 500; }
+.lire-ec { width: 22px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--ok), #C98A1B, var(--crit)); opacity: .55; }
+.echelle { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 3px; height: 8px; margin-top: 4px; }
+.echelle i { border-radius: 4px; } .echelle .ok { background: var(--ok); } .echelle .warn { background: #C98A1B; } .echelle .crit { background: var(--crit); }
+.echelle-l { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 3px; font-size: 12px; color: var(--muted); }
+.echelle-l > span { display: flex; flex-direction: column; } .echelle-l b { font-weight: 500; color: var(--ink); }
+.echelle-l > span:last-child { text-align: right; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.duo > div { padding: 14px 16px; border-radius: 10px; background: var(--surface-2); font-size: 14px; line-height: 1.5; color: var(--text-2); }
+.duo > div.duo-e { background: var(--sky-soft); }
+.duo p { margin: 0; } .duo-t { display: flex; align-items: center; gap: 8px; margin-bottom: 4px !important; color: var(--ink); } .duo-t b { font-weight: 500; }
+.pistes-expl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.piste-expl { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--text-2); }
+.piste-expl p { margin: 0; } .piste-expl b { color: var(--ink); font-weight: 500; }
+.jauge { display: grid; grid-template-columns: 76px minmax(0, 1fr) 28px; gap: 10px; align-items: center; font-size: 12px; color: var(--muted); }
+.jauge-f { height: 8px; border-radius: 4px; background: rgba(20,35,59,.07); overflow: hidden; }
+.jauge-f i { display: block; height: 100%; border-radius: 4px; } .jauge-f i.e { background: var(--team); } .jauge-f i.d { background: var(--dir); }
+.jauge .num { color: var(--ink); text-align: right; }
+.citations { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.citation { margin: 0; padding: 12px 14px; border-radius: 10px; font-size: 14px; line-height: 1.5; color: var(--ink); background: var(--surface-2); position: relative; }
+.citation.e { background: var(--sky-soft); }
+.citation p { margin: 4px 0 0; font-family: var(--display); font-size: 16px; }
+.citation-r { font-size: 12px; font-weight: 500; color: var(--muted); }
+.vigil-tete { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.doc-climat .jauge { width: 100%; grid-template-columns: 62px minmax(0, 1fr) 24px; }
+.pts { display: inline-flex; gap: 3px; } .pts i { width: 8px; height: 8px; border-radius: 50%; background: rgba(20,35,59,.14); } .pts i.on { background: var(--cand); }
 @media (max-width: 640px) {
   .doc-page { padding: 20px 16px 16px; }
   .doc-grid2, .fiche-2 { grid-template-columns: 1fr; }
   .doc-climat { grid-template-columns: 1fr 1fr; }
+  .tuiles, .duo { grid-template-columns: 1fr; }
+  .tuile { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; } .tuile b { font-size: 30px; } .tuile-x { flex-basis: 100%; }
+  .lect-imp { margin-left: 0; }
+  .verdict { padding: 16px; } .verdict-t { font-size: 20px; }
   .doc-head > span:last-child { display: none; }
 }
 
@@ -394,7 +451,7 @@ body.cabinet .lang-wrap { display: none; }
   .hero h1 { font-size: 26px; }
   .wrap { max-width: none; padding: 0; gap: 0; }
   .doc-page { box-shadow: none; border: 0; border-radius: 0; padding: 0; break-after: page; page-break-after: always; }
-  .doc-ecart, .fiche-theme, .vigil-item { break-inside: avoid; }
+  .doc-ecart, .fiche-theme, .vigil-item, .axe-rap, .tuiles, .verdict { break-inside: avoid; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
@@ -1313,6 +1370,8 @@ body.cabinet .lang-wrap { display: none; }
 
   /* ---------- Pages vitrine : exemple de rapport et approche ---------- */
   var EX_CAND = { nom: "Camille M.", v: [3.8, 3.0, 2.0, 3.9, 3.2, 3.6, 2.4], imp: [3, 2, 4, 4, 3, 2, 5] };
+  /* Climat (socle) de l'exemple : [nom, direction, équipe] */
+  var EX_SOCLE = [["Respect", 4.4, 4.2], ["Droit à l'erreur", 4.5, 3.2], ["Solidarité", 4.0, 3.8], ["Équité des règles", 4.1, 3.7]];
   function exAxes() {
     return AXES.map(function (a, i) { return { nom: a.nom, court: a.court, g: a.g, d: a.d, dm: EXEMPLE[i][0], em: EXEMPLE[i][1], gap: Math.abs(EXEMPLE[i][0] - EXEMPLE[i][1]) }; });
   }
@@ -1321,17 +1380,50 @@ body.cabinet .lang-wrap { display: none; }
       <div class="doc-body">${corps}</div>
       <footer class="doc-foot"><span>Rapport de compatibilité · Atelier Durand (exemple fictif)</span><span class="num">${num} / ${total}</span></footer></article>`;
   }
-  function ligneAxe(a, avecCand, cm) {
-    var st = statut(a.gap);
-    var marques = [["d", "Direction", a.dm], ["e", "Équipe", a.em]];
-    if (avecCand) marques.push(["c", "Candidat", cm]);
-    return '<div class="axis"><div class="axis-head"><h3>' + esc(a.nom) + '</h3>' +
-      (avecCand ? "" : '<span><span class="pill ' + st[0] + '">' + st[1] + '</span><span class="cote">écart ' + fr(a.gap) + '</span></span>') + '</div>' +
-      piste(a, marques) + '</div>';
+  /* Bande colorée entre les deux réponses comparées : l'écart se voit d'un coup d'œil. */
+  function bandeHtml(a, b, st) {
+    var lo = Math.min(a, b), hi = Math.max(a, b);
+    return '<b class="bande ' + st + '" style="left:' + pct(lo) + '%;width:' + (pct(hi) - pct(lo)).toFixed(1) + '%"></b>';
   }
+  function pisteB(l, marques, a, b, st) {
+    var h = piste(l, marques), i = h.indexOf('">') + 2;
+    return h.slice(0, i) + bandeHtml(a, b, st) + h.slice(i);
+  }
+  function pole(v, l) {
+    if (v < 2.5) return l.g;
+    if (v > 3.5) return l.d;
+    return "Entre les deux";
+  }
+  function ligneAxe(a) {
+    var st = statut(a.gap);
+    return '<div class="axis axe-rap ' + st[0] + '"><div class="axis-head"><h3>' + esc(a.nom) + '</h3>' +
+      '<span><span class="pill ' + st[0] + '">' + st[1] + '</span><span class="cote">écart ' + fr(a.gap) + '</span></span></div>' +
+      pisteB(a, [["d", "Direction", a.dm], ["e", "Équipe", a.em]], a.dm, a.em, st[0]) +
+      (pole(a.dm, a) === pole(a.em, a) ? "" :
+      '<p class="lect"><span><i class="sw d"></i><span>Direction</span> <b>' + esc(pole(a.dm, a)) + '</b></span>' +
+      '<span><i class="sw e"></i><span>Équipe</span> <b>' + esc(pole(a.em, a)) + '</b></span></p>') + '</div>';
+  }
+  function tuile(st, n, titre, txt) {
+    return '<div class="tuile ' + st + '"><b class="num">' + n + '</b><span class="tuile-t">' + titre + '</span><span class="tuile-x">' + txt + '</span></div>';
+  }
+  function barre(lbl, cl, v) {
+    return '<div class="jauge"><span>' + lbl + '</span><span class="jauge-f"><i class="' + cl + '" style="width:' + (v / 5 * 100).toFixed(0) + '%"></i></span><span class="num">' + fr(v) + '</span></div>';
+  }
+  function piste2(titre, txt, e, d) {
+    return '<li class="piste-expl"><p><b>' + titre + '</b> ' + txt + '</p>' + barre("Équipe", "e", e) + barre("Direction", "d", d) + '</li>';
+  }
+  function points(n) {
+    var h = '<span class="pts" role="img" aria-label="Importance ' + n + ' sur 5">';
+    for (var i = 1; i <= 5; i++) h += '<i class="' + (i <= n ? "on" : "") + '"></i>';
+    return h + '</span>';
+  }
+  var IC_AVIS = '<svg class="verdict-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>';
+
   function vueRapport() {
     var ax = exAxes(), T = 5;
     var tri = ax.slice().sort(function (a, b) { return b.gap - a.gap; });
+    var nb = { crit: 0, warn: 0, ok: 0 };
+    ax.forEach(function (a) { nb[statut(a.gap)[0]]++; });
     var h = `<div class="hero"><a href="./" class="small">← Accueil</a><p class="label">Exemple de livrable</p>
       <h1>Le rapport que vous recevez</h1>
       <p class="lead">Pour chaque mission : le radar de l'entreprise, l'explication des écarts, les zones de vigilance, la comparaison de chaque candidat et une fiche d'entretien prête à l'emploi. L'exemple ci-dessous est entièrement fictif.</p>
@@ -1344,67 +1436,88 @@ body.cabinet .lang-wrap { display: none; }
       <p class="label">Rapport de compatibilité · Novembre 2026</p>
       <h2 class="doc-h1">Atelier Durand · Responsable commercial·e</h2>
       <div class="doc-meta"><span><b class="num">1</b> direction</span><span><b class="num">8</b> membres de l'équipe</span><span><b class="num">3</b> candidats</span><span><b class="num">2</b> vagues</span></div>
+      <div class="verdict">${IC_AVIS}<div><p class="verdict-l">Notre avis</p><p class="verdict-t">Recrutement réalisable, à deux conditions</p>
+        <p class="verdict-x">Présenter l'entreprise telle que la vit l'équipe, et vérifier en entretien que le candidat est à l'aise avec des échanges feutrés et des priorités qui changent souvent.</p></div></div>
+      <div class="tuiles">
+        ${tuile("crit", nb.crit, "Écarts marqués", "La direction et l'équipe ne décrivent pas la même chose.")}
+        ${tuile("warn", nb.warn, "Thèmes à clarifier", "Un léger décalage, à préciser avant les entretiens.")}
+        ${tuile("ok", nb.ok, "Thèmes alignés", "Même vision des deux côtés : un argument fiable.")}
+      </div>
       <div class="doc-grid2">
         <div><div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>${radarSvg(ax)}</div>
         <div class="stack">
-          <h3>En bref</h3>
-          <ul class="doc-list">
-            <li><span class="pill crit">2 écarts marqués</span> Franc-parler et Prise de décision : la direction et l'équipe ne décrivent pas la même entreprise.</li>
-            <li><span class="pill warn">3 thèmes à clarifier</span> Organisation du travail, Rapport au changement, Relation à la hiérarchie.</li>
-            <li><span class="pill ok">2 thèmes alignés</span> Travail en équipe et Disponibilité.</li>
-            <li><span class="pill warn">Climat : 1 point vu différemment</span> le droit à l'erreur.</li>
+          <h3>Comment lire ce rapport</h3>
+          <ul class="lire">
+            <li><i class="sw d"></i><div><b>Direction</b><span>Comment la direction décrit l'entreprise.</span></div></li>
+            <li><i class="sw e"></i><div><b>Équipe</b><span>Ce que vivent les salariés au quotidien (moyenne).</span></div></li>
+            <li><i class="lire-ec"></i><div><b>Écart</b><span>La distance entre les deux réponses, sur une échelle de 1 à 5. Plus elle est grande, plus un candidat risque d'être surpris en arrivant.</span></div></li>
           </ul>
-          <p class="doc-note">À retenir : sur le franc-parler, la direction se décrit plus directe que ce que vit l'équipe. Un candidat attiré par ce discours risque d'être déçu.</p>
+          <div class="echelle" aria-hidden="true"><i class="ok"></i><i class="warn"></i><i class="crit"></i></div>
+          <div class="echelle-l"><span><b>Aligné</b><span>moins de 0,5</span></span><span><b>À clarifier</b><span>de 0,5 à 1</span></span><span><b>Écart marqué</b><span>plus de 1</span></span></div>
         </div>
       </div>
+      <p class="doc-note">À retenir : sur le franc-parler, la direction se décrit plus directe que ce que vit l'équipe. Un candidat attiré par ce discours risque d'être déçu.</p>
       <h3>Thème par thème</h3>
-      <div class="doc-axes">${tri.map(function (a) { return ligneAxe(a); }).join("")}</div>`);
+      <div class="doc-axes">${tri.map(ligneAxe).join("")}</div>`);
 
     /* Page 2 : écarts expliqués */
+    function ecart(a, dit, vit, pistesH, verb) {
+      var st = statut(a.gap);
+      return `<section class="doc-ecart">
+        <div class="doc-ecart-tete"><h3>${esc(a.nom)}</h3><span><span class="pill ${st[0]}">${st[1]}</span><span class="cote">écart ${fr(a.gap)}</span></span></div>
+        ${pisteB(a, [["d", "Direction", a.dm], ["e", "Équipe", a.em]], a.dm, a.em, st[0])}
+        <div class="duo"><div><p class="duo-t"><i class="sw d"></i><b>Ce que dit la direction :</b></p><p>${dit}</p></div>
+          <div class="duo-e"><p class="duo-t"><i class="sw e"></i><b>Ce que vit l'équipe :</b></p><p>${vit}</p></div></div>
+        <h4>Pistes d'explication</h4><p class="small">Niveau d'accord avec chaque explication, sur 5</p>
+        <ul class="pistes-expl">${pistesH}</ul>
+        <div class="citations">${verb.map(function (v) { return '<blockquote class="citation ' + v[0] + '"><span class="citation-r">' + (v[0] === "e" ? "Équipe" : "Direction") + '</span><p>«\u00a0' + v[1] + '\u00a0»</p></blockquote>'; }).join("")}</div>
+      </section>`;
+    }
     h += '<div id="p2" class="ancre"></div>' + docPage(2, T, "Les écarts expliqués", `
       <h2 class="doc-h2">D'où viennent les écarts ?</h2>
       <p class="doc-p">La seconde vague a interrogé à nouveau la direction et l'équipe, uniquement sur les deux thèmes en écart marqué. Quatre explications sont testées pour chacun : décalage entre l'annoncé et le pratiqué, différences entre équipes, changement récent, attentes mal expliquées.</p>
-      <section class="doc-ecart">
-        <div class="doc-ecart-tete"><h3>Franc-parler</h3><span><span class="pill crit">Écart marqué</span><span class="cote">écart 1,3</span></span></div>
-        ${piste(ax[3], [["d", "Direction", ax[3].dm], ["e", "Équipe", ax[3].em]])}
-        <p class="doc-p"><b>Ce que dit la direction :</b> les critiques et les désaccords s'expriment directement. <b>Ce que vit l'équipe :</b> les remarques passent plutôt par des tête-à-tête et des formules prudentes.</p>
-        <h4>Pistes d'explication</h4>
-        <ul class="doc-list"><li><b>Attentes mal expliquées.</b> L'équipe ne sait pas si la franchise est vraiment attendue (équipe 3,9 · direction 2,1).</li>
-        <li><b>Pratiques variables.</b> Le franc-parler dépend beaucoup du manager (équipe 3,8 · direction 3,0).</li></ul>
-        <div class="doc-verb"><p><b>Équipe :</b> « On nous dit qu'on peut tout se dire, mais en réunion personne ne contredit le dirigeant. »</p><p><b>Direction :</b> « Ma porte est toujours ouverte, je préfère qu'on me dise les choses. »</p></div>
-      </section>
-      <section class="doc-ecart">
-        <div class="doc-ecart-tete"><h3>Prise de décision</h3><span><span class="pill crit">Écart marqué</span><span class="cote">écart 1,3</span></span></div>
-        ${piste(ax[0], [["d", "Direction", ax[0].dm], ["e", "Équipe", ax[0].em]])}
-        <p class="doc-p"><b>Ce que dit la direction :</b> les décisions restent centralisées. <b>Ce que vit l'équipe :</b> une vraie marge d'initiative au quotidien.</p>
-        <h4>Pistes d'explication</h4>
-        <ul class="doc-list"><li><b>Changement récent.</b> La délégation a beaucoup progressé depuis un an (équipe 3,9 · direction 3,6) : la direction décrit encore l'organisation d'avant.</li></ul>
-        <div class="doc-verb"><p><b>Équipe :</b> « Depuis la réorganisation, on valide beaucoup moins de choses. »</p></div>
-      </section>`);
+      ${ecart(ax[3], "les critiques et les désaccords s'expriment directement.", "les remarques passent plutôt par des tête-à-tête et des formules prudentes.",
+        piste2("Attentes mal expliquées.", "L'équipe ne sait pas si la franchise est vraiment attendue.", 3.9, 2.1) +
+        piste2("Pratiques variables.", "Le franc-parler dépend beaucoup du manager.", 3.8, 3.0),
+        [["e", "On nous dit qu'on peut tout se dire, mais en réunion personne ne contredit le dirigeant."], ["d", "Ma porte est toujours ouverte, je préfère qu'on me dise les choses."]])}
+      ${ecart(ax[0], "les décisions restent centralisées.", "une vraie marge d'initiative au quotidien.",
+        piste2("Changement récent.", "La délégation a beaucoup progressé depuis un an : la direction décrit encore l'organisation d'avant.", 3.9, 3.6),
+        [["e", "Depuis la réorganisation, on valide beaucoup moins de choses."]])}`);
 
     /* Page 3 : zones de vigilance */
+    function vigil(n, st, titre, txt, reco) {
+      return '<div class="vigil-item ' + st + '"><span class="vigil-n">' + n + '</span><div><div class="vigil-tete"><h3>' + titre + '</h3><span class="pill ' + st + '">' + (st === "crit" ? "Risque élevé" : "Risque modéré") + '</span></div><p>' + txt + '</p><p class="doc-reco"><b>Recommandation :</b> ' + reco + '</p></div></div>';
+    }
     h += '<div id="p3" class="ancre"></div>' + docPage(3, T, "Zones de vigilance", `
       <h2 class="doc-h2">Ce qui peut faire échouer ce recrutement</h2>
       <div class="vigil">
-        <div class="vigil-item crit"><span class="vigil-n">1</span><div><h3>Promettre une culture du franc-parler</h3><p>Si l'annonce et les entretiens reprennent le discours de la direction (« ici on se dit tout »), le candidat découvrira un quotidien plus feutré. C'est le cas typique de déception après l'embauche.</p><p class="doc-reco"><b>Recommandation :</b> décrire le fonctionnement tel que le vit l'équipe, et chercher un profil capable de décoder les messages indirects.</p></div></div>
-        <div class="vigil-item warn"><span class="vigil-n">2</span><div><h3>Un rythme plus réactif qu'annoncé</h3><p>L'équipe vit des priorités qui changent souvent (3,6 sur 5). Un candidat qui a besoin de planifier ses semaines s'y épuisera.</p><p class="doc-reco"><b>Recommandation :</b> en parler dès le premier entretien, exemples à l'appui.</p></div></div>
-        <div class="vigil-item warn"><span class="vigil-n">3</span><div><h3>Le droit à l'erreur, vu différemment</h3><p>La direction estime qu'on peut signaler une erreur sans crainte (4,5 sur 5) ; l'équipe est plus réservée (3,2). Ce n'est pas une alerte, mais un sujet à aborder avec la direction avant l'arrivée de la nouvelle recrue.</p><p class="doc-reco"><b>Recommandation :</b> préparer l'intégration avec le futur manager : comment seront traitées les premières erreurs.</p></div></div>
+        ${vigil(1, "crit", "Promettre une culture du franc-parler", "Si l'annonce et les entretiens reprennent le discours de la direction (« ici on se dit tout »), le candidat découvrira un quotidien plus feutré. C'est le cas typique de déception après l'embauche.", "décrire le fonctionnement tel que le vit l'équipe, et chercher un profil capable de décoder les messages indirects.")}
+        ${vigil(2, "warn", "Un rythme plus réactif qu'annoncé", "L'équipe vit des priorités qui changent souvent (3,6 sur 5). Un candidat qui a besoin de planifier ses semaines s'y épuisera.", "en parler dès le premier entretien, exemples à l'appui.")}
+        ${vigil(3, "warn", "Le droit à l'erreur, vu différemment", "La direction estime qu'on peut signaler une erreur sans crainte (4,5 sur 5) ; l'équipe est plus réservée (3,2). Ce n'est pas une alerte, mais un sujet à aborder avec la direction avant l'arrivée de la nouvelle recrue.", "préparer l'intégration avec le futur manager : comment seront traitées les premières erreurs.")}
       </div>
       <h3>Climat de travail</h3>
-      <div class="doc-climat">
-        <div><b>Respect</b><span class="pill ok">Solide</span></div><div><b>Droit à l'erreur</b><span class="pill warn">Vu différemment</span></div>
-        <div><b>Solidarité</b><span class="pill ok">Solide</span></div><div><b>Équité des règles</b><span class="pill ok">Solide</span></div></div>`);
+      <p class="small">Le socle commun : plus le score est haut, mieux c'est (sur 5).</p>
+      <div class="doc-climat">${EX_SOCLE.map(function (s) {
+        var st = statutSocle(s[2], s[1]);
+        return '<div><b>' + s[0] + '</b><span class="pill ' + st[0] + '">' + st[1] + '</span>' + barre("Direction", "d", s[1]) + barre("Équipe", "e", s[2]) + '</div>';
+      }).join("")}</div>`);
 
     /* Page 4 : candidat */
     var cAx = ax.map(function (a, i) {
       var gap = Math.abs(EX_CAND.v[i] - a.em);
       return { a: a, cm: EX_CAND.v[i], imp: EX_CAND.imp[i], gap: gap, st: statutC(gap, EX_CAND.imp[i]) };
     });
-    var ordre = { crit: 0, warn: 1, ok: 2 };
+    var ordre = { crit: 0, warn: 1, ok: 2 }, nc = { crit: 0, warn: 0, ok: 0 };
+    cAx.forEach(function (c) { nc[c.st[0]]++; });
     var cTri = cAx.slice().sort(function (x, y) { return (ordre[x.st[0]] - ordre[y.st[0]]) || (y.gap - x.gap); });
     h += '<div id="p4" class="ancre"></div>' + docPage(4, T, "Candidat", `
       <p class="label">Comparaison candidat</p>
-      <h2 class="doc-h1">${EX_CAND.nom} · 2 frictions probables</h2>
+      <h2 class="doc-h1">${EX_CAND.nom} · ${nc.crit} frictions probables</h2>
+      <div class="tuiles">
+        ${tuile("crit", nc.crit, "Frictions probables", "Écart important sur un thème qui compte pour le candidat.")}
+        ${tuile("warn", nc.warn, "Points à discuter", "Écart modéré, ou thème secondaire pour lui.")}
+        ${tuile("ok", nc.ok, "Thèmes compatibles", "Le candidat retrouvera ce qu'il recherche.")}
+      </div>
       <div class="doc-grid2">
         <div><div class="legend"><span><i class="sw c"></i>Candidat</span><span><i class="sw e"></i>Équipe (vécu)</span><span><i class="sw d"></i>Direction</span></div>${radarSvg(ax, EX_CAND.v)}</div>
         <div class="stack"><h3>Lecture</h3>
@@ -1412,9 +1525,10 @@ body.cabinet .lang-wrap { display: none; }
           <p class="doc-note">Sur le franc-parler, ${EX_CAND.nom} correspond au discours de la direction, pas au vécu de l'équipe : point à vérifier en priorité.</p></div>
       </div>
       <div class="doc-axes">${cTri.map(function (c) {
-        return '<div class="axis"><div class="axis-head"><h3>' + esc(c.a.nom) + '</h3><span class="pill ' + c.st[0] + '">' + c.st[1] + '</span></div>' +
-          piste(c.a, [["d", "Direction", c.a.dm], ["e", "Équipe", c.a.em], ["c", "Candidat", c.cm]]) +
-          '<p class="small num">Importance pour le candidat : ' + c.imp + '/5</p></div>';
+        return '<div class="axis axe-rap ' + c.st[0] + '"><div class="axis-head"><h3>' + esc(c.a.nom) + '</h3><span class="pill ' + c.st[0] + '">' + c.st[1] + '</span></div>' +
+          pisteB(c.a, [["d", "Direction", c.a.dm], ["e", "Équipe", c.a.em], ["c", "Candidat", c.cm]], c.cm, c.a.em, c.st[0]) +
+          '<p class="lect">' + (pole(c.cm, c.a) === pole(c.a.em, c.a) ? "" : '<span><i class="sw c"></i><span>Candidat</span> <b>' + esc(pole(c.cm, c.a)) + '</b></span><span><i class="sw e"></i><span>Équipe</span> <b>' + esc(pole(c.a.em, c.a)) + '</b></span>') +
+          '<span class="lect-imp"><span>Importance pour le candidat</span> ' + points(c.imp) + '</span></p></div>';
       }).join("")}</div>`);
 
     /* Page 5 : fiche d'entretien */
