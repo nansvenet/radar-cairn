@@ -115,8 +115,8 @@ button:focus-visible, .btn:focus-visible, a:focus-visible, input:focus-visible, 
 a { color: var(--sky); text-underline-offset: 3px; }
 a.small { text-decoration: none; font-weight: 500; }
 a.small:hover { text-decoration: underline; }
-input[type="text"], textarea { font: inherit; width: 100%; padding: 12px 16px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); transition: border-color 150ms var(--ease); }
-input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--sky); }
+input[type="text"], input[type="email"], textarea { font: inherit; width: 100%; padding: 12px 16px; border-radius: var(--r); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); transition: border-color 150ms var(--ease); }
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus { outline: none; border-color: var(--sky); }
 input.lien { font-size: 13px; color: var(--text-2); background: var(--surface-2); }
 textarea { min-height: 96px; resize: vertical; }
 textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; word-break: break-all; }
@@ -344,6 +344,21 @@ textarea.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-siz
 .fiche-notes { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); padding-top: 40px; border-bottom: 1px dashed var(--line-strong); padding-bottom: 8px; }
 .fiche-decision { display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: 12px; border: 1px solid var(--ink); font-size: 14px; }
 .fiche-ligne { display: block; height: 24px; border-bottom: 1px dashed var(--line-strong); }
+/* Profil candidat libre et vivier */
+.carte-profil .profil-lignes { display: flex; flex-direction: column; gap: 10px; }
+.profil-l { display: flex; flex-direction: column; gap: 2px; }
+.profil-l h3 { font-size: 14px !important; font-weight: 400 !important; color: var(--text-2); }
+.profil-pole { font-size: 14px; font-weight: 500; color: var(--ink); text-align: right; }
+.profil-l .track { height: 18px; } .profil-l .track::before { top: 8px; } .profil-l .mark { top: 2px; }
+.profil-l .poles { font-size: 11px; }
+.carte-profil .doc-foot span { flex: 1; }
+.viv-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.viv-item { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.viv-id { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.viv-score { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px; align-items: center; font-size: 13px; }
+.viv-score .jauge-f i.ok { background: var(--ok); } .viv-score .jauge-f i.warn { background: #C98A1B; } .viv-score .jauge-f i.crit { background: var(--crit); }
+.viv-simple .viv-item { grid-template-columns: minmax(0, 1fr) auto; }
+@media (max-width: 640px) { .viv-item { grid-template-columns: 1fr; } }
 /* Rapport : visuels de lecture rapide */
 .track .bande { position: absolute; top: 8px; height: 8px; border-radius: 4px; opacity: .3; }
 .bande.ok { background: var(--ok); } .bande.warn { background: #C98A1B; } .bande.crit { background: var(--crit); }
@@ -483,7 +498,7 @@ body.cabinet .lang-wrap { display: none; }
       <ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/>
       <ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/>
       <ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/>
-    </svg><nav><a href="./">Accueil</a><a href="#approche">Notre approche</a><a href="#rapport">Exemple de rapport</a></nav><span>© Cairn Affinités · Le radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></footer>
+    </svg><nav><a href="./">Accueil</a><a href="#approche">Notre approche</a><a href="#rapport">Exemple de rapport</a><a href="#libre">Test candidat</a></nav><span>© Cairn Affinités · Le radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></footer>
 </div>
 
 <script>
@@ -647,6 +662,10 @@ body.cabinet .lang-wrap { display: none; }
       }
       if (!reLong(longueurV1(o.r)).test(o.a)) return null;
       if (o.r === "c") res.n = (typeof o.n === "string" && o.n.trim()) ? o.n.trim().slice(0, 40) : "Candidat";
+      if (o.m === "libre" && o.r === "c") {
+        ["e", "j", "l"].forEach(function (k) { if (typeof o[k] === "string") res[k] = o[k].replace(/\s+/g, " ").trim().slice(0, k === "e" ? 80 : 60); });
+        if (res.e && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(res.e)) res.e = "";
+      }
       return res;
     } catch (e) { return null; }
   }
@@ -765,7 +784,7 @@ body.cabinet .lang-wrap { display: none; }
   var S = {
     route: { vue: "cabinet" },
     db: null, peutGerer: false, charge: "attente", // attente | ok | lent | absent
-    missions: [], courant: null, candidat: null, msg: null, confirmeSuppr: false, confirmeSupprCand: false,
+    missions: [], courant: null, candidat: null, msg: null, confirmeSuppr: false, confirmeSupprCand: false, vivier: false, confirmeRetV: null,
     rep: null // { slug, role, w, x:[], a:[], k:[], etape, code, nom, accord }
   };
   var app = document.getElementById("app");
@@ -861,6 +880,9 @@ body.cabinet .lang-wrap { display: none; }
     if (m) return { vue: "repondre", role: m[1], slug: m[2], w: 1, x: "" };
     if (h === "cabinet" || h === "missions") return { vue: "cabinet" };
     if (h === "rapport" || h === "approche") return { vue: h };
+    if (h === "libre") return { vue: "repondre", role: "c", slug: "libre", w: 1, x: "" };
+    m = h.match(/^profil-([A-Za-z0-9_-]{4,300})$/);
+    if (m) return { vue: "profil", p: m[1] };
     return { vue: "repondre", role: null, slug: null, w: 1, x: "" };
   }
   /* Pages du questionnaire : { titre, lead, q: [...], com, n (questions par page) } */
@@ -898,7 +920,7 @@ body.cabinet .lang-wrap { display: none; }
   function router() {
     S.route = lireHash();
     if (S.route.vue === "cabinet") S.peutGerer = true;
-    S.msg = null; S.confirmeSuppr = false; S.candidat = null; S.confirmeSupprCand = false;
+    S.msg = null; S.confirmeSuppr = false; S.candidat = null; S.confirmeSupprCand = false; S.vivier = false; S.confirmeRetV = null;
     if (S.route.vue === "repondre") demarrerReponse(S.route);
     rendre();
     window.scrollTo(0, 0);
@@ -942,6 +964,7 @@ body.cabinet .lang-wrap { display: none; }
       }
       S.courant = null;
     }
+    if (S.vivier) return vueVivier();
     var h = '<div class="stack"><h1>Vos missions</h1>' +
       '<p class="lead">Une mission par entreprise cliente. La direction et l\'équipe décrivent le fonctionnement réel de l\'entreprise ; le radar montre où leurs descriptions divergent, puis une seconde vague cherche pourquoi.</p></div>';
     h += '<form id="f-nouvelle" class="panel stack" autocomplete="off">' +
@@ -968,6 +991,9 @@ body.cabinet .lang-wrap { display: none; }
       });
       h += '</ul>';
     }
+    var nv = lireVivier().length;
+    h += '<section class="panel stack"><h2>Vivier de candidats</h2><p class="small">Les candidats qui passent le test libre et acceptent d\'être proposés à des entreprises. Chaque mission les classe par compatibilité.</p>' +
+      '<div class="row"><span class="chip num">' + pl(nv, "candidat") + '</span><button type="button" class="grow" data-vivier="1">Ouvrir le vivier</button></div></section>';
     return h;
   }
 
@@ -1002,6 +1028,7 @@ body.cabinet .lang-wrap { display: none; }
       h += '</ul>';
     }
     h += '</section>';
+    h += blocVivierMission(m, an);
 
     h += '<section class="panel stack"><h2>Envoyer le questionnaire</h2>' +
       '<label class="small row" for="lien-lang" style="gap:8px">Langue des questionnaires <select id="lien-lang" class="lang">' +
@@ -1281,7 +1308,8 @@ body.cabinet .lang-wrap { display: none; }
       '<p class="lead">Un recrutement réussi ne se joue pas seulement sur les compétences. Le radar Cairn Affinités mesure le fonctionnement réel d\'une entreprise, tel que le vivent ses équipes, puis compare chaque candidat à cette réalité.</p>' +
       '<div class="row cta-row"><a class="btn btn-xl" href="' + lienContact("Essai gratuit · Radar Cairn Affinités") + '">Essayer gratuitement</a>' +
       '<button type="button" class="ghost btn-xl" data-scroll="offres">Voir les formules</button></div>' +
-      '<p class="small">Vous avez reçu une invitation ? <a href="#" data-scroll="repondre-bloc">Répondre au questionnaire</a></p></div>' +
+      '<p class="small">Vous avez reçu une invitation ? <a href="#" data-scroll="repondre-bloc">Répondre au questionnaire</a></p>' +
+      '<p class="small">Vous êtes candidat ? <a href="#libre">Découvrez votre profil de travail</a></p></div>' +
       '<figure class="hero-radar" style="margin:0" aria-label="Exemple de radar de compatibilité">' +
         '<div class="hero-radar-tete"><b>Atelier Durand</b><span class="small">Exemple fictif · 1 direction, 8 salariés</span></div>' +
         '<div class="legend"><span><i class="sw d"></i>Direction</span><span><i class="sw e"></i>Équipe (moyenne)</span></div>' +
@@ -1341,6 +1369,13 @@ body.cabinet .lang-wrap { display: none; }
     h += '<section class="cta-final"><h2 class="h2-xl">Voyez ce que le radar révèle sur vos équipes</h2>' +
       '<p>Une démonstration de trente minutes, puis un premier radar offert sur une équipe. Sans engagement.</p>' +
       '<div class="row cta-row"><a class="btn btn-xl btn-clair" href="' + rdv + '">Demander une démo</a></div></section>';
+    /* Candidats libres */
+    h += section("candidats", "Vous êtes candidat ?", "Découvrez dans quel environnement vous travaillez le mieux",
+      '<div class="atouts">' +
+        '<div class="atout"><i class="ic" data-ic="clock" aria-hidden="true"></i><div><b>10 minutes, gratuit</b><span>Sans inscription, sur téléphone ou ordinateur.</span></div></div>' +
+        '<div class="atout"><i class="ic" data-ic="layers" aria-hidden="true"></i><div><b>Votre profil à partager</b><span>Une image et un lien pour LinkedIn ou vos autres réseaux.</span></div></div>' +
+        '<div class="atout"><i class="ic" data-ic="users" aria-hidden="true"></i><div><b>Des entreprises qui vous correspondent</b><span>Si vous le souhaitez, nous vous présentons aux entreprises compatibles.</span></div></div>' +
+      '</div><div class="row cta-row"><a class="btn btn-xl" href="#libre">Faire le test gratuit</a></div>');
     /* Répondants */
     h += section("repondre-bloc", "Vous avez reçu une invitation ?", "Répondre au questionnaire",
       '<div class="atouts">' +
@@ -1652,6 +1687,8 @@ body.cabinet .lang-wrap { display: none; }
     var roleTxt = r.role === "d" ? "Direction" : r.role === "c" ? "Candidat" : "Équipe";
     var pages = pagesRep(r), total = r.a.length, minutes = Math.max(2, Math.round(total / 5));
 
+    var libre = r.slug === SLUG_LIBRE && r.role === "c";
+    if (r.code && libre) return vueProfilLibre(r);
     if (r.code) {
       return '<div class="stack">' + retour + '<h1>Merci, c\'est terminé</h1>' +
         '<p class="lead">Dernière étape : envoyez ce code à votre contact Cairn Affinités' + (CFG.email ? ' avec le bouton ci-dessous, ou' : ',') + ' par SMS ou par e-mail. Vos réponses ne sont transmises que par ce code.</p></div>' +
@@ -1677,12 +1714,13 @@ body.cabinet .lang-wrap { display: none; }
         '<div class="panel stack"><p>Sur ' + (pages.length > 1 ? "certains sujets" : "un sujet") + ' (<strong>' + esc(pages.map(function (p) { return p.titre; }).join(", ")) +
         '</strong>), la direction et l\'équipe n\'ont pas décrit l\'entreprise de la même façon. C\'est fréquent et ce n\'est pas un reproche : ces questions servent à comprendre pourquoi.</p>' +
         '<p class="small">Répondez à partir de situations que vous avez réellement vécues ces derniers mois. Un commentaire libre est possible sur chaque sujet ; évitez d\'y citer des noms.</p></div>' + bouton;
-      if (r.role === "c") return '<div class="stack">' + retour + '<p class="label">Questionnaire candidat · mission <span class="nt">' + esc(r.slug) + '</span></p>' +
+      if (r.role === "c") return '<div class="stack">' + retour + (libre ? '<p class="label">Test candidat libre · gratuit</p>' : '<p class="label">Questionnaire candidat · mission <span class="nt">' + esc(r.slug) + '</span></p>') +
         '<h1>Dans quel environnement travaillez-vous le mieux ?</h1>' +
         '<div class="row"><span class="chip num">' + total + ' questions</span><span class="chip num">≈ ' + minutes + ' min</span><span class="chip">Enregistrement automatique</span></div></div>' +
         '<div class="panel stack"><p><strong>Pensez au poste où vous avez été le plus efficace et le plus à l\'aise</strong>, et décrivez comment il fonctionnait. Il n\'y a pas de bonne réponse : aucun des deux côtés n\'est meilleur que l\'autre, et des réponses « idéales » vous desserviraient en vous orientant vers un poste qui ne vous convient pas.</p>' + regle + '</div>' +
         '<div class="panel stack"><p class="label">Avant de commencer</p>' +
-        '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace, pour le comparer à celui de l\'entreprise qui recrute. Vos résultats sont confidentiels : ils ne servent qu\'à cette candidature, et vous pouvez en demander la restitution à votre contact Cairn Affinités.</p>' +
+        (libre ? '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace. À la fin, vous recevez votre profil, à partager si vous le souhaitez. Vos réponses restent sur votre appareil : rien n\'est envoyé à Cairn Affinités, sauf si vous choisissez ensuite de rejoindre notre vivier de candidats.</p>'
+          : '<p class="small">Ce questionnaire n\'est pas un test de personnalité. Il décrit l\'environnement de travail dans lequel vous êtes le plus efficace, pour le comparer à celui de l\'entreprise qui recrute. Vos résultats sont confidentiels : ils ne servent qu\'à cette candidature, et vous pouvez en demander la restitution à votre contact Cairn Affinités.</p>') +
         '<label class="consent" for="in-accord"><input type="checkbox" id="in-accord"' + (r.accord ? " checked" : "") + '><span>J\'ai lu ces informations et j\'accepte de répondre.</span></label>' +
         '<label class="label" for="in-prenom">Votre prénom et votre nom</label>' +
         '<input type="text" id="in-prenom" maxlength="40" autocomplete="name" value="' + esc(r.nom) + '">' + blocMsg() + '</div>' + bouton;
@@ -1731,12 +1769,246 @@ body.cabinet .lang-wrap { display: none; }
 
   function rendre() {
     var v = S.route.vue;
-    app.innerHTML = v === "repondre" ? vueRepondre() : v === "rapport" ? vueRapport() : v === "approche" ? vueApproche() : vueCabinet();
+    app.innerHTML = v === "repondre" ? vueRepondre() : v === "rapport" ? vueRapport() : v === "approche" ? vueApproche() : v === "profil" ? vueProfilPublic(S.route.p) : vueCabinet();
     poserIcones(app);
-    var acc = v === "rapport" || v === "approche" || (v === "repondre" && S.rep && !S.rep.slug);
+    var acc = v === "rapport" || v === "approche" || v === "profil" || (v === "repondre" && S.rep && !S.rep.slug);
     document.body.classList.toggle("accueil", !!acc);
     var tc = document.getElementById("top-cta"); if (tc) tc.href = lienContact("Demande de rendez-vous · Cairn Affinités");
     traduirePage();
+  }
+
+  /* ---------- Candidat libre : profil partageable et vivier ---------- */
+  var SLUG_LIBRE = "libre", CLE_VIVIER = "cairn-radar-vivier";
+  function profilDe(a) {
+    return AXES.map(function (ax, ai) { return mean(a.slice(ai * PER, ai * PER + PER)); });
+  }
+  function prenomDe(nom) { return String(nom || "").trim().split(/\s+/)[0].slice(0, 24); }
+  function lienProfil(prenom, prof) {
+    var p = b64e(JSON.stringify({ n: prenom, p: prof.map(function (v) { return Math.round(v * 10); }) }));
+    return location.origin + location.pathname + (LANG !== "fr" ? "?lang=" + LANG : "") + "#profil-" + p;
+  }
+  function lireProfil(p) {
+    try {
+      var o = JSON.parse(b64d(p));
+      if (!o || typeof o.n !== "string" || !Array.isArray(o.p) || o.p.length !== AXES.length) return null;
+      var ok = o.p.every(function (x) { return typeof x === "number" && x >= 10 && x <= 50; });
+      return ok ? { n: o.n.trim().slice(0, 24), p: o.p.map(function (x) { return x / 10; }) } : null;
+    } catch (e) { return null; }
+  }
+  function radarProfilSvg(prof) {
+    var cx = 210, cy = 150, R = 96, n = prof.length;
+    function pt(k, v) { var ang = (-90 + k * 360 / n) * Math.PI / 180, r = R * v / 5; return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)]; }
+    function poly(vals) { return vals.map(function (v, k) { var p = pt(k, v); return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
+    var s = '<svg class="radar" viewBox="0 0 420 300" role="img" aria-label="Radar du profil de travail">';
+    for (var ring = 1; ring <= 5; ring++) s += '<polygon points="' + poly(prof.map(function () { return ring; })) + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+    AXES.forEach(function (a, k) {
+      var e = pt(k, 5), l = pt(k, 6.15);
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+      var anchor = Math.abs(l[0] - cx) < 4 ? "middle" : (l[0] > cx ? "start" : "end");
+      s += '<text x="' + l[0].toFixed(1) + '" y="' + (l[1] + 4).toFixed(1) + '" text-anchor="' + anchor + '">' + esc(a.court) + '</text>';
+    });
+    s += '<polygon points="' + poly(prof) + '" fill="var(--cand)" fill-opacity="0.16" stroke="var(--cand)" stroke-width="2"/>';
+    prof.forEach(function (v, k) { var c = pt(k, v); s += '<circle cx="' + c[0].toFixed(1) + '" cy="' + c[1].toFixed(1) + '" r="3.5" fill="var(--cand)"/>'; });
+    return s + '</svg>';
+  }
+  function carteProfil(prenom, prof) {
+    return '<article class="doc-page carte-profil"><header class="doc-head"><span class="doc-brand"><svg width="18" height="20" viewBox="0 0 34 38" aria-hidden="true"><ellipse cx="17" cy="31" rx="15" ry="6" fill="#14233B"/><ellipse cx="17" cy="19.5" rx="11" ry="5" fill="#55627A"/><ellipse cx="17" cy="9.5" rx="7" ry="4" fill="#2F7FB8"/></svg>Cairn Affinités</span><span>Profil de travail</span></header>' +
+      '<div class="doc-body"><p class="label">Là où je travaille le mieux</p><h2 class="doc-h1"><span class="nt">' + esc(prenom) + '</span></h2>' +
+      '<div class="doc-grid2"><div>' + radarProfilSvg(prof) + '</div><div class="profil-lignes">' +
+      AXES.map(function (a, i) {
+        var v = prof[i];
+        return '<div class="profil-l"><div class="axis-head"><h3>' + esc(a.nom) + '</h3><b class="profil-pole">' + esc(pole(v, a)) + '</b></div>' +
+          '<div class="track"><i class="mark c" style="left:' + pct(v) + '%"></i></div><div class="poles"><span>' + esc(a.g) + '</span><span>' + esc(a.d) + '</span></div></div>';
+      }).join("") + '</div></div></div>' +
+      '<footer class="doc-foot"><span>Aucun profil n\'est meilleur qu\'un autre : ce qui compte, c\'est de trouver l\'entreprise qui vous correspond.</span></footer></article>';
+  }
+  function vueProfilLibre(r) {
+    var prof = profilDe(r.a), prenom = prenomDe(r.nom), vv = r.viv || {};
+    var h = '<div class="stack"><p class="label">Test candidat libre</p><h1>Votre profil de travail</h1>' +
+      '<p class="lead">Voici l\'environnement dans lequel vous travaillez le mieux. Partagez-le sur vos réseaux, et rejoignez notre vivier si vous souhaitez être proposé·e à des entreprises qui fonctionnent comme vous.</p></div>';
+    h += carteProfil(prenom, prof);
+    h += '<section class="panel stack"><h2>Partager mon profil</h2>' +
+      '<div class="row"><button type="button" class="grow" id="btn-image">Télécharger l\'image</button>' +
+      '<button type="button" class="ghost grow" id="btn-lien">Copier le lien</button>' +
+      (navigator.share ? '<button type="button" class="ghost grow" id="btn-partager-profil">Partager…</button>' : "") + '</div>' +
+      '<span class="small" id="partage-etat" role="status"></span>' +
+      '<p class="small">L\'image et le lien ne montrent que votre profil général, avec votre prénom. Vos réponses détaillées et vos priorités restent privées.</p></section>';
+    h += '<section class="panel stack vivier-rejoindre"><p class="label">Facultatif</p><h2>Rejoindre le vivier Cairn Affinités</h2>' +
+      '<p>Nous présentons des candidats à des PME et ETI dont le fonctionnement réel, mesuré auprès de leurs équipes, correspond à leur profil. Gratuit et sans engagement.</p>';
+    if (vv.ok) {
+      h += '<p class="msg good" role="status">Votre demande est prête : envoyez l\'e-mail qui vient de s\'ouvrir. Si rien ne s\'est ouvert, copiez ce code et envoyez-le à ' + esc(CFG.email || "Cairn Affinités") + '.</p>' +
+        '<textarea id="out-code" class="code" readonly>' + esc(r.code) + '</textarea>' +
+        '<div class="row">' + (CFG.email ? '<a class="btn grow" href="' + lienVivier(r) + '">Ouvrir l\'e-mail</a>' : "") +
+        '<button type="button" class="ghost grow" id="btn-copier">Copier le code</button></div><span class="small" id="copie-etat" role="status"></span>';
+    } else {
+      h += '<form id="f-rejoindre" class="stack" autocomplete="on">' +
+        '<label class="label" for="in-mail">Votre e-mail</label><input type="email" id="in-mail" maxlength="80" autocomplete="email" value="' + esc(vv.e || "") + '">' +
+        '<label class="label" for="in-poste">Poste recherché</label><input type="text" id="in-poste" maxlength="60" placeholder="Ex. : responsable commercial" value="' + esc(vv.j || "") + '">' +
+        '<label class="label" for="in-lieu">Ville ou région</label><input type="text" id="in-lieu" maxlength="60" autocomplete="address-level2" value="' + esc(vv.l || "") + '">' +
+        '<label class="consent" for="in-ok-viv"><input type="checkbox" id="in-ok-viv"><span>J\'accepte que Cairn Affinités conserve mes réponses et mes coordonnées pour me proposer à des entreprises compatibles. Je peux demander leur suppression à tout moment.</span></label>' +
+        blocMsg() + '<div class="row"><button type="submit" class="grow">Rejoindre le vivier</button></div></form>';
+    }
+    h += '</section><div class="row"><button type="button" class="ghost" id="btn-modifier">Modifier mes réponses</button></div>';
+    return h;
+  }
+  function lienVivier(r) {
+    return "mailto:" + encodeURIComponent(CFG.email || "") + "?subject=" + encodeURIComponent("Vivier Cairn · " + (r.nom || "Candidat")) +
+      "&body=" + encodeURIComponent(T("Bonjour, je souhaite rejoindre le vivier de candidats Cairn Affinités. Voici mon code :") + "\n\n" + r.code);
+  }
+  function vueProfilPublic(p) {
+    var o = lireProfil(p);
+    var cta = '<section class="cta-final"><h2 class="h2-xl">Et vous, où travaillez-vous le mieux ?</h2>' +
+      '<p>Décrivez en 10 minutes l\'environnement dans lequel vous êtes le plus efficace, et recevez votre profil à partager. Gratuit, sans inscription.</p>' +
+      '<div class="row cta-row"><a class="btn btn-xl btn-clair" href="#libre">Faire le test gratuit</a></div></section>';
+    if (!o) return '<div class="hero"><h1>Ce lien de profil est incomplet</h1><p class="lead">Demandez à la personne de vous renvoyer le lien en entier.</p></div>' + cta;
+    return '<div class="hero"><p class="label">Profil de travail partagé</p><h1 class="nt">' + esc(o.n) + '</h1><p class="lead">L\'environnement dans lequel cette personne travaille le mieux.</p></div>' + carteProfil(o.n, o.p) + cta;
+  }
+  /* Image à partager (1080 × 1350, format conseillé pour LinkedIn et Instagram). */
+  function imageProfil(prenom, prof) {
+    var W = 1080, H = 1350, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    var g = cv.getContext("2d"), SANS = '"Instrument Sans", system-ui, sans-serif', SERIF = '"Newsreader", Georgia, serif';
+    var INK = "#14233B", MUT = "#646E80", LIN = "rgba(20,35,59,.12)", CAND = "#8A3F7A";
+    function txt(s, x, y, font, col, al) { g.font = font; g.fillStyle = col; g.textAlign = al || "left"; g.fillText(s, x, y); }
+    g.fillStyle = "#F7F4EE"; g.fillRect(0, 0, W, H);
+    g.fillStyle = "#FDFBF7"; g.beginPath(); if (g.roundRect) g.roundRect(48, 48, W - 96, H - 96, 32); else g.rect(48, 48, W - 96, H - 96); g.fill();
+    [[31, 15, 6, INK], [19.5, 11, 5, "#55627A"], [9.5, 7, 4, "#2F7FB8"]].forEach(function (e) {
+      g.fillStyle = e[3]; g.beginPath(); g.ellipse(96 + 17 * 1.6, 96 + e[0] * 1.6, e[1] * 1.6, e[2] * 1.6, 0, 0, Math.PI * 2); g.fill();
+    });
+    txt("Cairn Affinités", 168, 140, "600 30px " + SANS, INK);
+    txt(T("Là où je travaille le mieux"), 96, 230, "500 26px " + SANS, MUT);
+    txt(prenom, 96, 300, "400 64px " + SERIF, INK);
+    var cx = W / 2, cy = 560, R = 190, n = prof.length;
+    function pt(k, v) { var a = (-90 + k * 360 / n) * Math.PI / 180, r = R * v / 5; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+    g.strokeStyle = LIN; g.lineWidth = 2;
+    for (var ring = 1; ring <= 5; ring++) { g.beginPath(); for (var k = 0; k < n; k++) { var p = pt(k, ring); if (k) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); } g.closePath(); g.stroke(); }
+    AXES.forEach(function (a, k) {
+      var e = pt(k, 5), l = pt(k, 6.1);
+      g.beginPath(); g.moveTo(cx, cy); g.lineTo(e[0], e[1]); g.stroke();
+      var al = Math.abs(l[0] - cx) < 6 ? "center" : (l[0] > cx ? "left" : "right");
+      txt(T(a.court), l[0], l[1] + 9, "500 25px " + SANS, "#4A566B", al);
+    });
+    g.beginPath(); prof.forEach(function (v, k) { var p = pt(k, v); if (k) g.lineTo(p[0], p[1]); else g.moveTo(p[0], p[1]); }); g.closePath();
+    g.fillStyle = "rgba(138,63,122,.16)"; g.fill(); g.strokeStyle = CAND; g.lineWidth = 4; g.stroke();
+    prof.forEach(function (v, k) { var p = pt(k, v); g.fillStyle = CAND; g.beginPath(); g.arc(p[0], p[1], 7, 0, Math.PI * 2); g.fill(); });
+    var y0 = 850, pas = 50;
+    AXES.forEach(function (a, i) {
+      var y = y0 + i * pas;
+      txt(T(a.nom), 96, y, "400 25px " + SANS, MUT);
+      txt(T(pole(prof[i], a)), W - 96, y, "600 26px " + SANS, INK, "right");
+      if (i) { g.fillStyle = LIN; g.fillRect(96, y - pas + 16, W - 192, 1.5); }
+    });
+    txt(T("Et vous ? Faites le test sur"), 96, H - 110, "400 24px " + SANS, MUT);
+    txt(location.host + location.pathname.replace(/index\.html$/, "").replace(/\/$/, ""), W - 96, H - 110, "600 24px " + SANS, INK, "right");
+    return new Promise(function (ok) { cv.toBlob(function (b) { ok(b); }, "image/png"); });
+  }
+  function telechargerImage(r, partager) {
+    var prenom = prenomDe(r.nom), prof = profilDe(r.a), etat = document.getElementById("partage-etat");
+    var pret = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    pret.then(function () { return imageProfil(prenom, prof); }).then(function (blob) {
+      if (!blob) return;
+      var nom = "profil-cairn-" + (slugify(prenom) || "candidat") + ".png";
+      var fichier = null;
+      try { fichier = new File([blob], nom, { type: "image/png" }); } catch (e) {}
+      if (partager && fichier && navigator.canShare && navigator.canShare({ files: [fichier] })) {
+        navigator.share({ files: [fichier], title: T("Mon profil de travail"), text: lienProfil(prenom, prof) }).catch(function () {});
+        return;
+      }
+      if (partager && navigator.share) { navigator.share({ title: T("Mon profil de travail"), url: lienProfil(prenom, prof) }).catch(function () {}); return; }
+      var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nom;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+      if (etat) etat.textContent = T("Image téléchargée.");
+    });
+  }
+  function rejoindreVivier() {
+    var r = S.rep;
+    var e = (document.getElementById("in-mail").value || "").trim().slice(0, 80);
+    var j = (document.getElementById("in-poste").value || "").replace(/\s+/g, " ").trim().slice(0, 60);
+    var l = (document.getElementById("in-lieu").value || "").replace(/\s+/g, " ").trim().slice(0, 60);
+    r.viv = { e: e, j: j, l: l };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { S.msg = { t: "Indiquez une adresse e-mail valide." }; return rendre(); }
+    if (!document.getElementById("in-ok-viv").checked) { S.msg = { t: "Cochez la case pour accepter d'être proposé·e à des entreprises." }; return rendre(); }
+    var o = decodeReponse(r.code);
+    var charge = { v: VERSION, m: SLUG_LIBRE, r: "c", a: r.a.join(""), i: o ? o.i : idAlea(), t: new Date().toISOString().slice(0, 10), n: r.nom || "Candidat", e: e, j: j, l: l };
+    r.code = encodeReponse(charge);
+    r.viv.ok = true; S.msg = null;
+    rendre();
+    if (CFG.email) location.href = lienVivier(r);
+  }
+
+  /* Vivier côté cabinet (stocké sur cet appareil, comme les missions) */
+  function lireVivier() {
+    try { var a = JSON.parse(localStorage.getItem(CLE_VIVIER) || "[]"); return Array.isArray(a) ? a.filter(function (x) { return x && typeof x.a === "string" && reLong(N_C).test(x.a); }) : []; } catch (e) { return []; }
+  }
+  function ecrireVivier(a) { localStorage.setItem(CLE_VIVIER, JSON.stringify(a)); }
+  function importerVivier(txt) {
+    var r = decodeReponse(txt);
+    if (!r) { S.msg = { t: "Ce code n'est pas lisible. Demandez au candidat de le copier en entier, de CAIRN- jusqu'au dernier caractère." }; return rendre(); }
+    if (r.ancien) { S.msg = { t: "Ce code vient d'une version précédente du questionnaire." }; return rendre(); }
+    if (r.m !== SLUG_LIBRE || r.r !== "c") { S.msg = { t: "Ce code appartient à la mission « " + r.m + " » : ajoutez-le dans cette mission." }; return rendre(); }
+    var v = lireVivier();
+    if (v.some(function (x) { return x.i === r.i; })) { S.msg = { t: "Ce candidat est déjà dans le vivier." }; return rendre(); }
+    v.unshift({ i: r.i, n: r.n, a: r.a, t: r.t, e: r.e || "", j: r.j || "", l: r.l || "" });
+    try { ecrireVivier(v); S.msg = { ok: true, t: r.n + " ajouté·e au vivier." }; } catch (e) { S.msg = { t: "Le vivier n'a pas pu être enregistré sur cet appareil." }; }
+    rendre();
+  }
+  function scoreVivier(an, x) {
+    var res = analyserCandidat(an, { v: x.a.split("").map(Number) });
+    var num = 0, den = 0, nf = 0, nd = 0;
+    res.axes.forEach(function (a) { num += a.imp * Math.min(a.gap, 2); den += a.imp * 2; if (a.st[0] === "crit") nf++; else if (a.st[0] === "warn") nd++; });
+    return { x: x, score: Math.max(0, Math.round(100 * (1 - num / (den || 1)))), nf: nf, nd: nd };
+  }
+  function blocVivierMission(m, an) {
+    var v = lireVivier(), deja = {};
+    (m.reponses || []).forEach(function (x) { deja[x.i] = 1; });
+    var h = '<section class="panel stack"><h2>Vivier : candidats compatibles</h2>';
+    if (!v.length) return h + '<p class="small">Votre vivier est vide. Partagez le lien du test candidat libre, puis ajoutez les codes reçus dans le vivier (page des missions).</p></section>';
+    if (!an.pret) return h + '<p class="small">Le classement du vivier s\'affichera dès que le radar de cette mission sera prêt.</p></section>';
+    var liste = v.filter(function (x) { return !deja[x.i]; }).map(function (x) { return scoreVivier(an, x); })
+      .sort(function (a, b) { return (a.nf - b.nf) || (b.score - a.score); });
+    if (!liste.length) return h + '<p class="small">Tous les candidats du vivier sont déjà dans cette mission.</p></section>';
+    h += '<p class="small">Classés du plus au moins compatible avec ce que vit l\'équipe, en tenant compte de ce qui compte pour chaque candidat. Ajoutez un candidat à la mission pour obtenir son rapport et sa fiche d\'entretien.</p><ul class="viv-liste">';
+    liste.slice(0, 20).forEach(function (s) {
+      var x = s.x, st = s.nf ? "crit" : s.nd > 2 ? "warn" : "ok";
+      h += '<li class="viv-item"><div class="viv-id"><b>' + esc(x.n) + '</b><span class="small">' + esc([x.j, x.l].filter(Boolean).join(" · ") || "—") + '</span></div>' +
+        '<div class="viv-score"><span class="jauge-f"><i class="' + st + '" style="width:' + s.score + '%"></i></span><span class="num">' + s.score + ' %</span></div>' +
+        '<span class="pill ' + st + '">' + (s.nf ? pl(s.nf, "friction") : s.nd ? pl(s.nd, "point") + " à discuter" : "Compatible") + '</span>' +
+        '<button type="button" class="ghost" data-pousser="' + esc(x.i) + '">Ajouter à la mission</button></li>';
+    });
+    return h + '</ul></section>';
+  }
+  function pousserCandidat(id) {
+    var m = missionCourante(), x = lireVivier().filter(function (y) { return y.i === id; })[0];
+    if (!m || !x) return;
+    var liste = copieReponses(m);
+    if (liste.some(function (y) { return y.i === id; })) return;
+    liste.push({ r: "c", a: x.a, i: x.i, t: x.t || "", n: x.n, v: VERSION });
+    S.db.doc("missions/" + m.id).update({ reponses: liste })
+      .then(function () { S.msg = { ok: true, t: x.n + " ajouté·e à la mission : son rapport et sa fiche d'entretien sont dans « Candidats »." }; rendre(); })
+      .catch(function () { S.msg = { t: "Le candidat n'a pas pu être ajouté. Réessayez dans un instant." }; rendre(); });
+  }
+  function vueVivier() {
+    var v = lireVivier();
+    var h = '<div class="stack"><a href="#cabinet" data-retourv="1" class="small">← Toutes les missions</a><h1>Vivier de candidats</h1>' +
+      '<p class="lead">Les candidats qui passent le test libre et acceptent d\'être proposés vous envoient un code. Ajoutez-le ici : chaque mission classera ensuite le vivier par compatibilité.</p></div>';
+    h += '<section class="panel stack"><h2>Lien du test candidat libre</h2><p class="small">À partager sur LinkedIn, dans vos annonces ou par message.</p>' + blocLien("Test candidat libre", SLUG_LIBRE) + '</section>';
+    h += '<form id="f-vivier" class="panel stack"><h2>Ajouter un candidat</h2><label class="small" for="in-code-v">Collez le code reçu par e-mail (il commence par CAIRN-).</label>' +
+      '<textarea id="in-code-v" class="code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
+      '<div class="row"><button type="submit">Ajouter au vivier</button></div>' + blocMsg() + '</form>';
+    h += '<section class="stack"><h2>' + pl(v.length, "candidat") + '</h2>';
+    if (!v.length) h += '<p class="small">Aucun candidat pour l\'instant.</p>';
+    else {
+      h += '<ul class="viv-liste viv-simple">';
+      v.forEach(function (x) {
+        h += '<li class="viv-item"><div class="viv-id"><b>' + esc(x.n) + '</b><span class="small">' + esc([x.j, x.l, x.t].filter(Boolean).join(" · ")) + '</span>' +
+          (x.e ? '<a class="small" href="mailto:' + esc(x.e) + '">' + esc(x.e) + '</a>' : "") + '</div>' +
+          (S.confirmeRetV === x.i
+            ? '<span class="row"><button type="button" class="danger" data-retirerv="' + esc(x.i) + '" data-ok="1">Oui, retirer</button><button type="button" class="ghost" data-retirerv="">Annuler</button></span>'
+            : '<button type="button" class="ghost" data-retirerv="' + esc(x.i) + '">Retirer</button>') + '</li>';
+      });
+      h += '</ul>';
+    }
+    return h + '</section>';
   }
 
   /* ---------- Actions ---------- */
@@ -1761,7 +2033,7 @@ body.cabinet .lang-wrap { display: none; }
     var base = slugify(nom);
     if (!nom || !base) { S.msg = { t: "Indiquez le nom de l'entreprise." }; return rendre(); }
     var slug = base, n = 2;
-    var pris = function (s) { return S.missions.some(function (m) { return m.id === s; }); };
+    var pris = function (s) { return s === SLUG_LIBRE || S.missions.some(function (m) { return m.id === s; }); };
     while (pris(slug)) slug = base + "-" + (n++);
     S.msg = null;
     S.db.doc("missions/" + slug).set({ nom: nom.slice(0, 60), cree: new Date().toISOString().slice(0, 10), reponses: [] })
@@ -1774,6 +2046,7 @@ body.cabinet .lang-wrap { display: none; }
     var r = decodeReponse(txt);
     if (!r) { S.msg = { t: "Ce code n'est pas lisible. Demandez au répondant de le copier en entier, de CAIRN- jusqu'au dernier caractère." }; return rendre(); }
     if (r.ancien) { S.msg = { t: "Ce code vient d'une version précédente du questionnaire. Demandez au répondant de refaire le questionnaire actuel." }; return rendre(); }
+    if (r.m === SLUG_LIBRE) { S.msg = { t: "Ce code vient d'un candidat libre : ajoutez-le dans le vivier (page des missions), il apparaîtra ensuite dans le classement de cette mission." }; return rendre(); }
     if (r.m !== m.id) { S.msg = { t: "Ce code appartient à la mission « " + r.m + " », pas à celle-ci." }; return rendre(); }
     if (r.w === 2) {
       if (!m.v2) { S.msg = { t: "Ce code est une réponse de vague 2, mais la vague 2 n'est pas lancée pour cette mission." }; return rendre(); }
@@ -1890,7 +2163,18 @@ body.cabinet .lang-wrap { display: none; }
     if (t.dataset.copie) { copierTexte(t.dataset.copie, t); return; }
     if (t.id === "btn-partager") { try { navigator.share({ title: "Radar Cairn", text: r.code }); } catch (e) {} return; }
     if (t.id === "btn-sauver") { sauvegarder(); return; }
-    if (t.id === "btn-modifier") { r.code = null; r.etape = 0; return haut(); }
+    if (t.id === "btn-modifier") { r.code = null; r.viv = null; r.etape = 0; return haut(); }
+    if (t.dataset.vivier) { S.vivier = true; S.msg = null; return haut(); }
+    if (t.dataset.retourv) { ev.preventDefault(); S.vivier = false; S.msg = null; S.confirmeRetV = null; return haut(); }
+    if (t.dataset.pousser) { pousserCandidat(t.dataset.pousser); return; }
+    if (t.dataset.retirerv != null) {
+      if (t.dataset.ok) { try { ecrireVivier(lireVivier().filter(function (x) { return x.i !== t.dataset.retirerv; })); } catch (e) {} S.confirmeRetV = null; }
+      else S.confirmeRetV = t.dataset.retirerv || null;
+      rendre(); return;
+    }
+    if (t.id === "btn-image") { telechargerImage(r, false); return; }
+    if (t.id === "btn-partager-profil") { telechargerImage(r, true); return; }
+    if (t.id === "btn-lien") { copierTexte(lienProfil(prenomDe(r.nom), profilDe(r.a)), t); return; }
   });
 
   app.addEventListener("submit", function (ev) {
@@ -1899,6 +2183,10 @@ body.cabinet .lang-wrap { display: none; }
     if (f.id === "f-nouvelle") {
       if (!S.db || S.charge === "attente") { S.msg = { t: "Vos missions sont encore en cours de chargement. Réessayez dans un instant." }; return rendre(); }
       creerMission(document.getElementById("in-nom").value);
+    } else if (f.id === "f-rejoindre") {
+      rejoindreVivier();
+    } else if (f.id === "f-vivier") {
+      importerVivier(document.getElementById("in-code-v").value);
     } else if (f.id === "f-import") {
       importer(document.getElementById("in-code").value);
     } else if (f.id === "f-entree") {
@@ -1938,10 +2226,10 @@ body.cabinet .lang-wrap { display: none; }
     },
     collection: function () { return { onSnapshot: function (f) { abonnes.push(f); setTimeout(notifier, 0); } }; }
   };
-  window.addEventListener("storage", function (e) { if (e.key === CLE) notifier(); });
+  window.addEventListener("storage", function (e) { if (e.key === CLE) notifier(); if (e.key === CLE_VIVIER && S.route.vue === "cabinet") rendre(); });
 
   function sauvegarder() {
-    var blob = new Blob([JSON.stringify({ cairn: 1, date: new Date().toISOString(), missions: lireTout() }, null, 1)], { type: "application/json" });
+    var blob = new Blob([JSON.stringify({ cairn: 1, date: new Date().toISOString(), missions: lireTout(), vivier: lireVivier() }, null, 1)], { type: "application/json" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "cairn-radar-sauvegarde-" + new Date().toISOString().slice(0, 10) + ".json";
@@ -1966,6 +2254,12 @@ body.cabinet .lang-wrap { display: none; }
           cur[id] = Object.assign({}, m[id], ex || {}, { reponses: rs }); n++;
         });
         ecrireTout(cur);
+        if (Array.isArray(o.vivier)) {
+          var viv = lireVivier(), vus2 = {};
+          viv.forEach(function (x) { vus2[x.i] = 1; });
+          o.vivier.forEach(function (x) { if (x && typeof x.i === "string" && typeof x.a === "string" && reLong(N_C).test(x.a) && !vus2[x.i]) { viv.push({ i: x.i, n: String(x.n || "Candidat").slice(0, 40), a: x.a, t: String(x.t || ""), e: String(x.e || ""), j: String(x.j || ""), l: String(x.l || "") }); vus2[x.i] = 1; } });
+          ecrireVivier(viv);
+        }
         S.msg = { ok: true, t: pl(n, "mission") + " restaurée" + (n > 1 ? "s" : "") + "." };
       } catch (e) { S.msg = { t: "Ce fichier n'est pas une sauvegarde du radar." }; }
       rendre();
