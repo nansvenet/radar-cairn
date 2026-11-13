@@ -2,6 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>/* Page d'accueil en français : accueil.html. Les liens avec # (questionnaires, rapport, cabinet) restent ici. */
+(function(){var h=location.hash;if(h&&h!=="#")return;var l=null;try{l=new URLSearchParams(location.search).get("lang")}catch(e){}
+if(!l){try{l=localStorage.getItem("cairn-lang")}catch(e){}}if(!l)l=(navigator.language||"fr").slice(0,2).toLowerCase();
+if(["en","es","de","it"].indexOf(l)<0)location.replace("accueil.html");})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Radar de compatibilité · Cairn Affinités</title>
 <meta name="description" content="Cairn Affinités — le radar de compatibilité qui compare la culture réelle d'une entreprise et ses candidats. Pour les PME, ETI et cabinets de recrutement.">
