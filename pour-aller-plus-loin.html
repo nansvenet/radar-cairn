@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pour aller plus loin · Cairn Affinités</title>
+<meta name="description" content="10 skills RH offerts pour votre IA : préparer un recrutement, mener les entretiens, réussir l'intégration et comprendre les départs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+:root{
+--bg:#F7F4EE; --surface:#FDFBF7; --surface-2:#EFE9DF;
+--ink:#14233B; --text-2:#4A566B; --muted:#646E80;
+--line:rgba(20,35,59,.10); --line-strong:rgba(20,35,59,.18);
+--sky:#276D9E; --sky-soft:#E6EEF4;
+--btn:#14233B; --on-btn:#FDFBF7; --band:#14233B; --on-band:#F7F4EE; --on-band-2:rgba(247,244,238,.72);
+--display:"Newsreader",Georgia,"Times New Roman",serif;
+--body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+--ease-out:cubic-bezier(.23,1,.32,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--bg:#0F1726; --surface:#162034; --surface-2:#1C2840;
+--ink:#E9EEF6; --text-2:#B5C0D2; --muted:#8C98AD;
+--line:rgba(233,238,246,.10); --line-strong:rgba(233,238,246,.20);
+--sky:#7DB6E0; --sky-soft:#1A2D45;
+--btn:#E9EEF6; --on-btn:#0F1726; --band:#1C2840; --on-band:#E9EEF6; --on-band-2:rgba(233,238,246,.7);
+color-scheme:dark}}
+:root[data-theme="dark"]{
+--bg:#0F1726; --surface:#162034; --surface-2:#1C2840;
+--ink:#E9EEF6; --text-2:#B5C0D2; --muted:#8C98AD;
+--line:rgba(233,238,246,.10); --line-strong:rgba(233,238,246,.20);
+--sky:#7DB6E0; --sky-soft:#1A2D45;
+--btn:#E9EEF6; --on-btn:#0F1726; --band:#1C2840; --on-band:#E9EEF6; --on-band-2:rgba(233,238,246,.7);
+color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.1;text-wrap:balance;margin:0;letter-spacing:-.015em}
+h1{font-size:clamp(2.3rem,5.5vw,3.6rem)}
+h1 em{font-style:italic;color:var(--sky)}
+h2{font-size:clamp(1.6rem,3.2vw,2.2rem)}
+h3{font-size:1.1rem;font-family:var(--body);font-weight:600;letter-spacing:0;line-height:1.3}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--sky);font-weight:600}
+.lead{font-size:1.15rem;color:var(--text-2);max-width:60ch}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:6px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:.98rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit;line-height:1.2;transition:transform 160ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,box-shadow 200ms ease;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--btn);color:var(--on-btn)}
+.btn-ghost{border-color:var(--line-strong);color:var(--ink);background:transparent}
+.btn-sm{padding:9px 14px;font-size:.88rem;border-radius:10px}
+.btn .arr{display:inline-block;transition:transform 200ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+.btn-primary:hover{box-shadow:0 6px 18px -8px rgba(20,35,59,.55)}
+.btn-ghost:hover{background:var(--surface);border-color:var(--ink)}
+.btn:hover .arr{transform:translateX(3px)}
+}
+
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:1.3rem;font-weight:500;letter-spacing:-.01em}
+.logo small{display:block;font-family:var(--body);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:-2px}
+nav.menu{display:flex;gap:4px;margin-left:auto;font-size:.94rem}
+nav.menu a{text-decoration:none;color:var(--text-2);padding:8px 12px;border-radius:8px;transition:color 150ms ease,background-color 150ms ease}
+nav.menu a[aria-current]{color:var(--ink);background:var(--surface-2);font-weight:600}
+@media (hover:hover) and (pointer:fine){nav.menu a:hover{color:var(--ink);background:var(--surface-2)}}
+header.top .btn{padding:10px 16px;font-size:.92rem}
+@media (max-width:820px){nav.menu{display:none}header.top .btn{margin-left:auto}}
+
+.hero{padding-block:64px 8px;display:flex;flex-direction:column;gap:20px;max-width:780px}
+.pourquoi{margin-top:36px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sky);border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.pourquoi h2{font-size:1.45rem;margin-bottom:8px}
+.pourquoi p{color:var(--text-2)}
+.pourquoi p+p{margin-top:10px}
+.ic{width:38px;height:38px;border-radius:10px;background:var(--sky-soft);color:var(--sky);display:grid;place-items:center}
+.ic svg{width:19px;height:19px}
+@media (max-width:640px){.pourquoi{grid-template-columns:1fr;padding:22px}}
+
+.etape{margin-top:64px}
+.etape-tete{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.etape-tete .n{font-family:var(--display);font-size:1rem;color:var(--muted)}
+.etape-tete p{margin-left:auto;color:var(--muted);font-size:.9rem}
+@media (max-width:640px){.etape-tete{flex-wrap:wrap}.etape-tete p{margin-left:0;width:100%}}
+
+.grille{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:960px){.grille{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.grille{grid-template-columns:1fr}}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.skill .num{font-family:var(--display);font-size:1.5rem;color:var(--sky);line-height:1}
+.skill p{color:var(--text-2);font-size:.95rem;flex:1}
+.skill .pied{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.pill{font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--sky-soft);color:var(--sky);white-space:nowrap}
+.skill.vedette{background:var(--band);color:var(--on-band);border-color:var(--band)}
+.skill.vedette p,.skill.vedette .num{color:var(--on-band-2)}
+.skill.vedette .btn-primary{background:var(--on-band);color:var(--band)}
+.skill.vedette .pill{background:rgba(255,255,255,.14);color:var(--on-band)}
+
+.comment{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line)}
+.comment div{padding:26px 24px}
+.comment div+div{border-left:1px solid var(--line)}
+.comment b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:500;line-height:1;margin-bottom:10px;color:var(--sky)}
+.comment h3{margin-bottom:4px}
+.comment p{color:var(--text-2);font-size:.95rem}
+@media (max-width:760px){.comment{grid-template-columns:1fr}.comment div+div{border-left:0;border-top:1px solid var(--line)}.comment div{padding:20px 4px}}
+.avert{margin-top:16px;font-size:.85rem;color:var(--muted);max-width:80ch}
+
+.band{background:var(--band);color:var(--on-band);border-radius:24px;padding:52px 48px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;margin-top:80px}
+.band p{color:var(--on-band-2);font-size:1.05rem;margin-top:12px}
+.band .actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.band .btn-primary{background:var(--on-band);color:var(--band)}
+.band .btn-ghost{color:var(--on-band);border-color:rgba(255,255,255,.28)}
+@media (max-width:800px){.band{grid-template-columns:1fr;padding:36px 24px;gap:24px;margin-top:64px}}
+
+footer{margin-top:96px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:28px;font-size:.88rem;color:var(--muted)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (hover:hover) and (pointer:fine){footer a:hover{color:var(--ink)}}
+
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.enter{animation:rise 600ms var(--ease-out) both;animation-delay:calc(var(--i,0) * 70ms)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.enter{animation:none}.btn:active{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+<div class="wrap">
+<a class="logo" href="accueil.html" aria-label="Cairn Affinités, accueil">
+<svg width="28" height="31" viewBox="0 0 34 38" aria-hidden="true"><ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/><ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/><ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/></svg>
+<span>Cairn Affinités<small>Radar de compatibilité</small></span>
+</a>
+<nav class="menu" aria-label="Navigation principale">
+<a href="accueil.html">Accueil</a>
+<a href="accueil.html#offres">Formules</a>
+<a href="accueil.html#candidats">Candidats</a>
+<a href="pour-aller-plus-loin.html" aria-current="page">Pour aller plus loin</a>
+</nav>
+<a class="btn btn-primary" href="accueil.html#contact">Demander une démo</a>
+</div>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="hero">
+<p class="eyebrow enter" style="--i:0">Pour aller plus loin · Ressources gratuites</p>
+<h1 class="enter" style="--i:1">10 skills RH <em>offerts</em> pour votre IA</h1>
+<p class="lead enter" style="--i:2">Des compétences prêtes à installer dans votre assistant IA, qui suivent tout le parcours d'un recrutement : avant, pendant et après l'embauche.</p>
+</section>
+
+<div class="pourquoi enter" style="--i:3">
+<span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></span>
+<div>
+<h2>Pourquoi nous les offrons</h2>
+<p>Un bon recrutement commence bien avant l'annonce et continue bien après l'arrivée. La plupart des PME n'ont pas de service RH dédié : ces skills vous permettent d'avancer dès aujourd'hui, en autonomie, sur les tâches qui font la réussite d'un recrutement.</p>
+<p>Nous préférons vous montrer notre façon de travailler plutôt que d'en parler. Et quand vous voudrez aller plus loin, avec le radar de compatibilité, un recrutement ou un accompagnement, nous serons là.</p>
+</div>
+</div>
+
+<section class="etape" aria-labelledby="t-avant">
+<div class="etape-tete"><span class="n">I.</span><h2 id="t-avant">Avant le recrutement</h2><p>Définir le besoin, attirer les bons profils</p></div>
+<div class="grille">
+<article class="skill"><span class="num">01</span><h3>Préparer un recrutement</h3><p>Définir le vrai besoin du poste, distinguer l'indispensable du souhaitable et rédiger une fiche de poste honnête.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/01-preparer-recrutement.zip" download>Télécharger</a></div></article>
+<article class="skill"><span class="num">02</span><h3>Une annonce qui attire les bons profils</h3><p>Une offre claire, qui dit aussi ce qui peut déplaire dans le poste, pour décourager les candidats qui ne correspondent pas.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/02-annonce-bons-profils.zip" download>Télécharger</a></div></article>
+<article class="skill"><span class="num">03</span><h3>Marque employeur pour PME</h3><p>Trouver ce qui rend votre entreprise attirante et le transformer en contenus LinkedIn, en page carrière et en arguments pour les entretiens.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/03-marque-employeur-pme.zip" download>Télécharger</a></div></article>
+<article class="skill vedette"><span class="num">05</span><h3>Culture réelle ou culture affichée ?</h3><p>Décrire la culture vue par la direction, la comparer à ce qu'en dit l'équipe et repérer les premiers écarts. Pour aller plus loin, le radar complet prend le relais.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/05-culture-reelle-vs-affichee.zip" download>Télécharger</a><span class="pill">Version découverte du radar</span></div></article>
+<article class="skill"><span class="num">06</span><h3>Matrice de compétences</h3><p>Cartographier les compétences de votre équipe, repérer les manques et les points forts avant d'ouvrir un poste.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/06-matrice-competences.zip" download>Télécharger</a></div></article>
+</div>
+</section>
+
+<section class="etape" aria-labelledby="t-pendant">
+<div class="etape-tete"><span class="n">II.</span><h2 id="t-pendant">Pendant le recrutement</h2><p>Évaluer avec méthode, pas au feeling</p></div>
+<div class="grille">
+<article class="skill"><span class="num">04</span><h3>Grille d'entretien structuré</h3><p>Les questions à poser selon le poste, une grille de notation commune et un débrief entre recruteurs, pour limiter les décisions « au feeling ».</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/04-grille-entretien-structure.zip" download>Télécharger</a></div></article>
+</div>
+</section>
+
+<section class="etape" aria-labelledby="t-apres">
+<div class="etape-tete"><span class="n">III.</span><h2 id="t-apres">Après l'embauche</h2><p>Intégrer, suivre, comprendre</p></div>
+<div class="grille">
+<article class="skill"><span class="num">07</span><h3>Intégration d'un nouvel arrivant</h3><p>Le programme du premier jour, de la première semaine et des trois premiers mois, avec les points d'étape et les signaux d'alerte.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/07-integration-nouvel-arrivant.zip" download>Télécharger</a></div></article>
+<article class="skill"><span class="num">08</span><h3>Suivi de période d'essai</h3><p>Préparer les entretiens à 1, 2 et 3 mois, repérer tôt les signes d'incompatibilité et prendre une décision claire.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/08-suivi-periode-essai.zip" download>Télécharger</a></div></article>
+<article class="skill"><span class="num">09</span><h3>Entretiens professionnels et annuels</h3><p>Préparer les entretiens côté manager et côté salarié, en respectant les obligations légales (entretien professionnel tous les 2 ans, bilan à 6 ans).</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/09-entretiens-professionnels.zip" download>Télécharger</a></div></article>
+<article class="skill"><span class="num">10</span><h3>Comprendre un départ</h3><p>Mener l'entretien de sortie, analyser les causes du départ et repérer celles qui se répètent.</p><div class="pied"><a class="btn btn-primary btn-sm" href="skills/10-comprendre-depart.zip" download>Télécharger</a></div></article>
+</div>
+</section>
+
+<section class="comment" aria-label="Comment les utiliser">
+<div><b>1</b><h3>Téléchargez</h3><p>Chaque skill est un petit dossier compressé, prêt à importer.</p></div>
+<div><b>2</b><h3>Installez</h3><p>Dans Claude : Paramètres, puis Capacités, puis Skills, et « Importer ».</p></div>
+<div><b>3</b><h3>Demandez</h3><p>Par exemple : « Aide-moi à préparer le recrutement d'un commercial. »</p></div>
+</section>
+<p class="avert">Ces skills sont des aides à la préparation et à la réflexion. Ils ne remplacent ni le jugement du recruteur ni un conseil juridique.</p>
+
+<section class="band" id="contact">
+<div>
+<h2>Prêt à aller plus loin que la version découverte ?</h2>
+<p>Le radar de compatibilité compare ce que vit réellement votre équipe au profil de chaque candidat. Gratuit pour une équipe jusqu'à 10 répondants.</p>
+</div>
+<div class="actions">
+<a class="btn btn-primary" href="https://nansvenet.github.io/radar-cairn/index.html#cabinet">Créer mon radar gratuit <span class="arr" aria-hidden="true">→</span></a>
+<a class="btn btn-ghost" href="mailto:cairn.affinites@gmail.com?subject=Skills%20RH%20%C2%B7%20Cairn%20Affinit%C3%A9s">Nous contacter</a>
+</div>
+</section>
+
+</div>
+</main>
+
+<footer>
+<div class="wrap">
+<span>© Cairn Affinités · Le radar de compatibilité</span>
+<nav aria-label="Pied de page"><a href="accueil.html">Accueil</a><a href="accueil.html#offres">Formules</a><a href="pour-aller-plus-loin.html">Pour aller plus loin</a><a href="accueil.html#contact">Contact</a></nav>
+</div>
+</footer>
+
+</body>
+</html>
