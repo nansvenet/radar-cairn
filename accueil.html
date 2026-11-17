@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cairn Affinités · Cabinet de recrutement fonctions support</title>
-<meta name="description" content="Cabinet de recrutement spécialisé dans les fonctions support (RH, paie, comptabilité, finance, juridique, assistanat) pour les PME et ETI. Chaque candidat est comparé au quotidien réel de votre équipe.">
+<meta name="description" content="Cabinet de recrutement spécialisé dans les fonctions support (RH, paie, comptabilité, finance, juridique, assistanat) pour les PME et ETI. 3 à 5 finalistes en 4 semaines, paiement au succès, devis en ligne.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
@@ -23,25 +23,34 @@
   --ease:cubic-bezier(.23,1,.32,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:120px;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img,svg{display:block}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.01em;line-height:1.15}
-h1{font-size:clamp(34px,5.2vw,56px)}
-h2{font-size:clamp(28px,3.6vw,40px);max-width:22ch}
+h1{font-size:clamp(34px,5vw,54px)}
+h2{font-size:clamp(28px,3.6vw,40px);max-width:24ch}
 h3{font-size:21px}
 p{color:var(--text-2)}
 .eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--sky);margin-bottom:14px}
 .lead{font-size:18px;max-width:58ch;margin-top:18px}
-section{padding:88px 0;border-top:1px solid var(--line)}
-.sec-head{margin-bottom:44px}
-.sec-head p{max-width:60ch;margin-top:14px}
+section{padding:80px 0;border-top:1px solid var(--line)}
+.sec-head{margin-bottom:40px}
+.sec-head p{max-width:62ch;margin-top:14px}
+.alt{background:var(--surface-2)}
+
+/* Barre candidats */
+.util{background:var(--band);color:var(--on-band-2);font-size:13px}
+.util .wrap{display:flex;justify-content:flex-end;gap:18px;padding-top:7px;padding-bottom:7px;flex-wrap:wrap}
+.util a{color:var(--on-band);text-decoration:none}
+.util a:hover{text-decoration:underline}
+.util i{font-style:normal}
+@media (max-width:560px){.util .pre{display:none}.util .wrap{justify-content:center;gap:16px}.hero{padding:36px 0 56px}}
 
 /* Header */
-header{position:sticky;top:0;z-index:20;background:rgba(247,244,238,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;gap:28px;height:68px}
+header{position:sticky;top:0;z-index:20;background:rgba(247,244,238,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:28px;height:66px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:16px;line-height:1.1}
 .logo small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
 .menu{display:flex;gap:22px;margin-left:auto;font-size:14.5px}
@@ -54,19 +63,60 @@ header .wrap{display:flex;align-items:center;gap:28px;height:68px}
 .btn-ghost{border-color:var(--line-strong);color:var(--ink);background:transparent}
 .btn-ghost:hover{border-color:var(--ink)}
 .btn-light{background:var(--on-band);color:var(--ink)}
+.btn-line-light{border-color:rgba(247,244,238,.35);color:var(--on-band);background:transparent}
+.btn-line-light:hover{border-color:var(--on-band)}
 header .btn{padding:10px 16px;font-size:14px}
-@media (max-width:960px){.menu{display:none}header .btn{margin-left:auto}}
+/* Menu mobile : pastilles défilantes */
+.chips{display:none;gap:8px;overflow-x:auto;padding:0 20px 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-size:13.5px;text-decoration:none;padding:7px 13px;border:1px solid var(--line-strong);border-radius:999px;color:var(--text-2);background:var(--surface)}
+@media (max-width:960px){.menu{display:none}header .btn{margin-left:auto}.chips{display:flex}}
 @media (max-width:420px){.logo small{display:none}header .btn{padding:9px 13px;font-size:13px}}
 
 /* Hero */
-.hero{padding:64px 0 72px;border-top:0}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero{padding:60px 0 72px;border-top:0}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.hero-note{margin-top:22px;font-size:14px;color:var(--muted)}
-.hero-note a{color:var(--sky)}
-.proof{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;color:var(--text-2)}
+.proof{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;font-size:14px;color:var(--text-2)}
 .proof span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sky);margin-right:8px;vertical-align:2px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.brief{padding:8px 22px}
+.brief h2{font-size:14px;font-family:var(--body);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:14px 0 6px}
+.brief dl{display:grid}
+.brief .row{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--line);text-decoration:none}
+.brief .row:hover dd b{color:var(--sky)}
+.brief dt{font-size:13px;color:var(--muted);padding-top:2px}
+.brief dd b{display:block;font-size:16px;transition:color .15s}
+.brief dd span{font-size:13.5px;color:var(--text-2)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:36px}}
+
+/* Postes */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.role{padding:22px}
+.role h3{font-size:19px;margin-bottom:6px}
+.role p{font-size:14.5px}
+.after{margin-top:20px;font-size:15px}
+.after a{color:var(--sky);font-weight:600}
+@media (max-width:820px){.roles{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.roles{grid-template-columns:1fr}}
+
+/* Déroulé */
+.steps{list-style:none;display:grid}
+.steps li{display:grid;grid-template-columns:64px 1fr 1fr;gap:24px;padding:24px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .n{font-family:var(--display);font-size:30px;color:var(--sky);line-height:1}
+.steps h3{margin-bottom:4px}
+.steps .when{font-size:13px;color:var(--muted);font-weight:500}
+.steps .you{font-size:14.5px;color:var(--text-2);border-left:2px solid var(--sky-soft);padding-left:16px}
+.steps .you b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+@media (max-width:760px){.steps li{grid-template-columns:44px 1fr}.steps .you{grid-column:2}}
+
+/* Différence */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.gains{list-style:none;display:grid;gap:22px}
+.gains b{display:block;font-size:17px;color:var(--ink);margin-bottom:2px}
+.gains li{padding-left:30px;position:relative}
+.gains li::before{content:"";position:absolute;left:2px;top:8px;width:14px;height:8px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
 .radar-card{padding:22px}
 .radar-card .meta{font-size:13px;color:var(--muted)}
 .radar-card strong{font-size:15px}
@@ -77,83 +127,132 @@ header .btn{padding:10px 16px;font-size:14px}
 .verdict div{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:9px 12px;border-radius:10px;background:var(--surface-2)}
 .tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
 .t-ok{background:var(--ok-bg);color:var(--ok)}.t-warn{background:var(--warn-bg);color:var(--warn)}.t-crit{background:var(--crit-bg);color:var(--crit)}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:40px}}
-
-/* Postes */
-.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.role{padding:22px}
-.role h3{font-size:19px;margin-bottom:6px}
-.role p{font-size:14.5px}
-@media (max-width:820px){.roles{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.roles{grid-template-columns:1fr}}
-
-/* Constat */
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.three h3{margin-bottom:8px}
-.three .num{font-family:var(--display);font-size:15px;color:var(--sky);margin-bottom:10px}
-@media (max-width:820px){.three{grid-template-columns:1fr}}
-
-/* Process */
-.steps{list-style:none;display:grid;gap:0;counter-reset:s}
-.steps li{display:grid;grid-template-columns:64px 1fr 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line)}
-.steps li:last-child{border-bottom:1px solid var(--line)}
-.steps .n{font-family:var(--display);font-size:30px;color:var(--sky);line-height:1}
-.steps h3{margin-bottom:4px}
-.steps .when{font-size:13px;color:var(--muted);font-weight:500}
-.steps .you{font-size:14.5px;color:var(--text-2);border-left:2px solid var(--sky-soft);padding-left:16px}
-.steps .you b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-@media (max-width:760px){.steps li{grid-template-columns:44px 1fr}.steps .you{grid-column:2}}
-
-/* Comparatif */
+.caption{font-size:13.5px;color:var(--muted);margin-top:12px}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.compare-wrap{margin-top:48px}
 .compare{width:100%;border-collapse:collapse;font-size:15px}
 .compare th,.compare td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare tr:last-child th,.compare tr:last-child td{border-bottom:0}
 .compare thead th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .compare td:last-child{color:var(--ink);font-weight:500}
-.compare td:nth-child(2){color:var(--text-2)}
 .compare tbody th{font-weight:600;width:24%}
 .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px}
 @media (max-width:640px){.compare thead{display:none}.compare,.compare tbody,.compare tr,.compare th,.compare td{display:block;width:100%}.compare tr{padding:14px 16px;border-bottom:1px solid var(--line)}.compare th,.compare td{border:0;padding:3px 0}.compare td:nth-child(2)::before{content:"Cabinet classique : ";color:var(--muted)}.compare td:last-child::before{content:"Cairn Affinités : ";color:var(--muted);font-weight:400}}
-
-/* Honoraires */
-.fee{display:grid;grid-template-columns:1fr 1.2fr;gap:0;overflow:hidden}
-.fee-main{background:var(--band);color:var(--on-band);padding:36px}
-.fee-main p{color:var(--on-band-2)}
-.fee-price{font-family:var(--display);font-size:64px;line-height:1;margin:18px 0 6px}
-.fee-price small{font-size:20px}
-.fee-list{padding:36px;list-style:none;display:grid;gap:12px;align-content:start}
-.fee-list li{position:relative;padding-left:28px;font-size:15.5px}
-.fee-list li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
+details.more{margin-top:28px;border-top:1px solid var(--line);padding-top:18px}
+details.more summary{cursor:pointer;font-weight:600;color:var(--sky);list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+ ";}
+details.more[open] summary::before{content:"− ";}
+.science{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+.sci{padding:20px}
+.sci h3{font-size:17px;margin-bottom:6px}
+.sci p{font-size:14px}
+.sci .in{margin-top:8px;font-size:13.5px;color:var(--ink)}
+.sci sup{font-size:11px;color:var(--sky)}
+.refs{margin-top:18px;font-size:12.5px;color:var(--muted);padding-left:18px;display:grid;gap:4px}
 .fine{font-size:13.5px;color:var(--muted);margin-top:16px}
-@media (max-width:820px){.fee{grid-template-columns:1fr}.fee-main,.fee-list{padding:28px}}
+@media (max-width:760px){.science{grid-template-columns:1fr}}
 
-/* Radar section */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.checks{list-style:none;display:grid;gap:10px;margin-top:22px}
-.checks li{padding-left:26px;position:relative}
-.checks li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--sky)}
-.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+/* Simulateur */
+.sim{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:start}
+.sim-controls{padding:8px 26px 18px}
+.ctrl{padding:20px 0;border-bottom:1px solid var(--line)}
+.ctrl:last-child{border-bottom:0}
+.ctrl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px}
+.ctrl-head label,.ctrl-head .lbl{font-weight:600;font-size:15.5px}
+.impact{font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;background:var(--surface-2);color:var(--text-2)}
+.impact.down{background:var(--ok-bg);color:var(--ok)}
+.impact.up{background:var(--warn-bg);color:var(--warn)}
+.ctrl .val{font-size:14.5px;color:var(--ink);margin-top:2px}
+.ctrl .hint{font-size:13.5px;color:var(--muted);margin-top:2px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:10px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:linear-gradient(90deg,var(--sky) var(--p,50%),var(--surface-2) var(--p,50%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:999px;background:var(--surface-2)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:999px;background:var(--sky)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--surface);border:2px solid var(--ink);margin-top:-9px;box-shadow:0 2px 6px rgba(20,35,59,.2)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--ink)}
+input[type=range]:focus-visible{outline:2px solid var(--sky);outline-offset:4px;border-radius:6px}
+.ticks{position:relative;height:38px;margin-top:2px}
+.ticks button{position:absolute;top:0;transform:translateX(-50%);max-width:92px;background:none;border:0;font:12.5px/1.25 var(--body);color:var(--muted);cursor:pointer;padding:4px 2px;text-align:center}
+.ticks button:first-child{transform:none;text-align:left;left:0!important}.ticks button:last-child{transform:none;text-align:right;left:auto!important;right:0}
+.ticks button.on{color:var(--ink);font-weight:600}
+.seg{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.seg button{flex:1;min-width:90px;font:500 14px var(--body);padding:10px 12px;border-radius:12px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.salary-row{display:flex;align-items:center;gap:10px;margin-top:8px}
+.salary-row input[type=number]{font:600 18px var(--body);width:130px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink)}
+.salary-row span{font-size:14px;color:var(--muted)}
+
+.sim-result{background:var(--band);color:var(--on-band);padding:28px;border-radius:18px;position:sticky;top:130px}
+.sim-result p{color:var(--on-band-2)}
+.sim-result .k{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#9CC3E0}
+.rate{font-family:var(--display);font-size:60px;line-height:1;margin:10px 0 4px}
+.rate small{font-size:18px}
+.amount{font-size:17px;color:var(--on-band)}
+.amount b{font-size:22px}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:22px 0 6px}
+.tl{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--on-band-2);text-align:center}
+.tl .bar{height:64px;border-radius:8px;background:rgba(247,244,238,.08);position:relative;overflow:hidden}
+.tl .bar i{position:absolute;left:0;right:0;bottom:0;background:#9CC3E0;border-radius:8px 8px 0 0;transition:height .35s var(--ease)}
+.tl b{color:var(--on-band);font-size:13px;font-weight:600;min-height:17px}
+.tl.zero b{color:var(--on-band-2);font-weight:400}
+.incl{list-style:none;display:grid;gap:7px;margin:20px 0 0;padding-top:18px;border-top:1px solid rgba(247,244,238,.15);font-size:14px;color:var(--on-band-2)}
+.incl li::before{content:"✓ ";color:#9CC3E0;font-weight:600}
+.res-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.res-ctas .btn{padding:11px 16px;font-size:14px}
+.sim-note{font-size:12.5px;margin-top:16px}
+@media (max-width:900px){.sim{grid-template-columns:1fr}.sim-result{position:static}.sim-controls{padding:4px 20px 14px}}
+/* Barre récap mobile */
+.simbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;background:var(--band);color:var(--on-band);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px -10px rgba(20,35,59,.5);transform:translateY(140%);transition:transform .3s var(--ease)}
+.simbar.show{transform:none}
+.simbar b{font-family:var(--display);font-size:24px;font-weight:500}
+.simbar span{font-size:13.5px;color:var(--on-band-2)}
+.simbar a{color:var(--on-band);font-size:13.5px;font-weight:600;text-decoration:none;border:1px solid rgba(247,244,238,.35);border-radius:999px;padding:8px 12px;white-space:nowrap}
+@media (min-width:901px){.simbar{display:none}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.faq summary{cursor:pointer;font-weight:600;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--sky);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{font-size:14.5px;margin-top:10px}
+@media (max-width:760px){.faq{grid-template-columns:1fr}}
+
+/* Contact */
+.band{background:var(--band);color:var(--on-band);border-top:0}
+.band h2{color:var(--on-band)}
+.band p{color:var(--on-band-2)}
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.contact .direct{margin-top:28px;display:grid;gap:10px;font-size:15px}
+.contact .direct a{color:var(--on-band)}
+.form{background:var(--surface);color:var(--ink);border-radius:18px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .full{grid-column:1/-1}
+.form label{display:grid;gap:5px;font-size:13px;font-weight:600}
+.form input,.form textarea{font:16px var(--body);padding:11px 13px;border-radius:11px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);width:100%}
+.form textarea{min-height:90px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:2px solid var(--sky);outline-offset:1px}
+.form .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px;color:var(--text-2)}
+.form .check input{width:18px;height:18px;margin-top:2px;flex:none}
+.form .err{font-size:13px;color:var(--crit);min-height:18px}
+.form .note{font-size:12.5px;color:var(--muted)}
+.copy{background:transparent;border:1px solid rgba(247,244,238,.3);color:var(--on-band);font:500 14px var(--body);padding:8px 13px;border-radius:999px;cursor:pointer;justify-self:start}
+@media (max-width:860px){.contact{grid-template-columns:1fr;gap:28px}}
+@media (max-width:520px){.form{grid-template-columns:1fr;padding:20px}}
+
+/* Radar seul + candidats */
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
 .plan{padding:20px}
 .plan .p{font-family:var(--display);font-size:28px;margin:6px 0 4px}
 .plan .p small{font-size:14px;font-family:var(--body);color:var(--muted)}
 .plan .label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sky)}
 .plan p{font-size:14px}
 .plan a{display:inline-block;margin-top:10px;font-size:14px;font-weight:600;color:var(--sky);text-decoration:none}
-@media (max-width:860px){.split{grid-template-columns:1fr}}
+@media (max-width:900px){.plans{grid-template-columns:1fr 1fr}}
 @media (max-width:440px){.plans{grid-template-columns:1fr}}
-
-/* Science */
-.science{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.sci{padding:22px}
-.sci h3{font-size:18px;margin-bottom:6px}
-.sci p{font-size:14.5px}
-.sci .in{margin-top:10px;font-size:13.5px;color:var(--ink)}
-.sci sup{font-size:11px;color:var(--sky)}
-.refs{margin-top:24px;font-size:12.5px;color:var(--muted);padding-left:18px;display:grid;gap:4px}
-@media (max-width:760px){.science{grid-template-columns:1fr}}
-
-/* Candidats / invitation */
 .duo{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
-.duo .card{padding:30px}
+.duo .card{padding:28px}
 .duo ul{list-style:none;display:grid;gap:12px;margin:18px 0 24px}
 .duo li b{display:block;font-size:15px}
 .duo li span{font-size:14px;color:var(--text-2)}
@@ -166,15 +265,7 @@ header .btn{padding:10px 16px;font-size:14px}
 .err{font-size:13px;color:var(--crit);min-height:18px;margin-top:8px}
 @media (max-width:820px){.duo{grid-template-columns:1fr}}
 
-/* CTA band */
-.band{background:var(--band);color:var(--on-band);border-top:0}
-.band h2{color:var(--on-band);max-width:24ch}
-.band p{color:var(--on-band-2)}
-.band .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
-.copy{background:transparent;border:1px solid rgba(247,244,238,.3);color:var(--on-band);font:500 14px var(--body);padding:10px 14px;border-radius:999px;cursor:pointer}
-.copy:hover{border-color:var(--on-band)}
-
-footer{padding:36px 0;font-size:13.5px;color:var(--muted)}
+footer{padding:36px 0 90px;font-size:13.5px;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
 footer nav{display:flex;flex-wrap:wrap;gap:16px}
 footer a{text-decoration:none}
@@ -185,6 +276,13 @@ footer a:hover{color:var(--ink)}
 </head>
 <body id="haut">
 
+<div class="util">
+  <div class="wrap">
+    <span><i class="pre">Candidat ? </i><a href="https://nansvenet.github.io/radar-cairn/index.html#libre">Faire le test gratuit</a></span>
+    <span><i class="pre">Invitation reçue ? </i><a href="#repondre">Répondre à une invitation</a></span>
+  </div>
+</div>
+
 <header>
   <div class="wrap">
     <a class="logo" href="#haut" aria-label="Cairn Affinités, accueil">
@@ -193,13 +291,21 @@ footer a:hover{color:var(--ink)}
     </a>
     <nav class="menu" aria-label="Navigation principale">
       <a href="#postes">Postes</a>
-      <a href="#methode">Notre méthode</a>
-      <a href="#honoraires">Honoraires</a>
-      <a href="#radar">Le radar</a>
-      <a href="#candidats">Candidats</a>
+      <a href="#deroule">Déroulé</a>
+      <a href="#difference">Notre différence</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">Questions</a>
     </nav>
     <a class="btn btn-primary" href="#contact">Confier un recrutement</a>
   </div>
+  <nav class="chips" aria-label="Navigation rapide">
+    <a href="#tarifs">Calculer mon devis</a>
+    <a href="#postes">Postes</a>
+    <a href="#deroule">Déroulé</a>
+    <a href="#difference">Notre différence</a>
+    <a href="#faq">Questions</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
 <main>
@@ -207,35 +313,28 @@ footer a:hover{color:var(--ink)}
 <section class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">Cabinet de recrutement · PME &amp; ETI</p>
-      <h1>Nous recrutons vos fonctions support. Des recrutements qui tiennent.</h1>
-      <p class="lead">RH, paie, comptabilité, finance, juridique, assistanat. Nous trouvons les candidats, et nous vérifions qu'ils se plairont dans votre équipe telle qu'elle est vraiment, pas seulement sur le papier.</p>
+      <p class="eyebrow">Cabinet de recrutement · Fonctions support · PME &amp; ETI</p>
+      <h1>Recrutez vos fonctions support, et gardez-les.</h1>
+      <p class="lead">RH, paie, comptabilité, finance, juridique, assistanat. Nous trouvons les candidats et nous vérifions qu'ils s'entendront avec votre équipe. Vous rencontrez 3 à 5 finalistes en 4 semaines et vous choisissez votre formule de paiement.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#contact">Confier un recrutement →</a>
-        <a class="btn btn-ghost" href="#methode">Voir notre méthode</a>
+        <a class="btn btn-primary" href="#tarifs">Calculer mon devis →</a>
+        <a class="btn btn-ghost" href="#contact">Parler de mon poste</a>
       </div>
       <div class="proof">
         <span>Plus de 30 ans d'expérience en recrutement</span>
-        <span>Honoraires au succès</span>
-        <span>Suivi 12 mois après l'arrivée</span>
+        <span>Réponse sous 24 h ouvrées</span>
       </div>
-      <p class="hero-note">Vous êtes candidat ? <a href="https://nansvenet.github.io/radar-cairn/index.html#libre">Découvrez votre profil de travail</a> · Invitation reçue ? <a href="#repondre">Répondre au questionnaire</a></p>
     </div>
 
-    <div class="card radar-card" aria-label="Exemple de radar de compatibilité">
-      <strong>Poste : Responsable paie</strong>
-      <div class="meta">Exemple fictif · PME de 60 salariés · finaliste n° 2</div>
-      <div class="legend">
-        <span><i style="background:var(--dir)"></i>Direction</span>
-        <span><i style="background:var(--team)"></i>Équipe (moyenne)</span>
-        <span><i style="background:var(--cand)"></i>Candidat</span>
-      </div>
-      <svg id="radar-svg" viewBox="-50 0 500 340" role="img" aria-label="Radar à sept axes comparant direction, équipe et candidat"></svg>
-      <div class="verdict">
-        <div><span>Organisation du travail</span><span class="tag t-ok">Compatible</span></div>
-        <div><span>Relation à la hiérarchie</span><span class="tag t-warn">À aborder en entretien</span></div>
-        <div><span>Rythme et disponibilité</span><span class="tag t-crit">Écart marqué</span></div>
-      </div>
+    <div class="card brief">
+      <h2>L'essentiel</h2>
+      <dl>
+        <a class="row" href="#postes"><dt>Postes</dt><dd><b>Fonctions support en CDI</b><span>Cadres et agents de maîtrise, partout en France</span></dd></a>
+        <a class="row" href="#deroule"><dt>Délai</dt><dd><b>3 à 5 finalistes en 4 semaines</b><span>Vous ne voyez que des candidats rencontrés et vérifiés</span></dd></a>
+        <a class="row" href="#tarifs"><dt>Prix</dt><dd><b>18 % du brut annuel</b><span>Ajustable selon garantie, paiement et exclusivité</span></dd></a>
+        <a class="row" href="#tarifs"><dt>Garantie</dt><dd><b>Remplacement sans frais</b><span>De la période d'essai jusqu'à 12 mois, au choix</span></dd></a>
+        <a class="row" href="#difference"><dt>En plus</dt><dd><b>Le radar de votre équipe</b><span>Chaque finaliste comparé à votre quotidien réel</span></dd></a>
+      </dl>
     </div>
   </div>
 </section>
@@ -244,9 +343,9 @@ footer a:hover{color:var(--ink)}
 <section id="postes">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Notre spécialité</p>
+      <p class="eyebrow">Les postes que nous recrutons</p>
       <h2>Les fonctions support, cadres et agents de maîtrise</h2>
-      <p>Des postes discrets mais essentiels, où une erreur de recrutement se paie vite : retards de paie, clôtures qui glissent, équipe qui se tend. Nous recrutons en CDI, partout en France.</p>
+      <p>Des postes discrets mais essentiels, où une erreur de recrutement se paie vite : retards de paie, clôtures qui glissent, équipe qui se tend. En CDI, partout en France.</p>
     </div>
     <div class="roles">
       <div class="card role"><h3>Ressources humaines</h3><p>Responsable RH, RRH de site, chargé(e) de recrutement, chargé(e) de développement RH.</p></div>
@@ -256,111 +355,222 @@ footer a:hover{color:var(--ink)}
       <div class="card role"><h3>Services généraux &amp; achats</h3><p>Responsable services généraux, acheteur(se), gestionnaire administratif(ve).</p></div>
       <div class="card role"><h3>Assistanat &amp; office</h3><p>Assistant(e) de direction, office manager, assistant(e) administratif(ve).</p></div>
     </div>
+    <p class="after">Votre poste n'apparaît pas ? <a href="#contact">Décrivez-le-nous</a>, nous vous dirons franchement si nous pouvons vous aider.</p>
   </div>
 </section>
 
-<!-- CONSTAT -->
-<section>
+<!-- DÉROULÉ -->
+<section id="deroule" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Le constat</p>
-      <h2>Un recrutement raté ne se lit pas sur un CV</h2>
-    </div>
-    <div class="three">
-      <div><p class="num">01</p><h3>Les compétences ne suffisent pas</h3><p>Rythme, franc-parler, autonomie : ce qui fait partir un collaborateur est rarement écrit dans la fiche de poste.</p></div>
-      <div><p class="num">02</p><h3>Direction et équipe ne vivent pas la même entreprise</h3><p>Le discours officiel et le quotidien divergent souvent. Le candidat découvre l'écart après son arrivée.</p></div>
-      <div><p class="num">03</p><h3>Un départ précoce coûte cher</h3><p>Des mois de recherche perdus, une équipe déstabilisée, et un poste à pourvoir de nouveau.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- METHODE -->
-<section id="methode">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Notre méthode</p>
-      <h2>Un recrutement classique, plus une vérification que les autres ne font pas</h2>
-      <p>Nous faisons tout le travail de recherche et de sélection. En plus, votre équipe répond à notre radar de compatibilité : chaque finaliste est comparé à son quotidien réel.</p>
+      <p class="eyebrow">Comment se passe un recrutement</p>
+      <h2>5 étapes, et très peu de temps de votre côté</h2>
+      <p>Nous faisons tout le travail de recherche et de sélection. Vous intervenez à trois moments : le brief, l'envoi d'un lien à votre équipe, et le choix final.</p>
     </div>
     <ol class="steps">
-      <li><span class="n">1</span><div><h3>Brief du poste</h3><p class="when">Jour 1 · 1 heure</p><p>Missions, compétences, salaire, et ce qui fait qu'on réussit ou qu'on part chez vous.</p></div><div class="you"><b>De votre côté</b>Un échange d'une heure avec le manager du poste.</div></li>
-      <li><span class="n">2</span><div><h3>Le radar de votre équipe</h3><p class="when">Semaine 1 · 10 minutes par personne</p><p>Direction et équipe répondent au même questionnaire, en toute confidentialité. Nous voyons où leurs descriptions se rejoignent et où elles divergent.</p></div><div class="you"><b>De votre côté</b>Transférer un lien à l'équipe. C'est tout.</div></li>
+      <li><span class="n">1</span><div><h3>Brief du poste</h3><p class="when">Jour 1 · 1 heure</p><p>Missions, compétences, salaire, et ce qui fait qu'on réussit ou qu'on part chez vous. Vous recevez ensuite un devis ferme.</p></div><div class="you"><b>De votre côté</b>Un échange d'une heure avec le manager du poste.</div></li>
+      <li><span class="n">2</span><div><h3>Le radar de votre équipe</h3><p class="when">Semaine 1 · 10 minutes par personne</p><p>Direction et équipe répondent au même questionnaire, en toute confidentialité. Nous voyons comment on travaille vraiment chez vous.</p></div><div class="you"><b>De votre côté</b>Transférer un lien à l'équipe. C'est tout.</div></li>
       <li><span class="n">3</span><div><h3>Recherche et approche</h3><p class="when">Semaines 1 à 3</p><p>Annonces, approche directe et réseau. Chaque candidat retenu est vu en entretien et passe le radar candidat.</p></div><div class="you"><b>De votre côté</b>Rien. Un point d'avancement chaque semaine.</div></li>
-      <li><span class="n">4</span><div><h3>Une sélection de 3 à 5 finalistes</h3><p class="when">Semaines 3 à 4</p><p>Pour chacun : synthèse d'entretien, compétences vérifiées, comparaison au vécu de l'équipe, et une fiche d'entretien avec les questions à poser et les points à dire franchement.</p></div><div class="you"><b>De votre côté</b>Rencontrer les finalistes et choisir.</div></li>
+      <li><span class="n">4</span><div><h3>3 à 5 finalistes</h3><p class="when">Semaines 3 à 4</p><p>Pour chacun : synthèse d'entretien, compétences vérifiées, comparaison avec votre équipe, et une fiche d'entretien avec les questions à poser.</p></div><div class="you"><b>De votre côté</b>Rencontrer les finalistes et choisir.</div></li>
       <li><span class="n">5</span><div><h3>Intégration et suivi 12 mois</h3><p class="when">Après l'arrivée</p><p>Des points réguliers avec la nouvelle recrue et son manager pour repérer tôt ce qui coince, avant que cela ne devienne un départ.</p></div><div class="you"><b>De votre côté</b>Quelques échanges courts dans l'année.</div></li>
     </ol>
   </div>
 </section>
 
-<!-- COMPARATIF -->
-<section>
+<!-- DIFFÉRENCE -->
+<section id="difference">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Ce qui change</p>
-      <h2>La différence avec un cabinet classique</h2>
-    </div>
-    <div class="table-wrap">
-      <table class="compare">
-        <thead><tr><th></th><th>Cabinet classique</th><th>Cairn Affinités</th></tr></thead>
-        <tbody>
-          <tr><th>Point de départ</th><td>La fiche de poste</td><td>La fiche de poste et le quotidien réel de l'équipe</td></tr>
-          <tr><th>Compatibilité</th><td>« Le feeling » en entretien</td><td>Un radar sur 7 thèmes, candidat comparé à l'équipe</td></tr>
-          <tr><th>Ce que vous recevez</th><td>Des CV et des comptes rendus</td><td>3 à 5 finalistes, chacun avec sa fiche d'entretien</td></tr>
-          <tr><th>Franchise</th><td>On vend le poste</td><td>On dit au candidat ce qui pourrait le gêner, avant qu'il signe</td></tr>
-          <tr><th>Après l'embauche</th><td>Fin de mission</td><td>Suivi d'intégration pendant 12 mois</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- HONORAIRES -->
-<section id="honoraires">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Honoraires</p>
-      <h2>Vous ne payez que si vous recrutez</h2>
-    </div>
-    <div class="card fee">
-      <div class="fee-main">
-        <p>Honoraires au succès</p>
-        <p class="fee-price">18 %<small> HT</small></p>
-        <p>du salaire brut annuel de la personne recrutée, facturés à son embauche.</p>
-        <a class="btn btn-light" style="margin-top:26px" href="mailto:cairn.affinites@gmail.com?subject=Confier%20un%20recrutement%20%C2%B7%20Cairn%20Affinit%C3%A9s">Confier un recrutement →</a>
+    <div class="split">
+      <div>
+        <p class="eyebrow">Notre différence</p>
+        <h2>Un recrutement raté ne se lit pas sur un CV</h2>
+        <p class="lead">La plupart des départs précoces ne viennent pas des compétences, mais d'un décalage avec l'équipe : le rythme, le franc-parler, la relation au manager. Nous le vérifions avant que vous ne signiez.</p>
+        <ul class="gains" style="margin-top:28px">
+          <li><b>Vous savez à quoi vous attendre</b>Chaque finaliste est comparé au quotidien réel de votre équipe, pas seulement à la fiche de poste.</li>
+          <li><b>Vos entretiens vont à l'essentiel</b>Une fiche par finaliste avec les points à creuser et les questions à poser.</li>
+          <li><b>Le candidat signe en connaissance de cause</b>Nous lui disons franchement ce qui pourrait le gêner. Moins de mauvaises surprises des deux côtés.</li>
+        </ul>
       </div>
-      <ul class="fee-list">
-        <li>Aucun acompte, rien à payer si nous ne trouvons pas</li>
-        <li>Radar de votre équipe inclus, sans limite de répondants</li>
-        <li>3 à 5 finalistes, chacun comparé au vécu de l'équipe</li>
-        <li>Une fiche d'entretien par finaliste</li>
-        <li>Remplacement sans frais si la personne part pendant sa période d'essai</li>
-        <li>Suivi d'intégration pendant 12 mois</li>
-      </ul>
+      <div class="card radar-card" aria-label="Exemple de radar de compatibilité">
+        <strong>Ce que vous recevez pour chaque finaliste</strong>
+        <div class="meta">Exemple fictif · Responsable paie · PME de 60 salariés</div>
+        <div class="legend">
+          <span><i style="background:var(--dir)"></i>Direction</span>
+          <span><i style="background:var(--team)"></i>Équipe (moyenne)</span>
+          <span><i style="background:var(--cand)"></i>Candidat</span>
+        </div>
+        <svg id="radar-svg" viewBox="-50 0 500 340" role="img" aria-label="Radar à sept axes comparant direction, équipe et candidat"></svg>
+        <div class="verdict">
+          <div><span>Organisation du travail</span><span class="tag t-ok">Compatible</span></div>
+          <div><span>Relation à la hiérarchie</span><span class="tag t-warn">À aborder en entretien</span></div>
+          <div><span>Rythme et disponibilité</span><span class="tag t-crit">Écart marqué</span></div>
+        </div>
+        <p class="caption">Le radar éclaire votre décision, il ne la prend pas à votre place. <a href="https://nansvenet.github.io/radar-cairn/index.html#rapport" style="color:var(--sky)">Voir un rapport complet →</a></p>
+      </div>
     </div>
-    <p class="fine">Plusieurs postes à pourvoir dans l'année ? Nous proposons un taux dégressif. Parlons-en.</p>
+
+    <div class="compare-wrap">
+      <div class="table-wrap">
+        <table class="compare">
+          <thead><tr><th></th><th>Cabinet classique</th><th>Cairn Affinités</th></tr></thead>
+          <tbody>
+            <tr><th>Point de départ</th><td>La fiche de poste</td><td>La fiche de poste et le quotidien réel de l'équipe</td></tr>
+            <tr><th>Compatibilité</th><td>« Le feeling » en entretien</td><td>Un radar sur 7 thèmes, candidat comparé à l'équipe</td></tr>
+            <tr><th>Ce que vous recevez</th><td>Des CV et des comptes rendus</td><td>3 à 5 finalistes, chacun avec sa fiche d'entretien</td></tr>
+            <tr><th>Prix</th><td>Un barème imposé</td><td>Un devis que vous construisez vous-même</td></tr>
+            <tr><th>Après l'embauche</th><td>Fin de mission</td><td>Suivi d'intégration pendant 12 mois</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <details class="more">
+      <summary>Sur quelles études repose la méthode ?</summary>
+      <div class="science">
+        <div class="card sci"><h3>L'accord entre une personne et son environnement compte<sup>1, 2</sup></h3><p>Il est lié à la satisfaction, à l'engagement et à l'intention de rester.</p><p class="in">Chez nous : un éclairage pour décider, jamais un verdict automatique.</p></div>
+        <div class="card sci"><h3>Les dirigeants voient leur culture plus favorablement que leurs équipes<sup>3</sup></h3><p>L'écart est le plus marqué sur la prise de décision et la liberté de parole.</p><p class="in">Chez nous : le même questionnaire pour tous ; l'écart est la donnée centrale.</p></div>
+        <div class="card sci"><h3>Une description réaliste du poste réduit les départs<sup>4</sup></h3><p>Présentée avant l'embauche, elle aide le candidat à savoir à quoi s'attendre.</p><p class="in">Chez nous : les points à dire franchement à chaque finaliste.</p></div>
+        <div class="card sci"><h3>Seules les préférences de travail sont pertinentes<sup>5</sup></h3><p>Rapprocher les gens sur leur mode de vie revient à trier sur des critères étrangers au poste.</p><p class="in">Chez nous : aucune question sur la vie personnelle ou les convictions.</p></div>
+      </div>
+      <ol class="refs">
+        <li>Kristof-Brown, A. L., Zimmerman, R. D. et Johnson, E. C. (2005). Personnel Psychology, 58(2), 281-342.</li>
+        <li>Arthur, W., Bell, S. T., Villado, A. J. et Doverspike, D. (2006). Journal of Applied Psychology, 91(4), 786-801.</li>
+        <li>Grenny, J. et Maxfield, D. (2016). Enquête VitalSmarts auprès de plus de 1 200 salariés, managers et dirigeants.</li>
+        <li>Phillips, J. M. (1998). Academy of Management Journal, 41(6), 673-690.</li>
+        <li>Stein, S. K., Goldberg, A. et Srivastava, S. B. (2018). Distinguishing Round from Square Pegs. Stanford GSB, document de travail n° 3627.</li>
+      </ol>
+      <p class="fine">Le radar est en cours de validation : sa fiabilité sera mesurée sur les premières missions. Il complète l'entretien et le jugement du recruteur. <a href="pour-aller-plus-loin.html" style="color:var(--sky)">Toute la méthode et les garanties légales →</a></p>
+    </details>
   </div>
 </section>
 
-<!-- RADAR -->
-<section id="radar">
-  <div class="wrap split">
+<!-- TARIFS / SIMULATEUR -->
+<section id="tarifs" class="alt">
+  <span id="honoraires"></span><span id="offres"></span>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tarifs</p>
+      <h2>Construisez votre devis en une minute</h2>
+      <p>Nos honoraires sont un pourcentage du salaire brut annuel de la personne recrutée. Réglez les curseurs selon vos priorités : le taux et l'échéancier se mettent à jour.</p>
+    </div>
+
+    <div class="sim">
+      <div class="card sim-controls" id="sim-controls">
+        <div class="ctrl">
+          <div class="ctrl-head"><label for="salaire">Salaire brut annuel du poste</label></div>
+          <div class="salary-row"><input id="salaire-n" type="number" inputmode="numeric" min="20000" max="200000" step="1000" value="45000" aria-label="Salaire brut annuel en euros"><span>€ brut / an</span></div>
+          <input id="salaire" type="range" min="25000" max="120000" step="1000" value="45000" aria-describedby="salaire-hint">
+          <p class="hint" id="salaire-hint">Fixe + variable prévu. Une estimation suffit.</p>
+        </div>
+
+        <div class="ctrl">
+          <div class="ctrl-head"><span class="lbl" id="l-garantie">Durée de la garantie</span><span class="impact" id="i-garantie"></span></div>
+          <p class="val" id="v-garantie"></p>
+          <input id="garantie" type="range" min="0" max="3" step="1" value="1" aria-labelledby="l-garantie">
+          <div class="ticks" id="t-garantie"></div>
+        </div>
+
+        <div class="ctrl">
+          <div class="ctrl-head"><span class="lbl" id="l-factu">Quand payez-vous ?</span><span class="impact" id="i-factu"></span></div>
+          <p class="val" id="v-factu"></p>
+          <input id="factu" type="range" min="0" max="4" step="1" value="2" aria-labelledby="l-factu">
+          <div class="ticks" id="t-factu"></div>
+          <p class="hint">Plus vous payez tard, plus nous portons le risque : le taux augmente légèrement.</p>
+        </div>
+
+        <div class="ctrl">
+          <div class="ctrl-head"><span class="lbl">Exclusivité de la mission</span><span class="impact" id="i-excl"></span></div>
+          <div class="seg" id="s-excl" role="group" aria-label="Exclusivité"></div>
+          <p class="hint" id="v-excl"></p>
+        </div>
+
+        <div class="ctrl">
+          <div class="ctrl-head"><span class="lbl">Postes à pourvoir dans l'année</span><span class="impact" id="i-vol"></span></div>
+          <div class="seg" id="s-vol" role="group" aria-label="Nombre de postes"></div>
+        </div>
+      </div>
+
+      <aside class="sim-result" id="sim-result" aria-live="polite">
+        <p class="k">Votre devis estimatif</p>
+        <p class="rate" id="r-rate">18 %<small> HT</small></p>
+        <p>du salaire brut annuel</p>
+        <p class="amount" style="margin-top:14px">soit <b id="r-amount">8 100 €</b> HT <span id="r-ttc" style="color:var(--on-band-2);font-size:14px"></span></p>
+        <div class="timeline" id="r-timeline"></div>
+        <ul class="incl">
+          <li>Radar de votre équipe, sans limite de répondants</li>
+          <li>3 à 5 finalistes, chacun avec sa fiche d'entretien</li>
+          <li id="r-gar">Remplacement sans frais pendant la période d'essai</li>
+          <li>Suivi d'intégration pendant 12 mois</li>
+        </ul>
+        <div class="res-ctas">
+          <a class="btn btn-light" href="#contact" id="r-go">Lancer avec ce devis →</a>
+          <button class="btn btn-line-light" type="button" id="r-copy">Copier le récapitulatif</button>
+        </div>
+        <p class="sim-note">Estimation indicative, confirmée par écrit après le brief. Plusieurs postes en même temps ou un profil rare : nous ajustons ensemble.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Questions fréquentes</p>
+      <h2>Ce que nos clients nous demandent avant de démarrer</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Combien de temps dure un recrutement ?</summary><p>Vous rencontrez vos 3 à 5 finalistes en 3 à 4 semaines. L'arrivée dépend ensuite du préavis du candidat : souvent 1 mois pour un agent de maîtrise, jusqu'à 3 mois pour un cadre.</p></details>
+      <details><summary>Que se passe-t-il si vous ne trouvez personne ?</summary><p>Vous ne payez rien, sauf si vous avez choisi l'option acompte : celui-ci couvre le travail de recherche engagé et reste acquis. Toutes les autres formules sont 100 % au succès.</p></details>
+      <details><summary>Comment fonctionne la garantie ?</summary><p>Si la personne quitte le poste pendant la durée de garantie choisie, quelle qu'en soit la raison (sauf suppression du poste), nous relançons la recherche sans frais supplémentaires.</p></details>
+      <details><summary>Pourquoi l'exclusivité fait-elle baisser le prix ?</summary><p>Quand nous sommes seuls sur le poste, nous pouvons y consacrer tout le temps nécessaire sans risquer de travailler pour rien. Nous partageons ce gain avec vous. En contrepartie, nous nous engageons sur un calendrier.</p></details>
+      <details><summary>Que demande le radar à mon équipe ?</summary><p>10 minutes chacun, une trentaine de questions sur la façon de travailler. Aucune question personnelle. Les réponses de l'équipe ne sont lues qu'en moyenne, jamais individuellement.</p></details>
+      <details><summary>Le devis en ligne est-il définitif ?</summary><p>C'est une estimation fidèle de nos conditions. Après le brief, nous vous envoyons un devis écrit reprenant vos choix, que vous pouvez encore ajuster.</p></details>
+      <details><summary>Recrutez-vous en région ?</summary><p>Oui, partout en France, en présentiel, hybride ou télétravail. Les entretiens se font en visio ou dans vos locaux selon votre préférence.</p></details>
+      <details><summary>Et si je veux recruter moi-même ?</summary><p>Le radar est aussi disponible seul, avec une version gratuite. <a href="#radar" style="color:var(--sky)">Voir les formules du radar</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="band" id="contact">
+  <div class="wrap contact">
     <div>
-      <p class="eyebrow">Le radar de compatibilité</p>
-      <h2>Notre outil, aussi disponible seul</h2>
-      <p class="lead">Le radar est au cœur de chacun de nos recrutements. Vous pouvez aussi l'utiliser en autonomie, pour connaître votre équipe avant d'ouvrir un poste ou pour vos propres recrutements.</p>
-      <ul class="checks">
-        <li>Le radar direction / équipe et la synthèse des écarts</li>
-        <li>L'explication de chaque écart, grâce à une seconde vague de questions</li>
-        <li>La comparaison de chaque candidat au vécu de l'équipe</li>
-        <li>Les sujets de management révélés au passage</li>
-      </ul>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://nansvenet.github.io/radar-cairn/index.html#cabinet">Créer mon radar gratuit →</a>
-        <a class="btn btn-ghost" href="https://nansvenet.github.io/radar-cairn/index.html#rapport">Voir l'exemple de rapport</a>
+      <p class="eyebrow" style="color:#9CC3E0">Un poste à pourvoir ?</p>
+      <h2>Parlons de votre recrutement</h2>
+      <p class="lead">Quelques informations suffisent. Nous vous rappelons sous 24 heures ouvrées avec une première lecture du marché, un calendrier et votre devis écrit.</p>
+      <div class="direct">
+        <span>Ou écrivez-nous directement : <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span>
+        <button class="copy" id="copy" type="button">Copier l'adresse</button>
       </div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <label>Votre nom<input name="nom" autocomplete="name" required></label>
+      <label>Entreprise<input name="entreprise" autocomplete="organization" required></label>
+      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
+      <label>Téléphone<input name="tel" type="tel" autocomplete="tel"></label>
+      <label>Poste à pourvoir<input name="poste" placeholder="Ex. Responsable paie" required></label>
+      <label>Ville<input name="ville" autocomplete="address-level2"></label>
+      <label class="full">Arrivée souhaitée<input name="date" placeholder="Ex. début mars"></label>
+      <label class="full">Contexte (facultatif)<textarea name="msg" placeholder="Création de poste, remplacement, taille de l'équipe…"></textarea></label>
+      <label class="check full"><input type="checkbox" id="joindre" checked><span>Joindre mon devis estimatif : <b id="f-devis">18 % · 8 100 € HT</b></span></label>
+      <p class="err full" id="f-err" role="alert"></p>
+      <div class="full"><button class="btn btn-primary" type="submit">Envoyer ma demande →</button></div>
+      <p class="note full">Le bouton ouvre votre messagerie avec un e-mail prérempli. Vos informations ne servent qu'à vous recontacter.</p>
+    </form>
+  </div>
+</section>
+
+<!-- RADAR SEUL -->
+<section id="radar">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Vous recrutez vous-même ?</p>
+      <h2>Le radar de compatibilité, disponible seul</h2>
+      <p>Utilisez notre outil en autonomie pour connaître votre équipe avant d'ouvrir un poste, ou pour comparer vos propres candidats.</p>
     </div>
     <div class="plans">
-      <div class="card plan"><span class="label">Découverte</span><p class="p">0 €</p><p>1 équipe, jusqu'à 10 répondants, en autonomie.</p><a href="https://nansvenet.github.io/radar-cairn/index.html#cabinet">Tester →</a></div>
+      <div class="card plan"><span class="label">Découverte</span><p class="p">0 €</p><p>1 équipe, jusqu'à 10 répondants, en autonomie.</p><a href="https://nansvenet.github.io/radar-cairn/index.html#cabinet">Créer mon radar →</a></div>
       <div class="card plan"><span class="label">Diagnostic</span><p class="p">490 € <small>HT</small></p><p>Un poste, 5 candidats comparés, restitution d'une heure.</p><a href="mailto:cairn.affinites@gmail.com?subject=Formule%20Diagnostic%20%C2%B7%20Cairn%20Affinit%C3%A9s">Lancer →</a></div>
       <div class="card plan"><span class="label">Entreprise</span><p class="p">190 € <small>HT / mois</small></p><p>Jusqu'à 5 équipes, candidats illimités, engagement 12 mois.</p><a href="mailto:cairn.affinites@gmail.com?subject=Formule%20Entreprise%20%C2%B7%20Cairn%20Affinit%C3%A9s">Demander une démo →</a></div>
       <div class="card plan"><span class="label">Cabinets</span><p class="p">390 € <small>HT / mois</small></p><p>À partir de. Missions illimitées, rapports à votre nom.</p><a href="mailto:cairn.affinites@gmail.com?subject=Formule%20Cabinet%20%C2%B7%20Cairn%20Affinit%C3%A9s">Nous contacter →</a></div>
@@ -368,45 +578,20 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<!-- SCIENCE -->
-<section id="science">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Sur quoi repose la méthode</p>
-      <h2>Chaque choix s'appuie sur un résultat de recherche</h2>
-      <p>Le radar applique la théorie de l'adéquation personne-environnement, étudiée depuis plus de trente ans en psychologie du travail.</p>
-    </div>
-    <div class="science">
-      <div class="card sci"><h3>L'accord entre une personne et son environnement compte<sup>1, 2</sup></h3><p>Il est lié à la satisfaction, à l'engagement et à l'intention de rester.</p><p class="in">Chez nous : un éclairage pour décider, jamais un verdict automatique.</p></div>
-      <div class="card sci"><h3>Les dirigeants voient leur culture plus favorablement que leurs équipes<sup>3</sup></h3><p>L'écart est le plus marqué sur la prise de décision et la liberté de parole.</p><p class="in">Chez nous : le même questionnaire pour tous ; l'écart est la donnée centrale.</p></div>
-      <div class="card sci"><h3>Une description réaliste du poste réduit les départs<sup>4</sup></h3><p>Présentée avant l'embauche, elle aide le candidat à savoir à quoi s'attendre.</p><p class="in">Chez nous : les points à dire franchement à chaque finaliste.</p></div>
-      <div class="card sci"><h3>Seules les préférences de travail sont pertinentes<sup>5</sup></h3><p>Rapprocher les gens sur leur mode de vie revient à trier sur des critères étrangers au poste.</p><p class="in">Chez nous : aucune question sur la vie personnelle ou les convictions.</p></div>
-    </div>
-    <ol class="refs">
-      <li>Kristof-Brown, A. L., Zimmerman, R. D. et Johnson, E. C. (2005). Personnel Psychology, 58(2), 281-342.</li>
-      <li>Arthur, W., Bell, S. T., Villado, A. J. et Doverspike, D. (2006). Journal of Applied Psychology, 91(4), 786-801.</li>
-      <li>Grenny, J. et Maxfield, D. (2016). Enquête VitalSmarts auprès de plus de 1 200 salariés, managers et dirigeants.</li>
-      <li>Phillips, J. M. (1998). Academy of Management Journal, 41(6), 673-690.</li>
-      <li>Stein, S. K., Goldberg, A. et Srivastava, S. B. (2018). Distinguishing Round from Square Pegs. Stanford GSB, document de travail n° 3627.</li>
-    </ol>
-    <p class="fine">Le radar est en cours de validation : sa fiabilité sera mesurée sur les premières missions. Il complète l'entretien et le jugement du recruteur, il ne décide pas à leur place. <a href="pour-aller-plus-loin.html" style="color:var(--sky)">Toute la méthode et les garanties légales →</a></p>
-  </div>
-</section>
-
 <!-- CANDIDATS + INVITATION -->
-<section id="candidats">
+<section id="candidats" class="alt">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Candidats</p>
-      <h2>Vous travaillez dans les fonctions support ?</h2>
+      <p class="eyebrow">Candidats et répondants</p>
+      <h2>Vous n'êtes pas recruteur ?</h2>
     </div>
     <div class="duo">
       <div class="card">
-        <h3>Découvrez dans quel environnement vous travaillez le mieux</h3>
+        <h3>Candidat : découvrez où vous travaillez le mieux</h3>
         <ul>
           <li><b>10 minutes, gratuit</b><span>Sans inscription, sur téléphone ou ordinateur.</span></li>
           <li><b>Votre profil à partager</b><span>Une image et un lien pour LinkedIn ou vos autres réseaux.</span></li>
-          <li><b>Des postes qui vous correspondent</b><span>Si vous le souhaitez, nous vous présentons aux entreprises compatibles avec votre profil.</span></li>
+          <li><b>Des postes qui vous correspondent</b><span>Si vous le souhaitez, nous vous présentons aux entreprises compatibles.</span></li>
         </ul>
         <a class="btn btn-primary" href="https://nansvenet.github.io/radar-cairn/index.html#libre">Faire le test gratuit →</a>
       </div>
@@ -428,27 +613,19 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 </section>
-
-<!-- CONTACT -->
-<section class="band" id="contact">
-  <div class="wrap">
-    <p class="eyebrow" style="color:#9CC3E0">Un poste à pourvoir ?</p>
-    <h2>Parlons de votre recrutement en 30 minutes</h2>
-    <p class="lead">Dites-nous le poste et le contexte. Nous vous répondons sous 24 heures ouvrées avec une première lecture du marché et un calendrier.</p>
-    <div class="row">
-      <a class="btn btn-light" href="mailto:cairn.affinites@gmail.com?subject=Confier%20un%20recrutement%20%C2%B7%20Cairn%20Affinit%C3%A9s&body=Poste%20%3A%20%0AVille%20%3A%20%0ASalaire%20envisag%C3%A9%20%3A%20%0ADate%20d'arriv%C3%A9e%20souhait%C3%A9e%20%3A%20%0ANum%C3%A9ro%20pour%20vous%20rappeler%20%3A%20">Confier un recrutement →</a>
-      <span style="color:var(--on-band-2);font-size:15px">cairn.affinites@gmail.com</span>
-      <button class="copy" id="copy" type="button">Copier l'adresse</button>
-    </div>
-  </div>
-</section>
 </main>
+
+<div class="simbar" id="simbar" aria-hidden="true">
+  <div><b id="sb-rate">18 %</b> <span id="sb-amount">soit 8 100 € HT</span></div>
+  <a href="#sim-result">Voir le détail</a>
+</div>
 
 <footer>
   <div class="wrap">
     <span>© Cairn Affinités · Cabinet de recrutement fonctions support</span>
     <nav aria-label="Pied de page">
-      <a href="#honoraires">Honoraires</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">Questions</a>
       <a href="https://nansvenet.github.io/radar-cairn/index.html#rapport">Exemple de rapport</a>
       <a href="pour-aller-plus-loin.html">Pour aller plus loin</a>
       <a href="#contact">Contact</a>
@@ -457,15 +634,55 @@ footer a:hover{color:var(--ink)}
 </footer>
 
 <script>
+/* ============================================================
+   RÉGLAGES DES TARIFS (à modifier ici uniquement)
+   base : taux standard en % du brut annuel.
+   pt   : points ajoutés (+) ou retirés (-) au taux de base.
+   split: répartition de la facture (en %) entre les 4 moments.
+   ============================================================ */
+var TARIFS = {
+  email: "cairn.affinites@gmail.com",
+  base: 18,
+  plancher: 14,          // taux minimum, quoi qu'il arrive
+  garantie: [
+    {l:"Aucune", d:"Pas de remplacement prévu.", inc:"Pas de garantie de remplacement", pt:-2},
+    {l:"Période d'essai", d:"Remplacement sans frais si la personne part pendant sa période d'essai.", inc:"Remplacement sans frais pendant la période d'essai", pt:0},
+    {l:"6 mois", d:"Remplacement sans frais si la personne part dans les 6 mois.", inc:"Remplacement sans frais pendant 6 mois", pt:1},
+    {l:"12 mois", d:"Remplacement sans frais si la personne part dans les 12 mois.", inc:"Remplacement sans frais pendant 12 mois", pt:3}
+  ],
+  facturation: [
+    {l:"Acompte", d:"1/3 au lancement de la mission, le solde à l'embauche.", split:[33,0,67,0], pt:-2},
+    {l:"Promesse", d:"100 % à la signature de la promesse d'embauche.", split:[0,100,0,0], pt:-1},
+    {l:"Embauche", d:"100 % à l'arrivée de la personne recrutée.", split:[0,0,100,0], pt:0},
+    {l:"Embauche + essai", d:"50 % à l'arrivée, 50 % à la fin de la période d'essai.", split:[0,0,50,50], pt:1},
+    {l:"Fin d'essai", d:"100 % à la fin de la période d'essai, une fois la personne confirmée.", split:[0,0,0,100], pt:2}
+  ],
+  moments: ["Lancement","Promesse","Embauche","Fin d'essai"],
+  exclusivite: [
+    {l:"Oui, en exclusivité", d:"Nous sommes seuls sur le poste et nous engageons sur un calendrier.", pt:0},
+    {l:"Non", d:"Vous travaillez aussi avec d'autres cabinets ou en direct.", pt:3}
+  ],
+  volume: [
+    {l:"1 poste", pt:0},
+    {l:"2 à 3 postes", pt:-1},
+    {l:"4 et plus", pt:-2}
+  ]
+};
+
 (function(){
-  // Radar
+  var T=TARIFS, $=function(id){return document.getElementById(id)};
+  var eur=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+  var num=function(x){return String(x).replace(".",",")};
+  var state={salaire:45000,garantie:1,factu:2,excl:0,vol:0};
+
+  // Radar d'illustration
   var axes=["Décision","Hiérarchie","Organisation","Franc-parler","Équipe","Changement","Disponibilité"];
   var series=[
     {c:"var(--dir)", v:[4.2,3.8,3.6,4.4,3.9,4.1,3.2], fill:.06},
     {c:"var(--team)",v:[2.9,2.6,3.9,3.1,4.1,3.4,4.3], fill:.14},
     {c:"var(--cand)",v:[3.1,4.2,3.8,3.4,3.8,3.0,2.4], fill:.10, dash:"5 4"}
   ];
-  var svg=document.getElementById("radar-svg"), NS="http://www.w3.org/2000/svg";
+  var svg=$("radar-svg"), NS="http://www.w3.org/2000/svg";
   var cx=200, cy=170, R=118, n=axes.length;
   function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
   function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
@@ -477,13 +694,113 @@ footer a:hover{color:var(--ink)}
   var polys=series.map(function(s){
     var p=el("polygon",{points:"",fill:s.c,"fill-opacity":s.fill,stroke:s.c,"stroke-width":"2","stroke-linejoin":"round"});
     if(s.dash)p.setAttribute("stroke-dasharray",s.dash);return p;});
-  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches, t0=null, D=900;
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
   function draw(k){series.forEach(function(s,j){polys[j].setAttribute("points",s.v.map(function(v,i){return pt(i,R*(v/5)*k).join(",")}).join(" "));});}
-  function step(ts){if(!t0)t0=ts;var x=Math.min(1,(ts-t0)/D),k=1-Math.pow(1-x,3);draw(k);if(x<1)requestAnimationFrame(step);}
-  if(reduce)draw(1);else requestAnimationFrame(step);
+  if(reduce||!("IntersectionObserver" in window))draw(1);else{
+    draw(0);var started=false;
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;var t0=null;(function step(ts){if(!t0)t0=ts;var x=Math.min(1,(ts-t0)/900);draw(1-Math.pow(1-x,3));if(x<1)requestAnimationFrame(step);})(performance.now());}})},{threshold:.3}).observe(svg);
+  }
+
+  // ===== Simulateur =====
+  function impactTxt(p){return p===0?"Standard":(p>0?"+":"−")+num(Math.abs(p))+" pt";}
+  function setImpact(id,p){var e=$(id);e.textContent=impactTxt(p);e.className="impact"+(p<0?" down":p>0?" up":"");}
+  function fillRange(r){var p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty("--p",p+"%");}
+
+  function buildTicks(key,list,rangeId){
+    var box=$("t-"+key);
+    list.forEach(function(o,i){var b=document.createElement("button");b.type="button";b.textContent=o.l;b.tabIndex=-1;
+      b.style.left="calc(12px + (100% - 24px) * "+(i/(list.length-1))+")";
+      b.addEventListener("click",function(){$(rangeId).value=i;state[key]=i;update();});box.appendChild(b);});
+    $(rangeId).addEventListener("input",function(){state[key]=+this.value;update();});
+  }
+  function buildSeg(key,list){
+    var box=$("s-"+key);
+    list.forEach(function(o,i){var b=document.createElement("button");b.type="button";b.textContent=o.l;
+      b.addEventListener("click",function(){state[key]=i;update();});box.appendChild(b);});
+  }
+  buildTicks("garantie",T.garantie,"garantie");
+  buildTicks("factu",T.facturation,"factu");
+  buildSeg("excl",T.exclusivite);
+  buildSeg("vol",T.volume);
+
+  var tl=$("r-timeline");
+  T.moments.forEach(function(m){var d=document.createElement("div");d.className="tl";d.innerHTML='<b></b><div class="bar"><i></i></div><span>'+m+'</span>';tl.appendChild(d);});
+
+  var sR=$("salaire"), sN=$("salaire-n");
+  sR.addEventListener("input",function(){state.salaire=+this.value;sN.value=this.value;update();});
+  sN.addEventListener("input",function(){var v=parseInt(this.value,10);if(!isNaN(v)&&v>0){state.salaire=v;sR.value=Math.min(120000,Math.max(25000,v));update();}});
+
+  var current={};
+  function update(){
+    var g=T.garantie[state.garantie], f=T.facturation[state.factu], x=T.exclusivite[state.excl], v=T.volume[state.vol];
+    var rate=Math.max(T.plancher,T.base+g.pt+f.pt+x.pt+v.pt);
+    var amount=Math.round(state.salaire*rate/100);
+    current={rate:rate,amount:amount,g:g,f:f,x:x,v:v};
+
+    $("v-garantie").textContent=g.d; setImpact("i-garantie",g.pt);
+    $("v-factu").textContent=f.d; setImpact("i-factu",f.pt);
+    $("v-excl").textContent=x.d; setImpact("i-excl",x.pt);
+    setImpact("i-vol",v.pt);
+    [["t-garantie","garantie"],["t-factu","factu"]].forEach(function(a){[].forEach.call($(a[0]).children,function(b,i){b.classList.toggle("on",i===state[a[1]]);});});
+    [["s-excl","excl"],["s-vol","vol"]].forEach(function(a){[].forEach.call($(a[0]).children,function(b,i){b.classList.toggle("on",i===state[a[1]]);b.setAttribute("aria-pressed",i===state[a[1]]);});});
+    $("garantie").value=state.garantie; $("factu").value=state.factu;
+    [sR,$("garantie"),$("factu")].forEach(fillRange);
+
+    var rt=num(rate)+" %";
+    $("r-rate").innerHTML=rt+"<small> HT</small>";
+    $("r-amount").textContent=eur.format(amount);
+    $("r-ttc").textContent="("+eur.format(Math.round(amount*1.2))+" TTC)";
+    $("r-gar").textContent=g.inc;
+    [].forEach.call(tl.children,function(c,i){var p=f.split[i];c.classList.toggle("zero",!p);
+      c.querySelector("b").textContent=p?eur.format(Math.round(amount*p/100)):"—";
+      c.querySelector("i").style.height=p+"%";});
+    $("sb-rate").textContent=rt; $("sb-amount").textContent="soit "+eur.format(amount)+" HT";
+    $("f-devis").textContent=rt+" · "+eur.format(amount)+" HT";
+  }
+  update();
+
+  function recap(){
+    var c=current, lines=[
+      "Devis estimatif Cairn Affinités",
+      "Salaire brut annuel : "+eur.format(state.salaire),
+      "Garantie : "+c.g.l,
+      "Paiement : "+c.f.d,
+      "Exclusivité : "+c.x.l,
+      "Postes dans l'année : "+c.v.l,
+      "Taux : "+num(c.rate)+" % HT, soit "+eur.format(c.amount)+" HT"
+    ];
+    T.moments.forEach(function(m,i){var p=c.f.split[i];if(p)lines.push("  · "+m+" : "+eur.format(Math.round(c.amount*p/100))+" HT ("+p+" %)");});
+    return lines.join("\n");
+  }
+  $("r-copy").addEventListener("click",function(){
+    var b=this,done=function(){b.textContent="Récapitulatif copié";setTimeout(function(){b.textContent="Copier le récapitulatif"},1800);};
+    if(navigator.clipboard)navigator.clipboard.writeText(recap()).then(done,done);else done();
+  });
+
+  // Barre récap mobile : visible quand on règle les curseurs et que le résultat est hors écran
+  if("IntersectionObserver" in window){
+    var vis={c:false,r:false}, bar=$("simbar");
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id==="sim-result"?"r":"c"]=e.isIntersecting;});bar.classList.toggle("show",vis.c&&!vis.r);},{threshold:0});
+    io.observe($("sim-controls"));io.observe($("sim-result"));
+  }
+
+  // ===== Formulaire de contact → e-mail prérempli =====
+  $("form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var f=this, val=function(n){return (f.elements[n].value||"").trim();}, err=$("f-err");
+    if(!val("nom")||!val("entreprise")||!val("poste")||!/\S+@\S+\.\S+/.test(val("email"))){err.textContent="Merci d'indiquer votre nom, votre entreprise, un e-mail valide et le poste.";return;}
+    err.textContent="";
+    var body=[
+      "Nom : "+val("nom"),"Entreprise : "+val("entreprise"),"E-mail : "+val("email"),"Téléphone : "+val("tel"),
+      "Poste : "+val("poste"),"Ville : "+val("ville"),"Arrivée souhaitée : "+val("date"),"",
+      val("msg")?"Contexte : "+val("msg")+"\n":""
+    ].join("\n");
+    if($("joindre").checked)body+="\n"+recap();
+    location.href="mailto:"+T.email+"?subject="+encodeURIComponent("Recrutement "+val("poste")+" · "+val("entreprise"))+"&body="+encodeURIComponent(body);
+  });
 
   // Invitation : redirige vers index.html#<rôle>-<code>
-  var input=document.getElementById("code"), err=document.getElementById("err");
+  var input=$("code"), err=$("err");
   document.querySelectorAll("[data-role]").forEach(function(b){
     b.addEventListener("click",function(){
       var code=(input.value||"").trim().toLowerCase().replace(/\s+/g,"-");
@@ -494,10 +811,10 @@ footer a:hover{color:var(--ink)}
   });
 
   // Copier l'adresse
-  var c=document.getElementById("copy");
+  var c=$("copy");
   c.addEventListener("click",function(){
     var done=function(){c.textContent="Adresse copiée";setTimeout(function(){c.textContent="Copier l'adresse"},1800);};
-    if(navigator.clipboard)navigator.clipboard.writeText("cairn.affinites@gmail.com").then(done,done);else done();
+    if(navigator.clipboard)navigator.clipboard.writeText(T.email).then(done,done);else done();
   });
 })();
 </script>
