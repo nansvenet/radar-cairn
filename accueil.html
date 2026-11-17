@@ -39,6 +39,13 @@ section{padding:80px 0;border-top:1px solid var(--line)}
 .sec-head{margin-bottom:40px}
 .sec-head p{max-width:62ch;margin-top:14px}
 .alt{background:var(--surface-2)}
+.skills-home{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.skills-home .card{padding:26px;display:flex;flex-direction:column;gap:10px}
+.skills-home .num{font-family:var(--display);font-size:24px;color:var(--sky);line-height:1}
+.skills-home p{color:var(--text-2);font-size:15px;flex:1}
+.skills-home .pied{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.skills-home .btn{padding:10px 16px;font-size:14px}
+@media (max-width:720px){.skills-home{grid-template-columns:1fr}}
 
 /* Barre candidats */
 .util{background:var(--band);color:var(--on-band-2);font-size:13px}
@@ -297,6 +304,7 @@ footer a:hover{color:var(--ink)}
       <a href="#difference">Notre différence</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#faq">Questions</a>
+      <a href="#skills">Skills offerts</a>
     </nav>
     <a class="btn btn-primary" href="#contact">Confier un recrutement</a>
   </div>
@@ -306,6 +314,7 @@ footer a:hover{color:var(--ink)}
     <a href="#deroule">Déroulé</a>
     <a href="#difference">Notre différence</a>
     <a href="#faq">Questions</a>
+    <a href="#skills">Skills offerts</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -533,6 +542,22 @@ footer a:hover{color:var(--ink)}
       <details><summary>Recrutez-vous en région ?</summary><p>Oui, partout en France, en présentiel, hybride ou télétravail. Les entretiens se font en visio ou dans vos locaux selon votre préférence.</p></details>
       <details><summary>Et si je veux recruter moi-même ?</summary><p>Le radar est aussi disponible seul, avec une version gratuite. <a href="#radar" style="color:var(--sky)">Voir les formules du radar</a>.</p></details>
     </div>
+  </div>
+</section>
+
+<!-- SKILLS OFFERTS -->
+<section id="skills" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Ressources gratuites</p>
+      <h2>Des skills RH offerts pour votre IA</h2>
+      <p>Des compétences prêtes à installer dans votre assistant IA (Claude, par exemple), pour avancer seul sur vos sujets RH. Deux sont déjà disponibles, les autres arrivent progressivement.</p>
+    </div>
+    <div class="skills-home">
+      <div class="card"><span class="num">03</span><h3>Marque employeur pour PME</h3><p>Trouver ce qui rend votre entreprise attirante et le transformer en contenus LinkedIn, en page carrière et en arguments pour les entretiens.</p><div class="pied"><a class="btn btn-primary" href="skills/03-marque-employeur-pme.zip" download>Télécharger</a><a class="btn btn-ghost" href="skills/03-marque-employeur-pme-exemple.pdf" target="_blank" rel="noopener">Voir un exemple</a></div></div>
+      <div class="card"><span class="num">06</span><h3>Matrice de compétences</h3><p>Cartographier les compétences de votre équipe, repérer les manques et les points forts avant d'ouvrir un poste.</p><div class="pied"><a class="btn btn-primary" href="skills/06-matrice-competences.zip" download>Télécharger</a><a class="btn btn-ghost" href="skills/06-matrice-competences-exemple.pdf" target="_blank" rel="noopener">Voir un exemple</a></div></div>
+    </div>
+    <p class="after">Installation : dans Claude, Paramètres, puis Capacités, puis Skills, et « Importer ». <a href="pour-aller-plus-loin.html">Voir tous les skills à venir →</a></p>
   </div>
 </section>
 
