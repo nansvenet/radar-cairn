@@ -155,52 +155,54 @@ details.more[open] summary::before{content:"− ";}
 
 /* Simulateur */
 .sim{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:start}
-.sim-controls{padding:8px 26px 18px}
-.ctrl{padding:20px 0;border-bottom:1px solid var(--line)}
+.sim-controls{padding:4px 24px 10px}
+.ctrl{padding:13px 0;border-bottom:1px solid var(--line)}
+.ctrl-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}.ctrl-pair .ctrl{border-bottom:0}.ctrl-pair .seg button{min-width:0;padding:7px 8px;font-size:13.5px}
+@media (max-width:600px){.ctrl-pair{grid-template-columns:1fr;gap:0}}
 .ctrl:last-child{border-bottom:0}
 .ctrl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px}
-.ctrl-head label,.ctrl-head .lbl{font-weight:600;font-size:15.5px}
+.ctrl-head label,.ctrl-head .lbl{font-weight:600;font-size:15px}
 .impact{font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;background:var(--surface-2);color:var(--text-2)}
 .impact.down{background:var(--ok-bg);color:var(--ok)}
 .impact.up{background:var(--warn-bg);color:var(--warn)}
-.ctrl .val{font-size:14.5px;color:var(--ink);margin-top:2px}
-.ctrl .hint{font-size:13.5px;color:var(--muted);margin-top:2px}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:10px;cursor:pointer}
+.ctrl .val{font-size:14px;color:var(--ink);margin-top:0}
+.ctrl .hint{font-size:13px;color:var(--muted);margin-top:0}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;margin-top:4px;cursor:pointer}
 input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:linear-gradient(90deg,var(--sky) var(--p,50%),var(--surface-2) var(--p,50%))}
 input[type=range]::-moz-range-track{height:6px;border-radius:999px;background:var(--surface-2)}
 input[type=range]::-moz-range-progress{height:6px;border-radius:999px;background:var(--sky)}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--surface);border:2px solid var(--ink);margin-top:-9px;box-shadow:0 2px 6px rgba(20,35,59,.2)}
 input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--ink)}
 input[type=range]:focus-visible{outline:2px solid var(--sky);outline-offset:4px;border-radius:6px}
-.ticks{position:relative;height:38px;margin-top:2px}
+.ticks{position:relative;height:30px;margin-top:0}
 .ticks button{position:absolute;top:0;transform:translateX(-50%);max-width:92px;background:none;border:0;font:12.5px/1.25 var(--body);color:var(--muted);cursor:pointer;padding:4px 2px;text-align:center}
 .ticks button:first-child{transform:none;text-align:left;left:0!important}.ticks button:last-child{transform:none;text-align:right;left:auto!important;right:0}
 .ticks button.on{color:var(--ink);font-weight:600}
-.seg{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-.seg button{flex:1;min-width:90px;font:500 14px var(--body);padding:10px 12px;border-radius:12px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.seg button{flex:1;min-width:90px;font:500 14px var(--body);padding:7px 12px;border-radius:12px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink);cursor:pointer}
 .seg button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.salary-row{display:flex;align-items:center;gap:10px;margin-top:8px}
-.salary-row input[type=number]{font:600 18px var(--body);width:130px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink)}
+.salary-row{display:flex;align-items:center;gap:10px;margin-top:4px}
+.salary-row input[type=number]{font:600 17px var(--body);width:130px;padding:6px 12px;border-radius:10px;border:1px solid var(--line-strong);background:var(--bg);color:var(--ink)}
 .salary-row span{font-size:14px;color:var(--muted)}
 
-.sim-result{background:var(--band);color:var(--on-band);padding:28px;border-radius:18px;position:sticky;top:130px}
+.sim-result{background:var(--band);color:var(--on-band);padding:22px 24px;border-radius:18px;position:sticky;top:130px}
 .sim-result p{color:var(--on-band-2)}
 .sim-result .k{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#9CC3E0}
-.rate{font-family:var(--display);font-size:60px;line-height:1;margin:10px 0 4px}
+.rate{font-family:var(--display);font-size:48px;line-height:1;margin:8px 0 2px}
 .rate small{font-size:18px}
 .amount{font-size:17px;color:var(--on-band)}
 .amount b{font-size:22px}
-.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:22px 0 6px}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 4px}
 .tl{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--on-band-2);text-align:center}
-.tl .bar{height:64px;border-radius:8px;background:rgba(247,244,238,.08);position:relative;overflow:hidden}
+.tl .bar{height:40px;border-radius:8px;background:rgba(247,244,238,.08);position:relative;overflow:hidden}
 .tl .bar i{position:absolute;left:0;right:0;bottom:0;background:#9CC3E0;border-radius:8px 8px 0 0;transition:height .35s var(--ease)}
 .tl b{color:var(--on-band);font-size:13px;font-weight:600;min-height:17px}
 .tl.zero b{color:var(--on-band-2);font-weight:400}
-.incl{list-style:none;display:grid;gap:7px;margin:20px 0 0;padding-top:18px;border-top:1px solid rgba(247,244,238,.15);font-size:14px;color:var(--on-band-2)}
+.incl{list-style:none;display:grid;gap:4px;margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(247,244,238,.15);font-size:14px;color:var(--on-band-2)}
 .incl li::before{content:"✓ ";color:#9CC3E0;font-weight:600}
-.res-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.res-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 .res-ctas .btn{padding:11px 16px;font-size:14px}
-.sim-note{font-size:12.5px;margin-top:16px}
+.sim-note{font-size:12.5px;margin-top:12px}
 @media (max-width:900px){.sim{grid-template-columns:1fr}.sim-result{position:static}.sim-controls{padding:4px 20px 14px}}
 /* Barre récap mobile */
 .simbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;background:var(--band);color:var(--on-band);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px -10px rgba(20,35,59,.5);transform:translateY(140%);transition:transform .3s var(--ease)}
@@ -331,9 +333,9 @@ footer a:hover{color:var(--ink)}
       <dl>
         <a class="row" href="#postes"><dt>Postes</dt><dd><b>Fonctions support en CDI</b><span>Cadres et agents de maîtrise, partout en France</span></dd></a>
         <a class="row" href="#deroule"><dt>Délai</dt><dd><b>3 à 5 finalistes en 4 semaines</b><span>Vous ne voyez que des candidats rencontrés et vérifiés</span></dd></a>
-        <a class="row" href="#tarifs"><dt>Prix</dt><dd><b>18 % du brut annuel</b><span>Ajustable selon garantie, paiement et exclusivité</span></dd></a>
-        <a class="row" href="#tarifs"><dt>Garantie</dt><dd><b>Remplacement sans frais</b><span>De la période d'essai jusqu'à 12 mois, au choix</span></dd></a>
-        <a class="row" href="#difference"><dt>En plus</dt><dd><b>Le radar de votre équipe</b><span>Chaque finaliste comparé à votre quotidien réel</span></dd></a>
+        <a class="row" href="#tarifs"><dt>Prix</dt><dd><b>À partir de 14 % du brut annuel</b><span>18 % en standard, ajustable selon vos choix</span></dd></a>
+        <a class="row" href="#tarifs"><dt>Garantie</dt><dd><b>Remplacement au choix</b><span>Sans garantie, ou jusqu'à 12 mois après l'arrivée</span></dd></a>
+        <a class="row" href="#difference"><dt>En plus</dt><dd><b>Radar d'équipe et suivi 12 mois</b><span>Finalistes comparés à votre équipe, intégration suivie</span></dd></a>
       </dl>
     </div>
   </div>
@@ -478,15 +480,17 @@ footer a:hover{color:var(--ink)}
           <p class="hint">Plus vous payez tard, plus nous portons le risque : le taux augmente légèrement.</p>
         </div>
 
+        <div class="ctrl-pair">
         <div class="ctrl">
-          <div class="ctrl-head"><span class="lbl">Exclusivité de la mission</span><span class="impact" id="i-excl"></span></div>
+          <div class="ctrl-head"><span class="lbl">Exclusivité</span><span class="impact" id="i-excl"></span></div>
           <div class="seg" id="s-excl" role="group" aria-label="Exclusivité"></div>
           <p class="hint" id="v-excl"></p>
         </div>
 
         <div class="ctrl">
-          <div class="ctrl-head"><span class="lbl">Postes à pourvoir dans l'année</span><span class="impact" id="i-vol"></span></div>
+          <div class="ctrl-head"><span class="lbl">Postes dans l'année</span><span class="impact" id="i-vol"></span></div>
           <div class="seg" id="s-vol" role="group" aria-label="Nombre de postes"></div>
+        </div>
         </div>
       </div>
 
@@ -494,7 +498,7 @@ footer a:hover{color:var(--ink)}
         <p class="k">Votre devis estimatif</p>
         <p class="rate" id="r-rate">18 %<small> HT</small></p>
         <p>du salaire brut annuel</p>
-        <p class="amount" style="margin-top:14px">soit <b id="r-amount">8 100 €</b> HT <span id="r-ttc" style="color:var(--on-band-2);font-size:14px"></span></p>
+        <p class="amount" style="margin-top:8px">soit <b id="r-amount">8 100 €</b> HT <span id="r-ttc" style="color:var(--on-band-2);font-size:14px"></span></p>
         <div class="timeline" id="r-timeline"></div>
         <ul class="incl">
           <li>Radar de votre équipe, sans limite de répondants</li>
