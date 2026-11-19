@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace candidats · Cairn Affinités</title>
+<meta name="description" content="Candidats : découvrez gratuitement où vous travaillez le mieux avec le radar de compatibilité, et équipez votre agent IA personnel de 10 skills pour votre recherche d'emploi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body id="haut">
+
+<div class="util">
+  <div class="wrap">
+    <span><i class="pre">Candidat ? </i><a href="candidats.html#test">Faire le test gratuit</a></span>
+    <span><i class="pre">Invitation reçue ? </i><a href="candidats.html#repondre">Répondre à une invitation</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="accueil.html" aria-label="Cairn Affinités, accueil">
+      <svg width="28" height="31" viewBox="0 0 34 38" aria-hidden="true"><ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/><ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/><ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/></svg>
+      <span>Cairn Affinités<small>Recrutement &amp; compatibilité d'équipe</small></span>
+    </a>
+    <nav class="menu" aria-label="Navigation principale">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html" class="on" aria-current="page">Candidats</a>
+      <a href="questions.html">Questions</a>
+    </nav>
+    <a class="btn btn-primary" href="contact.html?objet=recrutement">Confier un recrutement</a>
+  </div>
+  <nav class="chips" aria-label="Navigation rapide">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar de compatibilité</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html" class="on" aria-current="page">Candidats</a>
+      <a href="questions.html">Questions</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Espace candidats</p>
+      <h1>Trouvez un poste où vous travaillerez bien, pas seulement un poste.</h1>
+      <p class="lead">Découvrez gratuitement l'environnement de travail qui vous convient, partagez votre profil, et équipez votre agent IA personnel pour mener votre recherche avec méthode.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://nansvenet.github.io/radar-cairn/index.html#libre">Faire le test gratuit →</a>
+        <a class="btn btn-ghost" href="#agent">Les skills pour votre agent IA</a>
+      </div>
+    </div>
+    <div class="card brief">
+      <h2>Pour vous</h2>
+      <dl>
+        <a class="row" href="#test"><dt>Test</dt><dd><b>10 minutes, gratuit</b><span>Sans inscription, sur téléphone ou ordinateur</span></dd></a>
+        <a class="row" href="#test"><dt>Profil</dt><dd><b>Une image à partager</b><span>Pour LinkedIn ou vos autres réseaux</span></dd></a>
+        <a class="row" href="#vivier"><dt>Postes</dt><dd><b>Des entreprises compatibles</b><span>Si vous le souhaitez, et seulement si</span></dd></a>
+        <a class="row" href="#agent"><dt>Agent IA</dt><dd><b>10 skills pour votre recherche</b><span>Décoder une annonce, préparer un entretien…</span></dd></a>
+        <a class="row" href="#repondre"><dt>Invitation</dt><dd><b>Vous avez reçu un code ?</b><span>Répondez au questionnaire d'une mission</span></dd></a>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="test" class="alt">
+  <div class="wrap">
+    <div class="duo">
+      <div class="card">
+        <h3>Découvrez où vous travaillez le mieux</h3>
+        <p style="margin-top:8px;font-size:14.5px">Une trentaine de questions sur la façon dont vous aimez travailler : décisions, relation au manager, rythme, horaires, travail en équipe. Il n'y a ni bonne ni mauvaise réponse.</p>
+        <ul>
+          <li><b>10 minutes, gratuit</b><span>Sans inscription, sur téléphone ou ordinateur.</span></li>
+          <li><b>Votre profil à partager</b><span>Une image et un lien pour LinkedIn ou vos autres réseaux.</span></li>
+          <li><b>Vos points non négociables</b><span>Vous savez enfin les nommer, et les vérifier en entretien.</span></li>
+        </ul>
+        <a class="btn btn-primary" href="https://nansvenet.github.io/radar-cairn/index.html#libre">Faire le test gratuit →</a>
+      </div>
+      <div class="card" id="repondre">
+        <h3>Vous avez reçu une invitation ?</h3>
+        <p style="margin-top:8px;font-size:14.5px">Moins de 10 minutes, une trentaine de questions, sans bonne ni mauvaise réponse. Les réponses d'équipe ne sont lues qu'en moyenne.</p>
+        <div class="field">
+          <label for="code">Code de mission</label>
+          <input id="code" type="text" placeholder="Ex. atelier-durand" autocomplete="off" autocapitalize="none" spellcheck="false">
+        </div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:8px">Vous répondez en tant que</p>
+        <div class="roles-btns">
+          <button class="btn btn-ghost" data-role="d" type="button">Direction</button>
+          <button class="btn btn-ghost" data-role="e" type="button">Équipe</button>
+          <button class="btn btn-ghost" data-role="c" type="button">Candidat</button>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="agent">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Votre agent IA personnel</p>
+      <h2>10 skills pour mener votre recherche d'emploi avec méthode</h2>
+      <p>Un skill est une compétence que vous ajoutez à votre assistant IA (Claude, par exemple). Une fois installé, l'assistant sait exactement comment vous aider sur cette tâche, avec notre méthode. Ces skills arrivent progressivement : inscrivez-vous pour être prévenu.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><h3>Se connaître</h3><span>Savoir ce que vous cherchez vraiment</span></div>
+      <div class="skills">
+        <div class="card skill"><div class="top"><span class="num">01</span><span class="tag soon">Bientôt</span></div><h3>Mon profil de travail</h3><p>Votre agent apprend votre résultat au radar : l'environnement où vous êtes à l'aise, vos points non négociables. Il s'en sert dans tous les autres skills.</p><p class="ex">« Voici mon radar Cairn : retiens ce qui compte pour moi. »</p></div>
+        <div class="card skill"><div class="top"><span class="num">02</span><span class="tag soon">Bientôt</span></div><h3>Bilan de compétences express</h3><p>Faire l'inventaire de ce que vous savez faire, avec des exemples concrets, et repérer les compétences transférables vers d'autres postes.</p><p class="ex">« Je suis gestionnaire paie depuis 8 ans : qu'est-ce que je sais faire, au fond ? »</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><h3>Cibler et candidater</h3><span>Moins de candidatures, de meilleures candidatures</span></div>
+      <div class="skills">
+        <div class="card skill"><div class="top"><span class="num">03</span><span class="tag soon">Bientôt</span></div><h3>Décodeur d'annonces</h3><p>Lire une offre entre les lignes : le vrai niveau attendu, les signaux sur le rythme et l'ambiance, ce qui pourrait coincer avec votre profil.</p><p class="ex">« Analyse cette annonce de responsable comptable. »</p></div>
+        <div class="card skill"><div class="top"><span class="num">04</span><span class="tag soon">Bientôt</span></div><h3>Enquête sur l'entreprise</h3><p>Préparer une recherche sur l'entreprise avant de postuler : activité, actualités, avis de salariés, et les questions qui restent ouvertes.</p><p class="ex">« Que dois-je savoir sur cette PME avant de postuler ? »</p></div>
+        <div class="card skill"><div class="top"><span class="num">05</span><span class="tag soon">Bientôt</span></div><h3>CV ciblé, sans rien inventer</h3><p>Adapter votre CV à une offre en mettant en avant les bonnes expériences, avec vos vrais chiffres et sans embellir.</p><p class="ex">« Adapte mon CV à cette offre, sans rien ajouter de faux. »</p></div>
+        <div class="card skill"><div class="top"><span class="num">06</span><span class="tag soon">Bientôt</span></div><h3>Message d'approche</h3><p>Écrire un message court et personnel à un recruteur ou à un dirigeant sur LinkedIn, et une relance qui ne sonne pas comme une relance.</p><p class="ex">« Écris un message au DAF de cette entreprise. »</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><h3>Passer les entretiens</h3><span>Convaincre, et vérifier que le poste vous convient</span></div>
+      <div class="skills">
+        <div class="card skill"><div class="top"><span class="num">07</span><span class="tag soon">Bientôt</span></div><h3>Préparer l'entretien</h3><p>Simuler l'entretien avec votre agent, préparer vos exemples concrets (situation, action, résultat) et vos réponses aux questions difficiles.</p><p class="ex">« Fais-moi passer un entretien pour ce poste. »</p></div>
+        <div class="card skill"><div class="top"><span class="num">08</span><span class="tag soon">Bientôt</span></div><h3>Les questions qui révèlent la culture</h3><p>Les questions à poser au recruteur et au manager pour vérifier vos points non négociables : horaires réels, accès à la direction, gestion des urgences.</p><p class="ex">« Quelles questions poser pour savoir si on finit tard ? »</p></div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h"><h3>Décider et réussir</h3><span>Choisir la bonne offre, bien démarrer</span></div>
+      <div class="skills">
+        <div class="card skill"><div class="top"><span class="num">09</span><span class="tag soon">Bientôt</span></div><h3>Négocier et comparer ses offres</h3><p>Préparer la discussion sur le salaire et les conditions (télétravail, variable, date d'arrivée), puis comparer deux offres sur ce qui compte pour vous.</p><p class="ex">« J'ai deux offres : aide-moi à choisir. »</p></div>
+        <div class="card skill"><div class="top"><span class="num">10</span><span class="tag soon">Bientôt</span></div><h3>Mes 90 premiers jours</h3><p>Un plan pour la période d'essai : qui rencontrer, quoi livrer, comment demander un retour à 1, 2 et 3 mois, et repérer tôt ce qui coince.</p><p class="ex">« Je commence lundi comme responsable paie : prépare mon plan. »</p></div>
+      </div>
+    </div>
+
+    <div class="hero-ctas" style="margin-top:32px">
+      <a class="btn btn-primary" href="contact.html?objet=candidat">Être prévenu de leur sortie →</a>
+      <a class="btn btn-ghost" href="skills.html#installer">Comment installer un skill</a>
+    </div>
+  </div>
+</section>
+
+<section id="vivier" class="alt">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Notre vivier, si vous le souhaitez</p>
+      <h2>Être présenté aux entreprises qui vous correspondent</h2>
+    </div>
+    <div>
+      <p class="lead" style="margin-top:0">À la fin du test, vous pouvez choisir de rejoindre notre vivier. Quand une entreprise compatible avec votre profil recrute, nous vous contactons avant de transmettre quoi que ce soit.</p>
+      <ul class="gains" style="margin-top:22px">
+        <li><b>Facultatif</b>Sans votre accord, votre profil n'est transmis à personne.</li>
+        <li><b>Réversible</b>Vous pouvez quitter le vivier à tout moment, sur simple e-mail.</li>
+        <li><b>Spécialisé</b>Nous recrutons des fonctions support : RH, paie, comptabilité, finance, juridique, assistanat.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color:#9CC3E0">10 minutes pour mieux vous connaître</p>
+      <h2>Faites le test gratuit</h2>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-light" href="https://nansvenet.github.io/radar-cairn/index.html#libre">Commencer →</a>
+      <a class="btn btn-line-light" href="questions.html#q-candidats">Questions des candidats</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Cairn Affinités · Recrutement des fonctions support et radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span>
+    <nav aria-label="Pied de page">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar de compatibilité</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html">Candidats</a>
+      <a href="questions.html">Questions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script src="site.js"></script>
+
+</body>
+</html>

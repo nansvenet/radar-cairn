@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · Cairn Affinités</title>
+<meta name="description" content="Contactez Cairn Affinités pour un recrutement, le radar de compatibilité, les skills RH ou en tant que candidat. Réponse sous 24 heures ouvrées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body id="haut">
+
+<div class="util">
+  <div class="wrap">
+    <span><i class="pre">Candidat ? </i><a href="candidats.html#test">Faire le test gratuit</a></span>
+    <span><i class="pre">Invitation reçue ? </i><a href="candidats.html#repondre">Répondre à une invitation</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="accueil.html" aria-label="Cairn Affinités, accueil">
+      <svg width="28" height="31" viewBox="0 0 34 38" aria-hidden="true"><ellipse cx="17" cy="31" rx="15" ry="6" fill="var(--ink)"/><ellipse cx="17" cy="19.5" rx="11" ry="5" fill="var(--muted)"/><ellipse cx="17" cy="9.5" rx="7" ry="4" fill="var(--sky)"/></svg>
+      <span>Cairn Affinités<small>Recrutement &amp; compatibilité d'équipe</small></span>
+    </a>
+    <nav class="menu" aria-label="Navigation principale">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html">Candidats</a>
+      <a href="questions.html">Questions</a>
+    </nav>
+    <a class="btn btn-primary" href="contact.html?objet=recrutement">Confier un recrutement</a>
+  </div>
+  <nav class="chips" aria-label="Navigation rapide">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar de compatibilité</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html">Candidats</a>
+      <a href="questions.html">Questions</a>
+      <a href="contact.html" class="on" aria-current="page">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section class="band" id="contact" style="padding-top:64px">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow" style="color:#9CC3E0">Contact</p>
+      <h1 style="color:var(--on-band)">Parlons de votre projet</h1>
+      <p class="lead">Quelques informations suffisent. Nous vous répondons sous 24 heures ouvrées.</p>
+      <div class="contact-side">
+        <div class="item"><b>Par e-mail</b><span><a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span></div>
+        <button class="copy" type="button" data-copy="cairn.affinites@gmail.com">Copier l'adresse</button>
+        <div class="item"><b>Pour un recrutement</b><span>Nous vous rappelons avec une première lecture du marché, un calendrier et votre devis écrit.</span></div>
+        <div class="item"><b>Pour le radar</b><span>Une démonstration en visio, sur l'exemple ou directement sur votre équipe.</span></div>
+        <div class="item"><b>Candidat ?</b><span>Commencez par le <a href="https://nansvenet.github.io/radar-cairn/index.html#libre">test gratuit</a>, puis laissez-nous un mot ici.</span></div>
+      </div>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <div class="full">
+        <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--ink)">Vous nous contactez pour</p>
+        <div class="reasons" role="radiogroup" aria-label="Objet de votre demande">
+          <label><input type="radio" name="objet" value="recrutement" checked> Un recrutement</label>
+          <label><input type="radio" name="objet" value="radar"> Le radar</label>
+          <label><input type="radio" name="objet" value="skills"> Les skills</label>
+          <label><input type="radio" name="objet" value="candidat"> Je suis candidat</label>
+          <label><input type="radio" name="objet" value="autre"> Autre</label>
+        </div>
+      </div>
+      <label>Votre nom<input name="nom" autocomplete="name" required></label>
+      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
+      <label data-for="recrutement radar skills autre">Entreprise<input name="entreprise" autocomplete="organization"></label>
+      <label>Téléphone<input name="tel" type="tel" autocomplete="tel"></label>
+      <label data-for="recrutement candidat">Poste<input name="poste" placeholder="Ex. Responsable paie"></label>
+      <label data-for="recrutement candidat">Ville<input name="ville" autocomplete="address-level2"></label>
+      <label class="full" data-for="recrutement">Arrivée souhaitée<input name="date" placeholder="Ex. début mars"></label>
+      <label class="full" data-for="radar">Taille de l'équipe concernée<input name="taille" placeholder="Ex. 8 personnes"></label>
+      <label class="full">Message<textarea name="msg" placeholder="Création de poste, remplacement, question sur le radar, skill qui vous intéresse…"></textarea></label>
+      <div class="full hidden" id="devis-box">
+        <label class="check"><input type="checkbox" id="joindre" checked><span>Joindre mon devis estimatif</span></label>
+        <pre id="devis-txt" style="white-space:pre-wrap;font:13px/1.5 var(--body);color:var(--text-2);background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:8px"></pre>
+      </div>
+      <p class="err full" id="f-err" role="alert"></p>
+      <div class="full"><button class="btn btn-primary" type="submit">Envoyer ma demande →</button></div>
+      <p class="note full">Le bouton ouvre votre messagerie avec un e-mail prérempli. Vos informations ne servent qu'à vous recontacter.</p>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="grid3">
+      <a class="card offer" href="recrutement.html#tarifs"><span class="label">Recrutement</span><h3>Calculer mon devis</h3><p>En une minute, selon vos choix de garantie et de paiement.</p><span class="go">Ouvrir le simulateur →</span></a>
+      <a class="card offer" href="radar.html#exemple"><span class="label">Radar</span><h3>Voir un exemple commenté</h3><p>Comprendre en 3 minutes ce que montre le radar.</p><span class="go">Voir l'exemple →</span></a>
+      <a class="card offer" href="questions.html"><span class="label">Questions</span><h3>Questions fréquentes</h3><p>Délais, garantie, confidentialité, skills.</p><span class="go">Lire les réponses →</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Cairn Affinités · Recrutement des fonctions support et radar de compatibilité · <a href="mailto:cairn.affinites@gmail.com">cairn.affinites@gmail.com</a></span>
+    <nav aria-label="Pied de page">
+      <a href="accueil.html">Qui sommes-nous</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="radar.html">Radar de compatibilité</a>
+      <a href="skills.html">Skills offerts</a>
+      <a href="candidats.html">Candidats</a>
+      <a href="questions.html">Questions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script src="site.js"></script>
+
+</body>
+</html>
